@@ -1,0 +1,789 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Decentraland SDK 7 Scenes Context7 Reference
+
+This reference documents common patterns, components, and systems used in Decentraland SDK 7 scenes based on example implementations.
+
+## Table of Contents
+- [Scene Structure](mdc:#scene-structure)
+- [Entity-Component System](mdc:#entity-component-system)
+- [Component Reference](mdc:#component-reference)
+- [UI System](mdc:#ui-system)
+- [Input Handling](mdc:#input-handling)
+- [Movement & Animation](mdc:#movement--animation)
+- [Lights & Visual Effects](mdc:#lights--visual-effects)
+- [Triggers & Interactions](mdc:#triggers--interactions)
+- [Scene Optimization](mdc:#scene-optimization)
+- [Restricted Actions](mdc:#restricted-actions)
+- [Testing Framework](mdc:#testing-framework)
+
+## Scene Structure
+
+### Basic Project Structure
+```
+├── src/
+│   ├── index.ts          # Main entry point
+│   ├── components.ts     # Custom component definitions
+│   ├── systems.ts        # Custom system implementations
+│   ├── factory.ts        # Entity creation functions
+│   ├── utils.ts          # Helper functions
+│   └── ui.tsx            # UI definitions with React
+├── package.json
+└── tsconfig.json
+```
+
+### Main Entry Point
+```typescript
+// index.ts
+import { engine } from '@dcl/sdk/ecs'
+import { setupUi } from './ui'
+import { mySystem } from './systems'
+
+export function main() {
+  // Add systems to the engine
+  engine.addSystem(mySystem)
+  
+  // Initialize UI
+  setupUi()
+  
+  // Create initial entities
+  // ...
+}
+```
+
+## Entity-Component System
+
+### Creating Entities
+```typescript
+import { engine, Transform, MeshRenderer, MeshCollider } from '@dcl/sdk/ecs'
+import { Vector3 } from '@dcl/sdk/math'
+
+// Create a new entity
+const entity = engine.addEntity()
+
+// Add components to the entity
+Transform.create(entity, { 
+  position: Vector3.create(8, 1, 8),
+  scale: Vector3.create(1, 1, 1)
+})
+
+// Add a visual mesh
+MeshRenderer.setBox(entity) // Predefined shapes: setBox, setSphere, setPlane, etc.
+
+// Add collision
+MeshCollider.setBox(entity)
+```
+
+### Defining Custom Components
+```typescript
+// components.ts
+import { Schemas, engine } from '@dcl/sdk/ecs'
+
+// Define a component with properties
+export const Spinner = engine.defineComponent('spinner', { 
+  speed: Schemas.Number 
+})
+
+// Define a tag component (no properties)
+export const Cube = engine.defineComponent('cube-id', {})
+```
+
+### Creating Systems
+```typescript
+// systems.ts
+import { engine, Transform } from '@dcl/sdk/ecs'
+import { Quaternion, Vector3 } from '@dcl/sdk/math'
+import { Spinner } from './components'
+
+// System that rotates entities with the Spinner component
+export function circularSystem(dt: number) {
+  // Query all entities with both Spinner and Transform components
+  const entitiesWithSpinner = engine.getEntitiesWith(Spinner, Transform)
+  
+  for (const [entity, spinner, transform] of entitiesWithSpinner) {
+    // Get a mutable reference to modify the component
+    const mutableTransform = Transform.getMutable(entity)
+    
+    // Apply rotation based on the spinner speed and delta time
+    mutableTransform.rotation = Quaternion.multiply(
+      mutableTransform.rotation,
+      Quaternion.fromAngleAxis(dt * spinner.speed, Vector3.Up())
+    )
+  }
+}
+```
+
+## Component Reference
+
+### Transform
+```typescript
+// Position, rotation, and scale
+Transform.create(entity, {
+  position: Vector3.create(x, y, z),
+  rotation: Quaternion.fromEulerDegrees(x, y, z), // or Quaternion.create()
+  scale: Vector3.create(x, y, z),
+  parent: parentEntity // optional, for hierarchical transformations
+})
+
+// Update transform
+const transform = Transform.getMutable(entity)
+transform.position = Vector3.create(newX, newY, newZ)
+```
+
+### Mesh Rendering
+```typescript
+// Basic shapes
+MeshRenderer.setBox(entity)
+MeshRenderer.setSphere(entity)
+MeshRenderer.setPlane(entity)
+
+// Material
+import { Material, MeshRenderer } from '@dcl/sdk/ecs'
+import { Color4 } from '@dcl/sdk/math'
+
+// PBR material
+Material.setPbrMaterial(entity, {
+  albedoColor: Color4.fromHexString("#FF0000"),
+  metallic: 0.5,
+  roughness: 0.5,
+  // other properties: emissiveColor, reflectivityColor, etc.
+})
+
+// Basic material
+Material.setBasicMaterial(entity, {
+  diffuseColor: Color4.White()
+})
+```
+
+### 3D Models
+```typescript
+import { GltfContainer } from '@dcl/sdk/ecs'
+
+// Load a 3D model
+GltfContainer.create(entity, {
+  src: 'models/model.glb',
+  visibleMeshesCollisionMask: ColliderLayer.CL_POINTER // Optional
+})
+
+// Check loading state
+if (GltfContainerLoadingState.get(entity).currentState === LoadingState.FINISHED) {
+  // Model is loaded
+}
+```
+
+### Colliders
+```typescript
+import { MeshCollider, ColliderLayer } from '@dcl/sdk/ecs'
+
+// Basic colliders
+MeshCollider.setBox(entity)
+MeshCollider.setSphere(entity)
+MeshCollider.setPlane(entity)
+
+// With specific collision layer
+MeshCollider.setBox(entity, ColliderLayer.CL_PHYSICS)
+```
+
+### Text
+```typescript
+import { TextShape } from '@dcl/sdk/ecs'
+import { Color4 } from '@dcl/sdk/math'
+
+TextShape.create(entity, {
+  text: 'Hello Decentraland',
+  fontSize: 3,
+  textColor: Color4.White(),
+  outlineWidth: 0.1,
+  outlineColor: Color4.Black(),
+  width: 4,
+  height: 2,
+  textWrapping: true
+})
+```
+
+### Billboard
+```typescript
+import { Billboard } from '@dcl/sdk/ecs'
+
+// Makes an entity always face the camera
+Billboard.create(entity)
+```
+
+### Audio
+```typescript
+import { AudioSource } from '@dcl/sdk/ecs'
+
+AudioSource.create(entity, {
+  audioClipUrl: 'sounds/mySound.mp3',
+  playing: true,
+  loop: false,
+  volume: 1.0
+})
+
+// Play sound
+AudioSource.getMutable(entity).playing = true
+```
+
+## UI System
+
+### Setting Up React UI
+```typescript
+// ui.tsx
+import ReactEcs, { ReactEcsRenderer, UiEntity, Label, Button } from '@dcl/sdk/react-ecs'
+import { Color4 } from '@dcl/sdk/math'
+
+export function setupUi() {
+  ReactEcsRenderer.setUiRenderer(uiComponent)
+}
+
+const uiComponent = () => (
+  <UiEntity
+    uiTransform={{
+      width: 400,
+      height: 230,
+      margin: '16px 0 8px 270px',
+      padding: 4
+    }}
+    uiBackground={{ color: Color4.create(0.5, 0.8, 0.1, 0.6) }}
+  >
+    <Label
+      value="Hello Decentraland"
+      color={Color4.White()}
+      fontSize={24}
+    />
+    <Button
+      value="Click Me"
+      variant="primary"
+      fontSize={14}
+      onMouseDown={() => {
+        console.log('Button clicked')
+      }}
+    />
+  </UiEntity>
+)
+```
+
+### UI Components
+
+#### UiEntity
+```typescript
+<UiEntity
+  uiTransform={{
+    width: 400,                  // Pixels or percentage (e.g. '100%')
+    height: 300,
+    position: { top: 10, left: 10 }, // For absolute positioning
+    positionType: 'absolute',    // 'absolute' or 'relative'
+    display: 'flex',             // 'flex' or 'none'
+    flexDirection: 'column',     // 'column' or 'row'
+    alignItems: 'center',        // 'center', 'flex-start', 'flex-end'
+    justifyContent: 'center',    // 'center', 'flex-start', 'flex-end', 'space-between'
+    margin: 5,                   // Or { top: 5, right: 10, bottom: 5, left: 10 }
+    padding: 5                   // Same as margin
+  }}
+  uiBackground={{
+    color: Color4.White(),
+    texture: { src: 'images/image.png' },
+    textureMode: 'stretch',      // 'stretch', 'nine-slices', 'center'
+    avatarTexture: { userId: 'user-id' } // For rendering avatar
+  }}
+/>
+```
+
+#### Label
+```typescript
+<Label
+  value="Text content"
+  color={Color4.Black()}
+  fontSize={18}
+  textAlign="middle-center" // 'top-left', 'middle-right', etc.
+  font="serif"              // 'serif', 'monospace', or default sans-serif
+  uiTransform={{ width: 200, height: 50 }}
+/>
+```
+
+#### Button
+```typescript
+<Button
+  value="Click Me"
+  variant="primary"        // 'primary', 'secondary', etc.
+  fontSize={14}
+  color={Color4.White()}   // Text color
+  uiTransform={{ width: 100, height: 40 }}
+  onMouseDown={() => { /* action */ }}
+  uiBackground={{ color: Color4.Blue() }} // Override default button style
+/>
+```
+
+#### Input
+```typescript
+<Input
+  placeholder="Enter text..."
+  placeholderColor={Color4.Gray()}
+  color={Color4.Black()}    // Text color
+  fontSize={16}
+  onChange={(value) => { console.log('Value changing: ' + value) }}
+  onSubmit={(value) => { console.log('Submitted: ' + value) }}
+  uiTransform={{ width: 200, height: 40 }}
+/>
+```
+
+#### Dropdown
+```typescript
+<Dropdown
+  options={['Option 1', 'Option 2', 'Option 3']}
+  onChange={(index) => { console.log('Selected option: ' + index) }}
+  fontSize={16}
+  color={Color4.Black()}
+  uiTransform={{ width: 200, height: 40 }}
+  acceptEmpty={true}
+  emptyLabel="-- Select an option --"
+/>
+```
+
+### Canvas Information
+```typescript
+import { UiCanvasInformation, engine } from '@dcl/sdk/ecs'
+
+// Get screen info
+const canvasInfo = UiCanvasInformation.get(engine.RootEntity)
+const screenWidth = canvasInfo.width
+const screenHeight = canvasInfo.height
+const pixelRatio = canvasInfo.devicePixelRatio
+```
+
+## Input Handling
+
+### Pointer Events
+```typescript
+import { PointerEvents, PointerEventType, InputAction, pointerEventsSystem } from '@dcl/sdk/ecs'
+
+// Add clickable behavior to an entity
+PointerEvents.create(entity, {
+  pointerEvents: [
+    { 
+      eventType: PointerEventType.PET_DOWN, 
+      eventInfo: { 
+        button: InputAction.IA_POINTER,
+        hoverText: 'Click me',
+        showFeedback: true,       // Show interaction feedback
+        maxDistance: 10           // Max interaction distance 
+      } 
+    }
+  ]
+})
+
+// Response to click events
+pointerEventsSystem.onPointerDown(
+  { entity, opts: { button: InputAction.IA_POINTER } },
+  (event) => {
+    console.log('Entity clicked!')
+    // Handle the click
+  }
+)
+```
+
+### Input System
+```typescript
+import { inputSystem, InputAction, PointerEventType } from '@dcl/sdk/ecs'
+
+// Check if a key/button is pressed
+if (inputSystem.isPressed(InputAction.IA_FORWARD)) {
+  // W key or forward movement is active
+}
+
+// Check for a single press/trigger
+if (inputSystem.isTriggered(InputAction.IA_JUMP, PointerEventType.PET_DOWN)) {
+  // Space bar was just pressed
+}
+
+// Check for key release
+if (inputSystem.isTriggered(InputAction.IA_PRIMARY, PointerEventType.PET_UP)) {
+  // Primary button was just released
+}
+```
+
+### Input Modifiers
+```typescript
+import { InputModifier } from '@dcl/sdk/ecs'
+
+// Disable player movement controls
+InputModifier.create(engine.PlayerEntity, {
+  mode: {
+    $case: 'standard',
+    standard: {
+      disableWalk: true,  // Disable walking
+      disableRun: true,   // Disable running
+      disableJump: true   // Disable jumping
+    }
+  }
+})
+
+// Re-enable movement
+InputModifier.getMutable(engine.PlayerEntity).mode = {
+  $case: 'standard',
+  standard: {
+    disableWalk: false,
+    disableRun: false,
+    disableJump: false
+  }
+}
+```
+
+## Movement & Animation
+
+### Tweens
+```typescript
+import { Tween, EasingFunction, TweenSequence, TweenLoop } from '@dcl/sdk/ecs'
+import { Vector3, Quaternion } from '@dcl/sdk/math'
+
+// Move an entity
+Tween.create(entity, {
+  mode: Tween.Mode.Move({
+    start: Vector3.create(1, 0, 1),
+    end: Vector3.create(5, 0, 5)
+  }),
+  duration: 2000,  // In milliseconds
+  easingFunction: EasingFunction.EF_LINEAR
+})
+
+// Rotate an entity
+Tween.create(entity, {
+  mode: Tween.Mode.Rotate({
+    start: Quaternion.fromEulerDegrees(0, 0, 0),
+    end: Quaternion.fromEulerDegrees(0, 180, 0)
+  }),
+  duration: 2000,
+  easingFunction: EasingFunction.EF_EASEINQUAD
+})
+
+// Scale an entity
+Tween.create(entity, {
+  mode: Tween.Mode.Scale({
+    start: Vector3.create(1, 1, 1),
+    end: Vector3.create(2, 2, 2)
+  }),
+  duration: 2000,
+  easingFunction: EasingFunction.EF_EASEOUTQUAD
+})
+
+// Tween sequences (chained animations)
+TweenSequence.create(entity, {
+  sequence: [
+    {
+      mode: Tween.Mode.Move({
+        start: Vector3.create(5, 0, 5),
+        end: Vector3.create(10, 0, 5)
+      }),
+      duration: 2000,
+      easingFunction: EasingFunction.EF_LINEAR
+    },
+    {
+      mode: Tween.Mode.Move({
+        start: Vector3.create(10, 0, 5),
+        end: Vector3.create(10, 0, 10)
+      }),
+      duration: 2000,
+      easingFunction: EasingFunction.EF_LINEAR
+    }
+  ],
+  loop: TweenLoop.TL_RESTART  // Can be TL_RESTART, TL_YOYO, or undefined (no loop)
+})
+
+// Control tween playback
+const tween = Tween.getMutable(entity)
+tween.playing = false  // Pause the tween
+tween.currentTime = 0  // Reset to beginning
+```
+
+### Moving the Player
+```typescript
+import { movePlayerTo } from '~system/RestrictedActions'
+
+// Move the player to a position in the scene
+movePlayerTo({ 
+  newRelativePosition: { x: 8, y: 0, z: 8 },
+  cameraTarget: { x: 10, y: 1, z: 8 }  // Optional: where to look at
+})
+```
+
+### Avatar Shapes
+```typescript
+import { AvatarShape } from '@dcl/sdk/ecs'
+
+// Create an NPC avatar
+AvatarShape.create(entity, {
+  id: 'npc-id',
+  name: 'NPC Name',
+  bodyShape: 'urn:decentraland:off-chain:base-avatars:BaseMale',  // or BaseFemale
+  wearables: [
+    'urn:decentraland:off-chain:base-avatars:eyebrows_00',
+    'urn:decentraland:off-chain:base-avatars:mouth_00',
+    'urn:decentraland:off-chain:base-avatars:eyes_00',
+    'urn:decentraland:off-chain:base-avatars:blue_tshirt',
+    'urn:decentraland:off-chain:base-avatars:brown_pants',
+    'urn:decentraland:off-chain:base-avatars:classic_shoes',
+    'urn:decentraland:off-chain:base-avatars:short_hair'
+  ],
+  hairColor: { r: 0.92, g: 0.76, b: 0.62 },    // RGB values 0-1
+  skinColor: { r: 0.94, g: 0.85, b: 0.6 },     // RGB values 0-1
+  emotes: []
+})
+```
+
+### Camera Control
+```typescript
+import { MainCamera, VirtualCamera, CameraModeArea, CameraType } from '@dcl/sdk/ecs'
+
+// Create a virtual camera
+VirtualCamera.create(entity, {
+  lookAtEntity: targetEntity,  // Optional: entity to focus on
+  defaultTransition: { 
+    transitionMode: VirtualCamera.Transition.Time(2)  // 2 second transition
+    // Or VirtualCamera.Transition.Speed(10)  // Speed-based transition
+  }
+})
+
+// Activate a virtual camera
+MainCamera.getMutable(engine.CameraEntity).virtualCameraEntity = cameraEntity
+
+// Return to normal camera
+MainCamera.getMutable(engine.CameraEntity).virtualCameraEntity = undefined
+
+// Create a camera mode area to force first-person view
+CameraModeArea.create(entity, {
+  area: Vector3.create(5, 5, 5),  // Box size
+  mode: CameraType.CT_FIRST_PERSON  // Or CT_THIRD_PERSON
+})
+```
+
+### Emotes
+```typescript
+import { triggerEmote, triggerSceneEmote } from '~system/RestrictedActions'
+
+// Play a predefined avatar emote
+triggerEmote({ predefinedEmote: 'robot' })  // 'wave', 'dance', etc.
+
+// Play a custom animation
+triggerSceneEmote({ 
+  src: 'animations/myAnimation.glb',
+  loop: false
+})
+```
+
+## Lights & Visual Effects
+
+### Lights
+```typescript
+import { LightSource, PBLightSource_ShadowType } from '@dcl/sdk/ecs'
+import { Color3 } from '@dcl/sdk/math'
+
+// Create a point light
+LightSource.create(entity, {
+  color: Color3.White(),
+  intensity: 1.0,
+  range: 10,
+  active: true,
+  type: LightSource.Type.Point({
+    shadow: PBLightSource_ShadowType.ST_HARD  // ST_HARD, ST_SOFT, or ST_NONE
+  })
+})
+
+// Create a spotlight
+LightSource.create(entity, {
+  color: Color3.Yellow(),
+  intensity: 1.5,
+  range: 15,
+  active: true,
+  type: LightSource.Type.Spot({
+    innerAngle: 30,   // Inner cone angle in degrees
+    outerAngle: 60,   // Outer cone angle in degrees
+    shadow: PBLightSource_ShadowType.ST_HARD,
+    shadowMaskTexture: Material.Texture.Common({ src: 'textures/mask.png' })  // Optional light mask
+  })
+})
+```
+
+### Visibility Control
+```typescript
+import { VisibilityComponent } from '@dcl/sdk/ecs'
+
+// Hide an entity
+VisibilityComponent.create(entity, { visible: false })
+
+// Show it again
+VisibilityComponent.getMutable(entity).visible = true
+```
+
+## Triggers & Interactions
+
+### Raycasting
+```typescript
+import { Raycast, RaycastQueryType, raycastSystem } from '@dcl/sdk/ecs'
+import { Vector3 } from '@dcl/sdk/math'
+
+// Single raycast from entity
+Raycast.create(entity, {
+  originOffset: Vector3.Zero(),  // Offset from entity position
+  direction: { $case: 'globalDirection', globalDirection: Vector3.Down() },
+  // Or direction: { $case: 'localDirection', localDirection: Vector3.Forward() }
+  // Or direction: { $case: 'globalTarget', globalTarget: Vector3.create(10, 0, 10) }
+  // Or direction: { $case: 'targetEntity', targetEntity: targetEntityId }
+  maxDistance: 10,
+  queryType: RaycastQueryType.RQT_HIT_FIRST,  // First hit
+  // Or RQT_QUERY_ALL for all hits
+  timestamp: Date.now()  // Used to identify this raycast
+})
+
+// Global raycast
+raycastSystem.registerGlobalDirectionRaycast(
+  {
+    entity: engine.PlayerEntity,
+    opts: { 
+      direction: Vector3.Down(),
+      maxDistance: 10,
+      collisionMask: ColliderLayer.CL_PHYSICS  // Only hit specific layers
+    }
+  },
+  (raycastResult) => {
+    if (raycastResult.hits.length > 0) {
+      console.log('Hit at', raycastResult.hits[0].position)
+    }
+  }
+)
+```
+
+### Avatar Modifier Areas
+```typescript
+import { AvatarModifierArea, AvatarModifierType } from '@dcl/sdk/ecs'
+
+// Create an area that hides other avatars
+AvatarModifierArea.create(entity, {
+  area: Vector3.create(5, 5, 5),  // Box size
+  modifiers: [AvatarModifierType.AMT_HIDE_AVATARS],
+  // Or AMT_DISABLE_PASSPORTS
+  excludeIds: ['user-address-1', 'user-address-2']  // Optional: players not affected
+})
+```
+
+### Portable Experiences
+```typescript
+import { spawn, kill, SpawnResponse } from '~system/PortableExperiences'
+
+// Launch a portable experience
+let pxId: SpawnResponse
+spawn({ ens: 'experience.dcl.eth' }).then((response) => {
+  pxId = response
+})
+
+// Close a portable experience
+if (pxId?.pid) {
+  kill({ pid: pxId.pid })
+}
+```
+
+## Restricted Actions
+
+### External Links
+```typescript
+import { openExternalUrl, openNftDialog } from '~system/RestrictedActions'
+
+// Open a webpage
+openExternalUrl({ url: 'https://decentraland.org' })
+
+// Open NFT info dialog
+openNftDialog({ 
+  urn: 'urn:decentraland:ethereum:erc721:0x06012c8cf97bead5deae237070f9587f8e7a266d:1540722' 
+})
+```
+
+### Teleportation
+```typescript
+import { teleportTo, changeRealm } from '~system/RestrictedActions'
+
+// Teleport to another scene
+teleportTo({ worldCoordinates: { x: 10, y: 20 } })
+
+// Change Decentraland realm
+changeRealm({ 
+  realm: 'https://peer.decentraland.org',
+  message: 'Do you want to change realms?' // Optional confirmation message
+})
+```
+
+## Testing Framework
+
+### Writing Tests
+```typescript
+import { test } from '@dcl/sdk/testing'
+import { assertComponentValue } from '@dcl/sdk/testing/assert'
+
+test('my test case', function* (context) {
+  // Create test setup
+  const entity = engine.addEntity()
+  Transform.create(entity, { position: Vector3.One() })
+  
+  // Let the engine run for a frame
+  yield
+  
+  // Check component values
+  assertComponentValue(entity, Transform, {
+    position: Vector3.One(),
+    scale: Vector3.One(),
+    rotation: Quaternion.Identity()
+  })
+})
+```
+
+### Test Assertions
+```typescript
+import { assertEquals, assertEntitiesCount } from '@dcl/sdk/testing/assert'
+
+// Basic assertions
+assertEquals(actual, expected, 'Optional message')
+
+// Entity assertions
+assertEntitiesCount(engine.getEntitiesWith(MeshRenderer), 5, 'Should have 5 entities with MeshRenderer')
+```
+
+## Scene Optimization
+
+### Entity Pooling
+```typescript
+// Create an entity pool for reuse
+const entityPool: Entity[] = []
+
+function getEntityFromPool(): Entity {
+  if (entityPool.length > 0) {
+    return entityPool.pop()!
+  } else {
+    return createNewEntity()
+  }
+}
+
+function returnEntityToPool(entity: Entity) {
+  // Reset the entity to a clean state
+  VisibilityComponent.getMutable(entity).visible = false
+  entityPool.push(entity)
+}
+```
+
+### Visibility Culling
+```typescript
+// Create a system that hides distant entities
+engine.addSystem(() => {
+  const playerPos = Transform.get(engine.PlayerEntity).position
+  
+  for (const [entity, transform] of engine.getEntitiesWith(Transform, VisibilityComponent)) {
+    const distance = Vector3.distance(playerPos, transform.position)
+    
+    if (distance > 20) {
+      VisibilityComponent.getMutable(entity).visible = false
+    } else {
+      VisibilityComponent.getMutable(entity).visible = true
+    }
+  }
+})
+```
