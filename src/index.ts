@@ -13,25 +13,25 @@ import { emoteSetup } from './effects/emotes'
 import { lightsSetup } from './effects/lights/discoBall'
 import { clapMeterSetup } from './effects/clapMeter'
 
-
+/**
+ * Main entry point for the scene
+ * Initializes all scene components and systems
+ */
 export function main() {
-
-
+	console.log("Initializing scene components...")
+	
+	// Set up scene components
 	pedestalSetup()
-
 	tiltWorldSetup()
-
 	cameraSetup()
-
-	uiSetup()<
-
+	uiSetup()
 	emoteSetup()
-
 	clapMeterSetup()
-
-	console.log("THIS IS THE MAIN FUNCTION")
-
-	//lightsSetup()
+	
+	// Uncomment to enable disco ball lights
+	// lightsSetup()
+	
+	console.log("Scene initialization complete")
 }
 
 

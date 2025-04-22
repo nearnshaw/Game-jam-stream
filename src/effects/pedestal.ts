@@ -5,125 +5,154 @@ import { Vector3 } from "@dcl/sdk/math"
 import { triggerEmote } from "~system/RestrictedActions"
 import { getTriggerEvents, getActionEvents } from '@dcl/asset-packs/dist/events'
 import { randomDanceEmotes } from "./emotes"
-import { TriggerType, TriggerConditionType } from '@dcl/asset-packs'
 import { resetClapMeter } from "./clapMeter"
 import * as utils from '@dcl-sdk/utils'
 
-var test_avatar = "NicoE"
+// Constants
+const TEST_AVATAR = "NicoE"
+const PEDESTAL_ENTITY_NAME = 'pedestal'
+const SPIRAL_ENTITY_NAME = 'spiral'
+const EMOTE_DELAY_MS = 3050
 
-var amIOnPedestal = false
+// State
+let isPlayerOnPedestal = false
 
-
-
-
-// y si lo controlo todo desde el Admin?  con GetPlayers
-
-
-export function pedestalSetup(){
-
-
-    // getActions("button")?.on("Play Activate Animation", () => {
-    //     checkForPedestal()
-    // })<
-
-	sceneMessageBus.on("Pedestal", (data) => {
-		console.log("Pedestal", data)
-		checkForPedestal(data.player)
-	})
-
-	//getTriggers("button")?.on(TriggerType.ON_COUNTER_CHANGE, (data) => {
-	//	console.log("Button pressed", data)
-	//	checkForPedestal()
-	//})
-
+/**
+ * Sets up the pedestal functionality
+ * Initializes message bus listeners for pedestal events
+ */
+export function pedestalSetup() {
+    // Listen for pedestal events from the message bus
+    sceneMessageBus.on("Pedestal", (data) => {
+        console.log("Pedestal event received:", data)
+        checkForPedestal(data.player)
+    })
 }
 
-// runs for all
-export function checkForPedestal(avatar: string = test_avatar){
+/**
+ * Checks if the current player should be on the pedestal
+ * @param avatarName - The name of the avatar to check against
+ */
+export function checkForPedestal(avatarName: string = TEST_AVATAR) {
+    const currentPlayer = getPlayer()
 
-	let myPlayer = getPlayer()
+    if (!currentPlayer) {
+        console.log("No player found")
+        return
+    }
 
-	if (myPlayer) {
-		console.log('Name : ', myPlayer.name)
-		console.log('UserId : ', myPlayer.userId)
+    console.log('Player Name:', currentPlayer.name)
+    console.log('Player UserId:', currentPlayer.userId)
 
-		if(myPlayer.name.toLowerCase() === avatar.toLowerCase() && myPlayer.position && !amIOnPedestal){
-			console.log("IM THE CHOSEN ONE")
-
-			// check state of pedestal, if up do fast tween down && lights off. Wait one second, then resposition and tween up.
-			amIOnPedestal = true
-
-			InputModifier.createOrReplace(engine.PlayerEntity, {
-				mode: InputModifier.Mode.Standard({
-					disableJog: true,
-					disableRun: true,
-					disableJump: true,
-					disableWalk: true
-				}),
-			})
-
-			pedestal(myPlayer.position)
-
-		
-
-		} else if(amIOnPedestal){
-			InputModifier.createOrReplace(engine.PlayerEntity, {
-				mode: InputModifier.Mode.Standard({
-					disableJog: false,
-					disableRun: false,
-					disableJump: false,
-					disableWalk: false
-				}),
-			})
-
-			amIOnPedestal = false
-	
-			console.log("I AM NOT ON THE PEDESTAL")
-	
-		}	
-	} 
+    const isCurrentPlayer = currentPlayer.name.toLowerCase() === avatarName.toLowerCase()
+    
+    if (isCurrentPlayer && currentPlayer.position && !isPlayerOnPedestal) {
+        // Player should be on pedestal
+        console.log("Player is the chosen one")
+        activatePedestal(currentPlayer.position)
+    } else if (isPlayerOnPedestal) {
+        // Player should get off pedestal
+        deactivatePedestal()
+    }
 }
 
-// runs for all
-function pedestal(newPosition: Vector3){
-	const pedestal = engine.getEntityOrNullByName('pedestal')
-	const spiral = engine.getEntityOrNullByName('spiral')
-	if (pedestal && spiral) {
+/**
+ * Activates the pedestal for the current player
+ * @param playerPosition - The current position of the player
+ */
+function activatePedestal(playerPosition: Vector3) {
+    isPlayerOnPedestal = true
 
-		Transform.getMutable(pedestal).position = newPosition
+    // Disable player movement
+    disablePlayerMovement()
 
-		//const pedestalTriggers = getTriggerEvents(pedestal)
-		const pedestalActions = getActionEvents(pedestal)
-		pedestalActions.emit('Up', {})
-		pedestalActions.emit('Sound', {})
+    // Position and activate pedestal
+    const pedestal = engine.getEntityOrNullByName(PEDESTAL_ENTITY_NAME)
+    const spiral = engine.getEntityOrNullByName(SPIRAL_ENTITY_NAME)
+    
+    if (!pedestal || !spiral) {
+        console.error("Pedestal or spiral entities not found")
+        return
+    }
 
-		const spiralActions = getActionEvents(spiral)
-		spiralActions.emit('Pop Up', {})
+    // Position pedestal at player location
+    Transform.getMutable(pedestal).position = playerPosition
 
-		utils.timers.setTimeout(() => {
-			const emote = randomDanceEmotes[Math.floor(Math.random() * randomDanceEmotes.length)]
-			triggerEmote({ predefinedEmote: emote })
-          }, 3050)	
+    // Activate pedestal and spiral animations
+    const pedestalActions = getActionEvents(pedestal)
+    pedestalActions.emit('Up', {})
+    pedestalActions.emit('Sound', {})
 
-	}
+    const spiralActions = getActionEvents(spiral)
+    spiralActions.emit('Pop Up', {})
+
+    // Trigger random dance emote after delay
+    utils.timers.setTimeout(() => {
+        const emote = randomDanceEmotes[Math.floor(Math.random() * randomDanceEmotes.length)]
+        triggerEmote({ predefinedEmote: emote })
+    }, EMOTE_DELAY_MS)
 }
 
-// only runs for admin
-export function hidePedestal(){
+/**
+ * Deactivates the pedestal for the current player
+ */
+function deactivatePedestal() {
+    // Re-enable player movement
+    enablePlayerMovement()
+    
+    isPlayerOnPedestal = false
+    console.log("Player is no longer on the pedestal")
+}
 
-	
-	resetClapMeter()
+/**
+ * Disables player movement controls
+ */
+function disablePlayerMovement() {
+    InputModifier.createOrReplace(engine.PlayerEntity, {
+        mode: InputModifier.Mode.Standard({
+            disableJog: true,
+            disableRun: true,
+            disableJump: true,
+            disableWalk: true
+        }),
+    })
+}
 
-	const pedestal = engine.getEntityOrNullByName('pedestal')
-	const spiral = engine.getEntityOrNullByName('spiral')
+/**
+ * Enables player movement controls
+ */
+function enablePlayerMovement() {
+    InputModifier.createOrReplace(engine.PlayerEntity, {
+        mode: InputModifier.Mode.Standard({
+            disableJog: false,
+            disableRun: false,
+            disableJump: false,
+            disableWalk: false
+        }),
+    })
+}
 
-	if (pedestal && spiral) {
-		const pedestalActions = getActionEvents(pedestal)
-		pedestalActions.emit('Down', {})
-		const spiralActions = getActionEvents(spiral)
-		spiralActions.emit('Hide', {})
-	}
+/**
+ * Hides the pedestal and resets the clap meter
+ * This function is only called by the admin
+ */
+export function hidePedestal() {
+    // Reset clap meter
+    resetClapMeter()
 
-	
+    // Get pedestal and spiral entities
+    const pedestal = engine.getEntityOrNullByName(PEDESTAL_ENTITY_NAME)
+    const spiral = engine.getEntityOrNullByName(SPIRAL_ENTITY_NAME)
 
+    if (!pedestal || !spiral) {
+        console.error("Pedestal or spiral entities not found")
+        return
+    }
+
+    // Hide pedestal and spiral
+    const pedestalActions = getActionEvents(pedestal)
+    pedestalActions.emit('Down', {})
+    
+    const spiralActions = getActionEvents(spiral)
+    spiralActions.emit('Hide', {})
 }
