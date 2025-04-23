@@ -90,27 +90,6 @@
         "serializationType": "transform"
       },
       "data": {
-        "513": {
-          "json": {
-            "position": {
-              "x": 18.5,
-              "y": 20.200000762939453,
-              "z": 0
-            },
-            "scale": {
-              "x": 39,
-              "y": 20,
-              "z": 1
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0.7071067690849304,
-              "z": 0,
-              "w": 0.7071067690849304
-            },
-            "parent": 514
-          }
-        },
         "514": {
           "json": {
             "position": {
@@ -283,7 +262,7 @@
           "json": {
             "position": {
               "x": 122.69456481933594,
-              "y": 0.0000036612586882256437,
+              "y": 0.0000036612477742892224,
               "z": 87.24613952636719
             },
             "rotation": {
@@ -370,16 +349,16 @@
               "y": 36.999935150146484,
               "z": -36.9874153137207
             },
+            "scale": {
+              "x": 0.9999996423721313,
+              "y": 0.9999998211860657,
+              "z": 0.9999998211860657
+            },
             "rotation": {
               "x": 0.2329627275466919,
               "y": 0.5624222755432129,
               "z": 0.3036033809185028,
               "w": 0.7329628467559814
-            },
-            "scale": {
-              "x": 0.9999996423721313,
-              "y": 0.9999998211860657,
-              "z": 0.9999998211860657
             },
             "parent": 564
           }
@@ -391,16 +370,16 @@
               "y": 31.74995231628418,
               "z": -16.73746109008789
             },
+            "scale": {
+              "x": 0.9999997019767761,
+              "y": 1,
+              "z": 0.9999999403953552
+            },
             "rotation": {
               "x": -1.3294896916704602e-7,
               "y": 0.6087614893913269,
               "z": 2.224993806976272e-7,
               "w": 0.7933533191680908
-            },
-            "scale": {
-              "x": 0.9999997019767761,
-              "y": 1,
-              "z": 0.9999999403953552
             },
             "parent": 564
           }
@@ -475,16 +454,16 @@
               "y": 24.24996566772461,
               "z": -10.987465858459473
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 1.892470846698302e-9,
               "y": -5.088838683775521e-9,
               "z": -1.2331128118603374e-8,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 564
           }
@@ -496,16 +475,16 @@
               "y": -1.611191757268371e-12,
               "z": 94.75
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": -1.4731038506297196e-16,
               "y": -1.620661886950645e-18,
               "z": -3.308722450212111e-24,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 535
           }
@@ -622,16 +601,16 @@
               "y": 41.99995803833008,
               "z": 12.982224464416504
             },
+            "scale": {
+              "x": 0.9999997019767761,
+              "y": 1,
+              "z": 0.9999999403953552
+            },
             "rotation": {
               "x": -1.3294896916704602e-7,
               "y": 0.6087614893913269,
               "z": 2.224993806976272e-7,
               "w": 0.7933533191680908
-            },
-            "scale": {
-              "x": 0.9999997019767761,
-              "y": 1,
-              "z": 0.9999999403953552
             },
             "parent": 564
           }
@@ -1042,16 +1021,16 @@
               "y": 26.499969482421875,
               "z": 2.262528657913208
             },
+            "scale": {
+              "x": 0.9999997019767761,
+              "y": 1,
+              "z": 0.9999999403953552
+            },
             "rotation": {
               "x": -1.3294896916704602e-7,
               "y": 0.6087614893913269,
               "z": 2.224993806976272e-7,
               "w": 0.7933533191680908
-            },
-            "scale": {
-              "x": 0.9999997019767761,
-              "y": 1,
-              "z": 0.9999999403953552
             },
             "parent": 564
           }
@@ -1084,16 +1063,16 @@
               "y": 41.99995422363281,
               "z": -0.2374666929244995
             },
+            "scale": {
+              "x": 0.9999996423721313,
+              "y": 1,
+              "z": 0.9999998211860657
+            },
             "rotation": {
               "x": -1.3294896916704602e-7,
               "y": 0.6087614893913269,
               "z": 2.224993806976272e-7,
               "w": 0.7933533191680908
-            },
-            "scale": {
-              "x": 0.9999996423721313,
-              "y": 1,
-              "z": 0.9999998211860657
             },
             "parent": 564
           }
@@ -1168,16 +1147,16 @@
               "y": 6.199545055096678e-7,
               "z": -0.0000011509226851558196
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 6.123947623486105e-17,
               "y": 3.929009442046763e-16,
               "z": 2.2692957098678895e-15,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 514
           }
@@ -1189,16 +1168,16 @@
               "y": 60,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0.7071484923362732,
               "y": 0.09148702025413513,
               "z": -0.09309786558151245,
               "w": 0.6949129104614258
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 564
           }
@@ -1210,16 +1189,16 @@
               "y": 30,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": -0.6902608871459961,
               "y": 0.1238546371459961,
               "z": -0.1217116191983223,
               "w": -0.7024145722389221
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 564
           }
@@ -1231,18 +1210,39 @@
               "y": -1.611191757268371e-12,
               "z": 94.75
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": -1.4731038506297196e-16,
               "y": -1.620661886950645e-18,
               "z": -3.308722450212111e-24,
               "w": 1
             },
+            "parent": 535
+          }
+        },
+        "568": {
+          "json": {
+            "position": {
+              "x": 18.5,
+              "y": 20.200000762939453,
+              "z": -7.989999771118164
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0.7071067690849304,
+              "z": 0,
+              "w": 0.7071067690849304
+            },
             "scale": {
-              "x": 1,
-              "y": 1,
+              "x": 39,
+              "y": 20,
               "z": 1
             },
-            "parent": 535
+            "parent": 514
           }
         }
       }
@@ -1264,12 +1264,6 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {
-            "networkId": 0,
-            "entityId": 8002
-          }
-        },
         "514": {
           "json": {
             "networkId": 0,
@@ -1509,6 +1503,12 @@
             "networkId": 0,
             "entityId": 8048
           }
+        },
+        "568": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8049
+          }
         }
       }
     },
@@ -1522,11 +1522,6 @@
       },
       "data": {
         "0": {
-          "json": {
-            "states": []
-          }
-        },
-        "513": {
           "json": {
             "states": []
           }
@@ -3343,6 +3338,11 @@
           "json": {
             "states": []
           }
+        },
+        "568": {
+          "json": {
+            "states": []
+          }
         }
       }
     },
@@ -3581,79 +3581,6 @@
         "protocolBuffer": "PBMaterial"
       },
       "data": {
-        "513": {
-          "json": {
-            "material": {
-              "$case": "pbr",
-              "pbr": {
-                "texture": {
-                  "tex": {
-                    "$case": "videoTexture",
-                    "videoTexture": {
-                      "videoPlayerEntity": 513,
-                      "wrapMode": 0,
-                      "filterMode": 0
-                    }
-                  }
-                },
-                "alphaTest": 0.5,
-                "castShadows": true,
-                "alphaTexture": {
-                  "tex": {
-                    "$case": "texture",
-                    "texture": {
-                      "src": "",
-                      "wrapMode": 0,
-                      "filterMode": 0
-                    }
-                  }
-                },
-                "emissiveTexture": {
-                  "tex": {
-                    "$case": "texture",
-                    "texture": {
-                      "src": "",
-                      "wrapMode": 0,
-                      "filterMode": 0
-                    }
-                  }
-                },
-                "bumpTexture": {
-                  "tex": {
-                    "$case": "texture",
-                    "texture": {
-                      "src": "",
-                      "wrapMode": 0,
-                      "filterMode": 0
-                    }
-                  }
-                },
-                "albedoColor": {
-                  "r": 1,
-                  "g": 1,
-                  "b": 1,
-                  "a": 1
-                },
-                "emissiveColor": {
-                  "r": 1,
-                  "g": 1,
-                  "b": 1
-                },
-                "reflectivityColor": {
-                  "r": 1,
-                  "g": 1,
-                  "b": 1
-                },
-                "transparencyMode": 4,
-                "metallic": 0,
-                "roughness": 1,
-                "specularIntensity": 0,
-                "emissiveIntensity": 0,
-                "directIntensity": 1
-              }
-            }
-          }
-        },
         "525": {
           "json": {
             "material": {
@@ -3923,6 +3850,26 @@
               }
             }
           }
+        },
+        "568": {
+          "json": {
+            "material": {
+              "$case": "pbr",
+              "pbr": {
+                "texture": {
+                  "tex": {
+                    "$case": "videoTexture",
+                    "videoTexture": {
+                      "videoPlayerEntity": 0
+                    }
+                  }
+                },
+                "metallic": 0,
+                "roughness": 1,
+                "specularIntensity": 0
+              }
+            }
+          }
         }
       }
     },
@@ -3935,7 +3882,7 @@
         "protocolBuffer": "PBMeshCollider"
       },
       "data": {
-        "513": {
+        "568": {
           "json": {
             "collisionMask": 1,
             "mesh": {
@@ -3955,16 +3902,6 @@
         "protocolBuffer": "PBMeshRenderer"
       },
       "data": {
-        "513": {
-          "json": {
-            "mesh": {
-              "$case": "plane",
-              "plane": {
-                "uvs": []
-              }
-            }
-          }
-        },
         "525": {
           "json": {
             "mesh": {
@@ -4054,6 +3991,16 @@
               }
             }
           }
+        },
+        "568": {
+          "json": {
+            "mesh": {
+              "$case": "plane",
+              "plane": {
+                "uvs": []
+              }
+            }
+          }
         }
       }
     },
@@ -4070,11 +4017,6 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {
-            "value": "screen"
-          }
-        },
         "514": {
           "json": {
             "value": "base"
@@ -4344,6 +4286,11 @@
           "json": {
             "value": "scheduleController"
           }
+        },
+        "568": {
+          "json": {
+            "value": "screen"
+          }
         }
       }
     },
@@ -4390,13 +4337,6 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {
-            "componentIds": [
-              1043
-            ]
-          }
-        },
         "514": {
           "json": {
             "componentIds": [
@@ -4739,6 +4679,13 @@
               1
             ]
           }
+        },
+        "568": {
+          "json": {
+            "componentIds": [
+              1043
+            ]
+          }
         }
       }
     },
@@ -4805,11 +4752,10 @@
         "protocolBuffer": "PBVideoPlayer"
       },
       "data": {
-        "513": {
+        "568": {
           "json": {
-            "src": "https://player.vimeo.com/external/552481870.m3u8?s=c312c8533f97e808fccc92b0510b085c8122a875",
-            "playing": true,
-            "volume": 1
+            "src": "https://boedo.casla",
+            "playing": true
           }
         }
       }
@@ -8674,7 +8620,7 @@
                 "entity": 514,
                 "open": true,
                 "children": [
-                  513,
+                  568,
                   534,
                   559,
                   520,
@@ -8688,10 +8634,6 @@
               },
               {
                 "entity": 2,
-                "children": []
-              },
-              {
-                "entity": 513,
                 "children": []
               },
               {
@@ -8953,6 +8895,10 @@
               },
               {
                 "entity": 567,
+                "children": []
+              },
+              {
+                "entity": 568,
                 "children": []
               }
             ]
@@ -9230,41 +9176,6 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {
-            "id": 1,
-            "value": [
-              {
-                "name": "Play",
-                "type": "set_state",
-                "jsonPayload": "{ \"state\": \"Playing\" }",
-                "allowedInBasicView": true
-              },
-              {
-                "name": "Stop",
-                "type": "set_state",
-                "jsonPayload": "{ \"state\": \"Stopped\" }",
-                "allowedInBasicView": true
-              },
-              {
-                "name": "Play Video Stream",
-                "type": "play_video_stream",
-                "jsonPayload": "{ \"src\": \"https://player.vimeo.com/external/552481870.m3u8?s=c312c8533f97e808fccc92b0510b085c8122a875\", \"loop\": \"false\", \"volume\": 1, \"dclCast\": false }"
-              },
-              {
-                "name": "Stop Video Stream",
-                "type": "stop_video_stream",
-                "jsonPayload": "{}"
-              },
-              {
-                "name": "Plays or Stop",
-                "type": "set_state",
-                "jsonPayload": "{ \"state\": \"Toggle\" }",
-                "allowedInBasicView": true
-              }
-            ]
-          }
-        },
         "514": {
           "json": {
             "id": 54,
@@ -10601,90 +10512,6 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {
-            "value": [
-              {
-                "type": "on_state_change",
-                "conditions": [
-                  {
-                    "id": 2,
-                    "type": "when_state_is",
-                    "value": "Playing"
-                  }
-                ],
-                "actions": [
-                  {
-                    "id": 1,
-                    "name": "Play Video Stream"
-                  }
-                ],
-                "basicViewId": "trigger-when-turned-on"
-              },
-              {
-                "type": "on_state_change",
-                "conditions": [
-                  {
-                    "id": 2,
-                    "type": "when_state_is",
-                    "value": "Stopped"
-                  }
-                ],
-                "actions": [
-                  {
-                    "id": 1,
-                    "name": "Stop Video Stream"
-                  }
-                ],
-                "basicViewId": "trigger-when-turned-off"
-              },
-              {
-                "type": "on_state_change",
-                "conditions": [
-                  {
-                    "id": 2,
-                    "type": "when_state_is",
-                    "value": "Toggle"
-                  },
-                  {
-                    "id": 2,
-                    "type": "when_previous_state_is",
-                    "value": "Playing"
-                  }
-                ],
-                "operation": "and",
-                "actions": [
-                  {
-                    "id": 1,
-                    "name": "Stop"
-                  }
-                ]
-              },
-              {
-                "type": "on_state_change",
-                "conditions": [
-                  {
-                    "id": 2,
-                    "type": "when_state_is",
-                    "value": "Toggle"
-                  },
-                  {
-                    "id": 2,
-                    "type": "when_previous_state_is",
-                    "value": "Stopped"
-                  }
-                ],
-                "operation": "and",
-                "actions": [
-                  {
-                    "id": 1,
-                    "name": "Play"
-                  }
-                ]
-              }
-            ]
-          }
-        },
         "515": {
           "json": {
             "value": [
@@ -11234,17 +11061,6 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {
-            "id": 2,
-            "value": [
-              "Playing",
-              "Stopped",
-              "Toggle"
-            ],
-            "defaultValue": "Stopped"
-          }
-        },
         "515": {
           "json": {
             "id": 4,
@@ -11359,6 +11175,47 @@
               "First"
             ],
             "defaultValue": "Deactivated"
+          }
+        }
+      }
+    },
+    {
+      "name": "asset-packs::VideoScreen",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "thumbnail": {
+            "type": "string",
+            "serializationType": "utf8-string"
+          },
+          "defaultMediaSource": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "default": 0,
+            "serializationType": "enum-int",
+            "enumObject": {
+              "0": "VideoURL",
+              "1": "LiveStream",
+              "VideoURL": 0,
+              "LiveStream": 1
+            }
+          },
+          "defaultURL": {
+            "type": "string",
+            "serializationType": "utf8-string"
+          }
+        },
+        "serializationType": "map"
+      },
+      "data": {
+        "568": {
+          "json": {
+            "thumbnail": "https://boedo.casla",
+            "defaultMediaSource": 0,
+            "defaultURL": "https://boedo.casla"
           }
         }
       }
@@ -11608,7 +11465,12 @@
               "disableVideoPlayersSound": false,
               "showAuthorOnVideoPlayers": true,
               "linkAllVideoPlayers": false,
-              "videoPlayers": []
+              "videoPlayers": [
+                {
+                  "entity": 568,
+                  "customName": "screen"
+                }
+              ]
             },
             "smartItemsControl": {
               "isEnabled": true,
@@ -11706,9 +11568,6 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {}
-        },
         "514": {
           "json": {}
         },
@@ -11866,6 +11725,9 @@
         },
         "567": {
           "json": {}
+        },
+        "568": {
+          "json": {}
         }
       }
     },
@@ -11907,11 +11769,6 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {
-            "value": true
-          }
-        },
         "514": {
           "json": {
             "value": true
@@ -12077,7 +11934,9 @@
                     "asset-packs::AdminTools",
                     "AdminTools",
                     "asset-packs::Rewards",
-                    "Rewards"
+                    "Rewards",
+                    "asset-packs::VideoScreen",
+                    "VideoScreen"
                   ],
                   "default": "asset-packs::Actions",
                   "serializationType": "enum-string",
@@ -12125,7 +11984,9 @@
                     "AdminTools": "asset-packs::AdminTools",
                     "asset-packs::AdminTools": "AdminTools",
                     "Rewards": "asset-packs::Rewards",
-                    "asset-packs::Rewards": "Rewards"
+                    "asset-packs::Rewards": "Rewards",
+                    "VideoScreen": "asset-packs::VideoScreen",
+                    "asset-packs::VideoScreen": "VideoScreen"
                   }
                 },
                 "layout": {
@@ -12161,38 +12022,6 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {
-            "isBasicViewEnabled": true,
-            "componentName": "Video Player",
-            "fields": [
-              {
-                "name": "Hover Text",
-                "type": "core::PointerEvents"
-              },
-              {
-                "name": "Video Player",
-                "type": "core::VideoPlayer"
-              },
-              {
-                "name": "When Clicked",
-                "type": "asset-packs::Triggers",
-                "basicViewId": "trigger-when-clicked"
-              },
-              {
-                "name": "When Turned On",
-                "type": "asset-packs::Triggers",
-                "basicViewId": "trigger-when-turned-on"
-              },
-              {
-                "name": "When Turned Off",
-                "type": "asset-packs::Triggers",
-                "basicViewId": "trigger-when-turned-off"
-              }
-            ],
-            "assetId": "dc5ec17b-aa1a-4bd0-bace-7d615d9bdc70"
-          }
-        },
         "515": {
           "json": {
             "isBasicViewEnabled": false,
@@ -12373,6 +12202,19 @@
             "componentName": "Confetti",
             "fields": [],
             "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
+        "568": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Video Screen",
+            "fields": [
+              {
+                "name": "Config",
+                "type": "asset-packs::VideoScreen"
+              }
+            ],
+            "assetId": "dc5ec17b-aa1a-4bd0-bace-7d615d9bdc71"
           }
         }
       }

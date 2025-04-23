@@ -10,8 +10,8 @@
     "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next"
   },
   "devDependencies": {
-    "@dcl/js-runtime": "7.8.5",
-    "@dcl/sdk": "^7.8.5"
+    "@dcl/js-runtime": "latest",
+    "@dcl/sdk": "https://sdk-team-cdn.decentraland.org/@dcl/js-sdk-toolchain/branch/feat/video-screen/dcl-sdk-7.8.4-14579743923.commit-91790db.tgz"
   },
   "engines": {
     "node": ">=16.0.0",
