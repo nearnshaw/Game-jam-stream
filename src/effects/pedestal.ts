@@ -12,7 +12,7 @@ import * as utils from '@dcl-sdk/utils'
 const TEST_AVATAR = "NicoE"
 const PEDESTAL_ENTITY_NAME = 'pedestal'
 const SPIRAL_ENTITY_NAME = 'spiral'
-const EMOTE_DELAY_MS = 3050
+const EMOTE_DELAY_MS = 3100
 
 // State
 let isPlayerOnPedestal = false
@@ -50,9 +50,10 @@ export function checkForPedestal(avatarName: string = TEST_AVATAR) {
         // Player should be on pedestal
         console.log("Player is the chosen one")
         activatePedestal(currentPlayer.position)
+	
     } else if (isPlayerOnPedestal) {
         // Player should get off pedestal
-        deactivatePedestal()
+        getOffPedestal()
     }
 }
 
@@ -65,6 +66,8 @@ function activatePedestal(playerPosition: Vector3) {
 
     // Disable player movement
     disablePlayerMovement()
+
+
 
     // Position and activate pedestal
     const pedestal = engine.getEntityOrNullByName(PEDESTAL_ENTITY_NAME)
@@ -96,7 +99,7 @@ function activatePedestal(playerPosition: Vector3) {
 /**
  * Deactivates the pedestal for the current player
  */
-function deactivatePedestal() {
+function getOffPedestal() {
     // Re-enable player movement
     enablePlayerMovement()
     
@@ -138,7 +141,7 @@ function enablePlayerMovement() {
  */
 export function hidePedestal() {
     // Reset clap meter
-    resetClapMeter()
+    //resetClapMeter()
 
     // Get pedestal and spiral entities
     const pedestal = engine.getEntityOrNullByName(PEDESTAL_ENTITY_NAME)

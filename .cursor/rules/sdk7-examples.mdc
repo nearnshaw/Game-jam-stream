@@ -12,13 +12,12 @@ This reference documents common patterns, components, and systems used in Decent
 - [Entity-Component System](mdc:#entity-component-system)
 - [Component Reference](mdc:#component-reference)
 - [UI System](mdc:#ui-system)
-- [Input Handling](mdc:#input-handling)
-- [Movement & Animation](mdc:#movement--animation)
-- [Lights & Visual Effects](mdc:#lights--visual-effects)
-- [Triggers & Interactions](mdc:#triggers--interactions)
-- [Scene Optimization](mdc:#scene-optimization)
-- [Restricted Actions](mdc:#restricted-actions)
-- [Testing Framework](mdc:#testing-framework)
+- - @Pontr- @Eent hts  @Trons
+- @Scene Optimization
+- @Restricted Actions
+- @Testing Framework
+- @Network Connections
+- @Blockchain Operations
 
 ## Scene Structure
 
@@ -354,6 +353,277 @@ const screenHeight = canvasInfo.height
 const pixelRatio = canvasInfo.devicePixelRatio
 ```
 
+## Runtime Data
+
+### World Time
+```typescript
+import { getWorldTime } from '~system/Runtime'
+
+// Get the current time in the Decentraland world
+executeTask(async () => {
+  const time = await getWorldTime({})
+  console.log(`Current time: ${time.seconds} seconds since day start`)
+  
+  // Convert to hours (24-hour cycle)
+  const hours = (time.seconds / 3600) % 24
+  console.log(`Current hour: ${hours.toFixed(2)}`)
+  
+  // Check if it's night time (between 19:50 and 6:15)
+  const isNight = time.seconds > 19.833 * 3600 || time.seconds < 6.25 * 3600
+  if (isNight) {
+    console.log('It is night time')
+  }
+})
+```
+
+### Realm Information
+```typescript
+import { getRealm } from '~system/Runtime'
+
+// Get information about the current realm
+executeTask(async () => {
+  const { realmInfo } = await getRealm({})
+  console.log(`Current realm: ${realmInfo.realmName}`)
+  console.log(`Network ID: ${realmInfo.networkId}`)
+  console.log(`Is preview: ${realmInfo.isPreview}`)
+  
+  // Check if connected to scene room
+  if (realmInfo.isConnectedSceneRoom) {
+    console.log('Connected to scene room')
+  }
+})
+```
+
+### Platform Detection
+```typescript
+import { getPlatform } from '~system/EnvironmentApi'
+
+// Detect the platform the player is using
+executeTask(async () => {
+  const { platform } = await getPlatform()
+  
+  if (platform === 'BROWSER') {
+    console.log('Running in browser')
+    // Optimize for browser performance
+  } else if (platform === 'DESKTOP') {
+    console.log('Running in desktop app')
+    // Enable higher quality features
+  }
+})
+```
+
+### Engine Information
+```typescript
+import { EngineInfo, engine } from '@dcl/sdk/ecs'
+
+// Access engine information
+engine.addSystem((deltaTime) => {
+  const engineInfo = EngineInfo.getOrNull(engine.RootEntity)
+  if (!engineInfo) return
+  
+  // Get current frame number
+  const currentFrame = engineInfo.frameNumber
+  
+  // Get total runtime in seconds
+  const runtime = engineInfo.totalRuntime
+  
+  // Get current tick number
+  const currentTick = engineInfo.tickNumber
+  
+  // Example: Log every 100 frames
+  if (currentFrame % 100 === 0) {
+    console.log(`Runtime: ${runtime.toFixed(2)}s, Frame: ${currentFrame}, Tick: ${currentTick}`)
+  }
+})
+```
+
+## Player Data & Camera Controls
+
+### Player Position and Rotation
+```typescript
+import { engine, Transform } from '@dcl/sdk/ecs'
+import { Vector3, Quaternion } from '@dcl/sdk/math'
+
+// Get player position and rotation
+function getPlayerPosition() {
+  if (!Transform.has(engine.PlayerEntity)) return
+  if (!Transform.has(engine.CameraEntity)) return
+
+  // Player position (at chest height, ~0.88m above ground)
+  const playerPos = Transform.get(engine.PlayerEntity).position
+
+  // Player rotation (direction the avatar is facing)
+  const playerRot = Transform.get(engine.PlayerEntity).rotation
+
+  // Camera position (at eye level, ~1.75m above ground in 1st person)
+  const cameraPos = Transform.get(engine.CameraEntity).position
+
+  // Camera rotation
+  const cameraRot = Transform.get(engine.CameraEntity).rotation
+
+  console.log('Player position:', playerPos)
+  console.log('Player rotation:', playerRot)
+  console.log('Camera position:', cameraPos)
+  console.log('Camera rotation:', cameraRot)
+}
+
+// Add as a system to continuously track player position
+engine.addSystem(getPlayerPosition)
+
+// Get player position once
+executeTask(async () => {
+  // Wait for player entity to be available
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  getPlayerPosition()
+})
+```
+
+### Player Identity Data
+```typescript
+import { engine, PlayerIdentityData, AvatarBase, AvatarEquippedData } from '@dcl/sdk/ecs'
+
+// Access player identity and avatar data
+function getPlayerData() {
+  for (const [entity, identity, base, equipped] of engine.getEntitiesWith(
+    PlayerIdentityData,
+    AvatarBase,
+    AvatarEquippedData
+  )) {
+    // Player address and guest status
+    console.log('Player address:', identity.address)
+    
+    // Avatar base information
+    console.log('Player name:', base.name)
+    console.log('Body shape:', base.bodyShapeUrn)
+    console.log('Skin color:', base.skinColor)
+    console.log('Eye color:', base.eyeColor)
+    console.log('Hair color:', base.hairColor)
+    
+    // Equipped wearables and emotes
+    console.log('Wearables:', equipped.wearableUrns)
+    console.log('Emotes:', equipped.emoteUrns)
+  }
+}
+
+// Add as a system to continuously track player data
+engine.addSystem(getPlayerData)
+```
+
+### Get Player Information
+```typescript
+import { getPlayer } from '@dcl/sdk/network'
+
+// Get current player information
+executeTask(async () => {
+  const player = getPlayer()
+  
+  console.log('Player ID:', player.userId)
+  console.log('Player address:', player.publicKey)
+  console.log('Player name:', player.name)
+  console.log('Player description:', player.description)
+  console.log('Player avatar:', player.avatar)
+  
+  // Access avatar details
+  console.log('Body shape:', player.avatar.bodyShape)
+  console.log('Wearables:', player.avatar.wearables)
+  console.log('Emotes:', player.avatar.emotes)
+})
+```
+
+### Get Portable Experiences
+```typescript
+import { getPortableExperiencesLoaded } from '~system/PortableExperiences'
+
+// Check if player has portable experiences loaded
+executeTask(async () => {
+  const { loaded } = await getPortableExperiencesLoaded({})
+  
+  if (loaded.length > 0) {
+    console.log('Player has portable experiences loaded:')
+    loaded.forEach(px => {
+      console.log(`- ID: ${px.id}`)
+    })
+  } else {
+    console.log('Player has no portable experiences loaded')
+  }
+})
+```
+
+### Camera Mode
+```typescript
+import { engine, CameraMode, CameraType } from '@dcl/sdk/ecs'
+
+// Check player's camera mode (1st or 3rd person)
+function checkCameraMode() {
+  if (!CameraMode.has(engine.CameraEntity)) return
+  
+  const cameraMode = CameraMode.get(engine.CameraEntity)
+  
+  if (cameraMode.mode === CameraType.CT_THIRD_PERSON) {
+    console.log('Player is using 3rd person camera')
+  } else {
+    console.log('Player is using 1st person camera')
+  }
+}
+
+// Add as a system to continuously check camera mode
+engine.addSystem(checkCameraMode)
+
+// Create a camera mode area to force first-person view
+import { CameraModeArea } from '@dcl/sdk/ecs'
+
+function createFirstPersonArea() {
+  const area = engine.addEntity()
+  
+  CameraModeArea.create(area, {
+    area: Vector3.create(5, 5, 5),  // Box size
+    mode: CameraType.CT_FIRST_PERSON
+  })
+  
+  Transform.create(area, {
+    position: Vector3.create(8, 1, 8)
+  })
+}
+```
+
+### Pointer Lock
+```typescript
+import { engine, PointerLock } from '@dcl/sdk/ecs'
+
+// Check if the player's cursor is locked
+function checkPointerLock() {
+  if (!PointerLock.has(engine.CameraEntity)) return
+  
+  const isLocked = PointerLock.get(engine.CameraEntity).isPointerLocked
+  
+  if (isLocked) {
+    console.log('Cursor is locked (camera control mode)')
+  } else {
+    console.log('Cursor is unlocked (UI interaction mode)')
+  }
+}
+
+// Add as a system to continuously check pointer lock
+engine.addSystem(checkPointerLock)
+
+// Listen for pointer lock changes
+import { inputSystem, InputAction, PointerEventType } from '@dcl/sdk/ecs'
+
+function setupPointerLockListener() {
+  // Check for right mouse button press (unlocks cursor)
+  if (inputSystem.isTriggered(InputAction.IA_SECONDARY, PointerEventType.PET_DOWN)) {
+    console.log('Right mouse button pressed - cursor unlocked')
+  }
+  
+  // Check for left mouse button press (locks cursor)
+  if (inputSystem.isTriggered(InputAction.IA_PRIMARY, PointerEventType.PET_DOWN)) {
+    console.log('Left mouse button pressed - cursor locked')
+  }
+}
+
+engine.addSystem(setupPointerLockListener)
+```
+
 ## Input Handling
 
 ### Pointer Events
@@ -432,6 +702,114 @@ InputModifier.getMutable(engine.PlayerEntity).mode = {
 }
 ```
 
+## Event Listeners
+
+### Scene Entry/Exit Events
+```typescript
+import { onEnterScene, onLeaveScene } from '@dcl/sdk/src/players'
+
+// Listen for players entering the scene
+onEnterScene((player) => {
+  if (!player) return
+  console.log('Player entered:', player.userId)
+  console.log('Player data:', player)
+})
+
+// Listen for players leaving the scene
+onLeaveScene((userId) => {
+  if (!userId) return
+  console.log('Player left:', userId)
+})
+
+// Filter for current player only
+import { getPlayer } from '@dcl/sdk/network'
+
+export function main() {
+  let myPlayer = getPlayer()
+
+  onEnterScene((player) => {
+    if (!player) return
+    if (myPlayer && player.userId == myPlayer.userId) {
+      console.log('I entered the scene')
+    }
+  })
+
+  onLeaveScene((userId) => {
+    if (!userId) return
+    if (myPlayer && userId == myPlayer.userId) {
+      console.log('I left the scene')
+    }
+  })
+}
+```
+
+### Avatar Emote Events
+```typescript
+import { AvatarEmoteCommand } from '@dcl/sdk/ecs'
+
+// Listen for emote events from the current player
+AvatarEmoteCommand.onChange(engine.PlayerEntity, (emote) => {
+  if (!emote) return
+  console.log('Emote played:', emote.emoteUrn)
+  console.log('Is looping:', emote.loop)
+  console.log('Timestamp:', emote.timestamp)
+})
+
+// Listen for emote events from other players
+function setupEmoteListener(playerEntity: Entity) {
+  AvatarEmoteCommand.onChange(playerEntity, (emote) => {
+    if (!emote) return
+    console.log('Player emote:', emote.emoteUrn)
+  })
+}
+```
+
+### Camera Mode Events
+```typescript
+import { CameraMode } from '@dcl/sdk/ecs'
+
+// Listen for camera mode changes
+CameraMode.onChange(engine.CameraEntity, (cameraComponent) => {
+  if (!cameraComponent) return
+  console.log('Camera mode:', cameraComponent.mode)
+  // 0 = first person
+  // 1 = third person
+})
+```
+
+### Pointer Lock Events
+```typescript
+import { PointerLock } from '@dcl/sdk/ecs'
+
+// Listen for cursor lock state changes
+PointerLock.onChange(engine.CameraEntity, (pointerLock) => {
+  if (!pointerLock) return
+  console.log('Cursor locked:', pointerLock.isPointerLocked)
+})
+```
+
+### Avatar Profile Events
+```typescript
+import { AvatarEquippedData, AvatarBase } from '@dcl/sdk/ecs'
+
+// Listen for wearable/emote changes
+AvatarEquippedData.onChange(engine.PlayerEntity, (equipped) => {
+  if (!equipped) return
+  console.log('Wearables:', equipped.wearableUrns)
+  console.log('Emotes:', equipped.emoteUrns)
+})
+
+// Listen for avatar base changes
+AvatarBase.onChange(engine.PlayerEntity, (body) => {
+  if (!body) return
+  console.log('Name:', body.name)
+  console.log('Body shape:', body.bodyShapeUrn)
+  console.log('Skin color:', body.skinColor)
+  console.log('Eye color:', body.eyeColor)
+  console.log('Hair color:', body.hairColor)
+})
+```
+
 ## Movement & Animation
 
 ### Tweens
@@ -496,6 +874,80 @@ TweenSequence.create(entity, {
 const tween = Tween.getMutable(entity)
 tween.playing = false  // Pause the tween
 tween.currentTime = 0  // Reset to beginning
+```
+
+### Animator Component
+```typescript
+import { Animator, engine } from '@dcl/sdk/ecs'
+
+// Create an entity with a 3D model
+const shark = engine.addEntity()
+GltfContainer.create(shark, {
+  src: 'models/shark.glb'
+})
+
+// Add the Animator component with animation states
+Animator.create(shark, {
+  states: [
+    {
+      clip: 'swim',  // Name of the animation clip in the model
+      playing: true,
+      loop: true,
+      speed: 1.0,
+      weight: 1.0
+    },
+    {
+      clip: 'bite',
+      playing: false,
+      loop: false,
+      speed: 1.0,
+      weight: 0.0
+    }
+  ]
+})
+
+// Play a specific animation
+Animator.playSingleAnimation(shark, 'swim')
+
+// Stop all animations
+Animator.stopAllAnimations(shark)
+
+// Get a specific animation clip to modify its properties
+const swimAnim = Animator.getClip(shark, 'swim')
+if (swimAnim) {
+  swimAnim.speed = 0.5  // Play at half speed
+  swimAnim.weight = 0.8  // Set animation weight
+}
+
+// Play multiple animations with different weights
+Animator.create(shark, {
+  states: [
+    {
+      clip: 'swim',
+      playing: true,
+      loop: true,
+      weight: 0.7
+    },
+    {
+      clip: 'bite',
+      playing: true,
+      loop: false,
+      weight: 0.3
+    }
+  ]
+})
+
+// Create an animation that resets to the first frame when finished
+Animator.create(shark, {
+  states: [
+    {
+      clip: 'bite',
+      playing: true,
+      loop: false,
+      shouldReset: true  // Return to first frame when animation ends
+    }
+  ]
+})
 ```
 
 ### Moving the Player
@@ -621,23 +1073,37 @@ VisibilityComponent.getMutable(entity).visible = true
 
 ### Raycasting
 ```typescript
-import { Raycast, RaycastQueryType, raycastSystem } from '@dcl/sdk/ecs'
+import { Raycast, RaycastQueryType, raycastSystem, RaycastResult } from '@dcl/sdk/ecs'
 import { Vector3 } from '@dcl/sdk/math'
+import { ColliderLayer } from '@dcl/sdk/ecs'
 
-// Single raycast from entity
+// Basic raycast from entity
 Raycast.create(entity, {
   originOffset: Vector3.Zero(),  // Offset from entity position
   direction: { $case: 'globalDirection', globalDirection: Vector3.Down() },
-  // Or direction: { $case: 'localDirection', localDirection: Vector3.Forward() }
-  // Or direction: { $case: 'globalTarget', globalTarget: Vector3.create(10, 0, 10) }
-  // Or direction: { $case: 'targetEntity', targetEntity: targetEntityId }
   maxDistance: 10,
   queryType: RaycastQueryType.RQT_HIT_FIRST,  // First hit
-  // Or RQT_QUERY_ALL for all hits
   timestamp: Date.now()  // Used to identify this raycast
 })
 
-// Global raycast
+// Direction types for raycasts
+// 1. Global direction (ignores entity rotation)
+direction: { $case: 'globalDirection', globalDirection: Vector3.Down() }
+
+// 2. Local direction (relative to entity's forward direction)
+direction: { $case: 'localDirection', localDirection: Vector3.Forward() }
+
+// 3. Global target (points to a specific world position)
+direction: { $case: 'globalTarget', globalTarget: Vector3.create(10, 0, 10) }
+
+// 4. Target entity (points to another entity)
+direction: { $case: 'targetEntity', targetEntity: targetEntityId }
+
+// Query types
+queryType: RaycastQueryType.RQT_HIT_FIRST  // Returns only the first hit
+queryType: RaycastQueryType.RQT_QUERY_ALL  // Returns all hits along the ray
+
+// Global raycast with callback
 raycastSystem.registerGlobalDirectionRaycast(
   {
     entity: engine.PlayerEntity,
@@ -653,6 +1119,57 @@ raycastSystem.registerGlobalDirectionRaycast(
     }
   }
 )
+
+// Access raycast results in a system
+engine.addSystem(() => {
+  for (const [entity, result] of engine.getEntitiesWith(RaycastResult)) {
+    if (result.hits.length > 0) {
+      // Process hits
+      for (const hit of result.hits) {
+        console.log(`Hit entity: ${hit.entityId}`)
+        console.log(`Hit position: ${hit.position}`)
+        console.log(`Hit normal: ${hit.normalHit}`)
+        console.log(`Hit distance: ${hit.length}`)
+      }
+    }
+  }
+})
+
+// Raycast from camera
+raycastSystem.registerGlobalDirectionRaycast(
+  {
+    entity: engine.CameraEntity,
+    opts: {
+      queryType: RaycastQueryType.RQT_HIT_FIRST,
+      direction: Vector3.rotate(
+        Vector3.Forward(),
+        Transform.get(engine.CameraEntity).rotation
+      ),
+    },
+  },
+  function (raycastResult) {
+    console.log(raycastResult)
+  }
+)
+
+// Continuous raycast (runs every frame)
+Raycast.create(entity, {
+  direction: { $case: 'localDirection', localDirection: Vector3.Forward() },
+  maxDistance: 16,
+  queryType: RaycastQueryType.RQT_HIT_FIRST,
+  originOffset: Vector3.create(0.5, 0, 0), // Prevent self-collision
+  continuous: true // Run every frame
+})
+
+// Raycast between two entities
+Raycast.create(entity1, {
+  direction: {
+    $case: "targetEntity",
+    targetEntity: entity2
+  },
+  maxDistance: 16,
+  queryType: RaycastQueryType.RQT_QUERY_ALL
+})
 ```
 
 ### Avatar Modifier Areas
@@ -785,5 +1302,387 @@ engine.addSystem(() => {
       VisibilityComponent.getMutable(entity).visible = true
     }
   }
+})
+```
+
+## Network Connections
+
+### Fetch API
+```typescript
+import { executeTask } from '@dcl/sdk/ecs'
+
+// Basic GET request
+executeTask(async () => {
+  try {
+    const response = await fetch('https://api.example.com/data')
+    const json = await response.json()
+    console.log('Response:', json)
+  } catch (error) {
+    console.error('Failed to fetch:', error)
+  }
+})
+
+// POST request with headers and body
+executeTask(async () => {
+  try {
+    const response = await fetch('https://api.example.com/data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        key: 'value'
+      })
+    })
+    const json = await response.json()
+    console.log('Response:', json)
+  } catch (error) {
+    console.error('Failed to fetch:', error)
+  }
+})
+```
+
+### Signed Fetch
+```typescript
+import { executeTask } from '@dcl/sdk/ecs'
+import { signedFetch } from '@dcl/sdk/network'
+
+// Basic signed GET request
+executeTask(async () => {
+  try {
+    const response = await signedFetch('https://api.example.com/data')
+    const json = await response.json()
+    console.log('Response:', json)
+  } catch (error) {
+    console.error('Failed to fetch:', error)
+  }
+})
+
+// Signed POST request with headers and body
+executeTask(async () => {
+  try {
+    const response = await signedFetch('https://api.example.com/data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        key: 'value'
+      })
+    })
+    const json = await response.json()
+    console.log('Response:', json)
+  } catch (error) {
+    console.error('Failed to fetch:', error)
+  }
+})
+```
+
+### WebSocket Connections
+```typescript
+import { executeTask } from '@dcl/sdk/ecs'
+
+// Basic WebSocket connection
+executeTask(async () => {
+  const ws = new WebSocket('wss://example.com/ws')
+  
+  ws.onopen = () => {
+    console.log('Connected to WebSocket')
+    ws.send('Hello Server!')
+  }
+  
+  ws.onmessage = (event) => {
+    console.log('Received:', event.data)
+  }
+  
+  ws.onerror = (error) => {
+    console.error('WebSocket error:', error)
+  }
+  
+  ws.onclose = () => {
+    console.log('Disconnected from WebSocket')
+  }
+})
+
+// WebSocket with reconnection logic
+executeTask(async () => {
+  let ws: WebSocket | null = null
+  let reconnectAttempts = 0
+  const maxReconnectAttempts = 5
+  
+  function connect() {
+    ws = new WebSocket('wss://example.com/ws')
+    
+    ws.onopen = () => {
+      console.log('Connected to WebSocket')
+      reconnectAttempts = 0
+      ws?.send('Hello Server!')
+    }
+    
+    ws.onmessage = (event) => {
+      console.log('Received:', event.data)
+    }
+    
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error)
+    }
+    
+    ws.onclose = () => {
+      console.log('Disconnected from WebSocket')
+      if (reconnectAttempts < maxReconnectAttempts) {
+        reconnectAttempts++
+        setTimeout(connect, 1000 * reconnectAttempts)
+      }
+    }
+  }
+  
+  connect()
+})
+```
+
+### Entity Synchronization
+```typescript
+import { syncEntity } from '@dcl/sdk/network'
+import { engine, Transform, MeshRenderer } from '@dcl/sdk/ecs'
+import { Vector3 } from '@dcl/sdk/math'
+
+// Create a synced entity with a specific entityEnumId
+const syncedEntity = engine.addEntity()
+Transform.create(syncedEntity, { 
+  position: Vector3.create(8, 1, 8),
+  scale: Vector3.create(1, 1, 1)
+})
+MeshRenderer.setBox(syncedEntity)
+
+// Sync the entity with other players
+syncEntity(syncedEntity, [Transform.componentId], 1) // entityEnumId: 1
+
+// Create a synced entity with multiple components
+const complexEntity = engine.addEntity()
+Transform.create(complexEntity, { 
+  position: Vector3.create(5, 1, 5)
+})
+MeshRenderer.setBox(complexEntity)
+
+// Sync multiple components
+syncEntity(complexEntity, [
+  Transform.componentId,
+  MeshRenderer.componentId
+], 2) // entityEnumId: 2
+
+// Create a synced entity that responds to player interaction
+const interactiveEntity = engine.addEntity()
+Transform.create(interactiveEntity, { 
+  position: Vector3.create(3, 1, 3)
+})
+MeshRenderer.setBox(interactiveEntity)
+
+// Sync the entity and handle updates
+syncEntity(interactiveEntity, [Transform.componentId], 3) // entityEnumId: 3
+
+// Update synced entity position
+Transform.getMutable(interactiveEntity).position = Vector3.create(4, 1, 4)
+```
+
+### Message Bus
+```typescript
+import { MessageBus } from '@dcl/sdk/message-bus'
+
+// Create a message bus instance
+const messageBus = new MessageBus()
+
+// Define message types
+type SpawnMessage = {
+  position: { x: number; y: number; z: number }
+  entityEnumId: number
+}
+
+type UpdateMessage = {
+  entityId: number
+  position: { x: number; y: number; z: number }
+}
+
+// Send a spawn message
+messageBus.emit('spawn', {
+  position: { x: 8, y: 1, z: 8 },
+  entityEnumId: 1
+} as SpawnMessage)
+
+// Listen for spawn messages
+messageBus.on('spawn', (message: SpawnMessage) => {
+  const entity = engine.addEntity()
+  Transform.create(entity, {
+    position: Vector3.create(
+      message.position.x,
+      message.position.y,
+      message.position.z
+    )
+  })
+  MeshRenderer.setBox(entity)
+  
+  // Sync the newly created entity
+  syncEntity(entity, [Transform.componentId], message.entityEnumId)
+})
+
+// Send an update message
+messageBus.emit('update', {
+  entityId: 1,
+  position: { x: 10, y: 1, z: 10 }
+} as UpdateMessage)
+
+// Listen for update messages
+messageBus.on('update', (message: UpdateMessage) => {
+  // Find the entity by its synced ID
+  const entity = engine.getEntityById(message.entityId)
+  if (entity) {
+    Transform.getMutable(entity).position = Vector3.create(
+      message.position.x,
+      message.position.y,
+      message.position.z
+    )
+  }
+})
+
+// Example of a complete multiplayer interaction
+function handlePlayerInteraction(entity: Entity) {
+  // When a player interacts with an entity
+  messageBus.emit('interaction', {
+    entityId: entity,
+    action: 'click',
+    timestamp: Date.now()
+  })
+}
+
+// Listen for player interactions
+messageBus.on('interaction', (message) => {
+  console.log(`Entity ${message.entityId} was ${message.action}ed at ${message.timestamp}`)
+  // Handle the interaction for all players
+})
+```
+
+## Blockchain Operations
+
+### Get Player's Ethereum Account
+```typescript
+import { getPlayer } from '@dcl/sdk/src/players'
+
+export function main() {
+  let userData = getPlayer()
+  if (!userData.isGuest) {
+    console.log(userData.userId)
+  } else {
+    log('Player is not connected with Web3')
+  }
+}
+```
+
+### Check Gas Price
+```typescript
+import { RequestManager } from 'eth-connect'
+import { createEthereumProvider } from '@dcl/sdk/ethereum-provider'
+
+executeTask(async function () {
+  // Create an instance of the web3 provider to interface with Metamask
+  const provider = createEthereumProvider()
+  // Create the object that will handle the sending and receiving of RPC messages
+  const requestManager = new RequestManager(provider)
+  // Check the current gas price on the Ethereum network
+  const gasPrice = await requestManager.eth_gasPrice()
+  // log response
+  console.log({ gasPrice })
+})
+```
+
+### Import Contract ABI
+```typescript
+// Example of one function in the MANA ABI
+{
+  anonymous: false,
+  inputs: [
+    {
+      indexed: true,
+      name: 'burner',
+      type: 'address'
+    },
+    {
+      indexed: false,
+      name: 'value',
+      type: 'uint256'
+    }
+  ],
+  name: 'Burn',
+  type: 'event'
+}
+
+// Import the ABI
+import { abi } from '../contracts/mana'
+```
+
+### Instance a Contract
+```typescript
+import { RequestManager, ContractFactory } from 'eth-connect'
+import { createEthereumProvider } from '@dcl/sdk/ethereum-provider'
+import { abi } from '../contracts/mana'
+
+executeTask(async () => {
+  // Create an instance of the web3 provider to interface with Metamask
+  const provider = createEthereumProvider()
+  // Create the object that will handle the sending and receiving of RPC messages
+  const requestManager = new RequestManager(provider)
+  // Create a factory object based on the abi
+  const factory = new ContractFactory(requestManager, abi)
+  // Use the factory object to instance a `contract` object, referencing a specific contract
+  const contract = (await factory.at(
+    '0x2a8fd99c19271f4f04b1b7b9c4f7cf264b626edb'
+  )) as any
+})
+```
+
+### Call Contract Methods
+```typescript
+import { getPlayer } from '@dcl/sdk/src/players'
+import { createEthereumProvider } from '@dcl/sdk/ethereum-provider'
+import { RequestManager, ContractFactory } from 'eth-connect'
+import { abi } from '../contracts/mana'
+
+executeTask(async () => {
+  try {
+    // Setup steps explained in the section above
+    const provider = createEthereumProvider()
+    const requestManager = new RequestManager(provider)
+    const factory = new ContractFactory(requestManager, abi)
+    const contract = (await factory.at(
+      '0x2a8fd99c19271f4f04b1b7b9c4f7cf264b626edb'
+    )) as any
+    let userData = getPlayer()
+    if (userData.isGuest) {
+      return
+    }
+
+    // Perform a function from the contract
+    const res = await contract.setBalance(
+      '0xaFA48Fad27C7cAB28dC6E970E4BFda7F7c8D60Fb',
+      100,
+      {
+        from: userData.userId,
+      }
+    )
+    // Log response
+    console.log(res)
+  } catch (error: any) {
+    console.log(error.toString())
+  }
+})
+```
+
+### Send Custom RPC Messages
+```typescript
+import { sendAsync } from '~system/EthereumController'
+
+// send a message
+await sendAsync({
+  id: 1,
+  method: 'myMethod',
+  jsonParams: '{ myParam: myValue }',
 })
 ```

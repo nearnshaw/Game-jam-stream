@@ -24,18 +24,28 @@ export function cameraSetup(){
     const cam1 = engine.getEntityOrNullByName("VCameraRef")
     const cam2 = engine.getEntityOrNullByName("VCameraRef2")
     const cam3 = engine.getEntityOrNullByName("VCameraRef3")
+    const cam4 = engine.getEntityOrNullByName("VCameraRef4")
+    const cam5 = engine.getEntityOrNullByName("VCameraRef5")
+    const cam6 = engine.getEntityOrNullByName("VCameraRef6")
+    const cam7 = engine.getEntityOrNullByName("VCameraRef7")
+    const cam8 = engine.getEntityOrNullByName("VCameraRef8")
 
     const cameraRef = engine.getEntityOrNullByName("cameraToggle")
 
   
 
-    if(cameraRef &&screen && cam1 && cam2 && cam3){
+    if(cameraRef &&screen && cam1 && cam2 && cam3 && cam4 && cam5 && cam6 && cam7 && cam8){
         VirtualCamera.create(cam1, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(0) } })
         VirtualCamera.create(cam2, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(3) } })
-        VirtualCamera.create(cam3, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(3) } })
+        VirtualCamera.create(cam3, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(10) } })
+        VirtualCamera.create(cam4, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(6) } })
+        VirtualCamera.create(cam5, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(6) } })
+        VirtualCamera.create(cam6, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(15) } })
+        VirtualCamera.create(cam7, { defaultTransition: {transitionMode: VirtualCamera.Transition.Time(6) } })
+        VirtualCamera.create(cam8, { defaultTransition: {transitionMode: VirtualCamera.Transition.Time(6) } })
 
         
-        const camSequences = [ [], [cam1, cam2, cam3], [cam3, cam2, cam1] ]
+        const camSequences = [ [], [cam1, cam2, cam3], [cam4, cam5, cam6],[cam7, cam8, cam6] ]
 
         const cameraCommsEntity = engine.addEntity()
 
@@ -116,18 +126,27 @@ function cameraOff(){
 
 let camIndex = 0
 let time = 0
+let transitionTime = 3
 let cams: Entity[] = []
 
 function cameraSystem(dt: number){
     time += dt
-    if(time > 3){
+    if(time > transitionTime){
         camIndex++
         time = 0
+
         const mainCamera = MainCamera.getMutable(engine.CameraEntity)
         mainCamera.virtualCameraEntity = cams[camIndex]
+
+        if(cams[camIndex] && VirtualCamera.has(cams[camIndex])){
+            const transitionMode = VirtualCamera.get(cams[camIndex]).defaultTransition!.transitionMode!
+            transitionTime = transitionMode.$case === "time" ? transitionMode.time : 3
+        }
+
         console.log("Camera index", camIndex)
 
         if(camIndex >= cams.length){
+            cameraOff()
             console.log("Camera system removed")
             engine.removeSystem(cameraSystem)
         }

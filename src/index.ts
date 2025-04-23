@@ -12,6 +12,7 @@ import { uiSetup } from './ui'
 import { emoteSetup } from './effects/emotes'
 import { lightsSetup } from './effects/lights/discoBall'
 import { clapMeterSetup } from './effects/clapMeter'
+import { downloadScheduleData } from './effects/googleDocsLink'
 
 /**
  * Main entry point for the scene
@@ -30,6 +31,8 @@ export function main() {
 	
 	// Uncomment to enable disco ball lights
 	// lightsSetup()
+
+	downloadScheduleData()	
 	
 	console.log("Scene initialization complete")
 }

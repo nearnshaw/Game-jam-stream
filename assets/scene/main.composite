@@ -366,43 +366,43 @@
         "526": {
           "json": {
             "position": {
-              "x": 98.49996948242188,
-              "y": 58.500022888183594,
-              "z": 160.50003051757812
-            },
-            "scale": {
-              "x": 0.9999998807907104,
-              "y": 1,
-              "z": 1
+              "x": -122.0207290649414,
+              "y": 36.999935150146484,
+              "z": -36.9874153137207
             },
             "rotation": {
-              "x": 0.23296289145946503,
-              "y": 0.5624222159385681,
-              "z": 0.3036031424999237,
-              "w": 0.7329629063606262
+              "x": 0.2329627275466919,
+              "y": 0.5624222755432129,
+              "z": 0.3036033809185028,
+              "w": 0.7329628467559814
             },
-            "parent": 0
+            "scale": {
+              "x": 0.9999996423721313,
+              "y": 0.9999998211860657,
+              "z": 0.9999998211860657
+            },
+            "parent": 564
           }
         },
         "527": {
           "json": {
             "position": {
-              "x": 160,
-              "y": 53.75,
-              "z": 174.25
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
+              "x": -37.52070617675781,
+              "y": 31.74995231628418,
+              "z": -16.73746109008789
             },
             "rotation": {
-              "x": 0,
-              "y": 0.6087614297866821,
-              "z": 0,
-              "w": 0.7933533787727356
+              "x": -1.3294896916704602e-7,
+              "y": 0.6087614893913269,
+              "z": 2.224993806976272e-7,
+              "w": 0.7933533191680908
             },
-            "parent": 0
+            "scale": {
+              "x": 0.9999997019767761,
+              "y": 1,
+              "z": 0.9999999403953552
+            },
+            "parent": 564
           }
         },
         "528": {
@@ -471,22 +471,22 @@
         "531": {
           "json": {
             "position": {
-              "x": 209.5,
-              "y": 45.75,
-              "z": 186.5
-            },
-            "scale": {
-              "x": 1.0000001192092896,
-              "y": 1,
-              "z": 1.0000003576278687
+              "x": -11.020703315734863,
+              "y": 24.24996566772461,
+              "z": -10.987465858459473
             },
             "rotation": {
-              "x": -2.8081078795594294e-8,
-              "y": -5.806688108123126e-8,
-              "z": -2.69785942919043e-7,
+              "x": 1.892470846698302e-9,
+              "y": -5.088838683775521e-9,
+              "z": -1.2331128118603374e-8,
               "w": 1
             },
-            "parent": 0
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 564
           }
         },
         "532": {
@@ -496,16 +496,16 @@
               "y": -1.611191757268371e-12,
               "z": 94.75
             },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
             "rotation": {
               "x": -1.4731038506297196e-16,
               "y": -1.620661886950645e-18,
               "z": -3.308722450212111e-24,
               "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
             },
             "parent": 535
           }
@@ -613,6 +613,27 @@
               "w": -0.7071067690849304
             },
             "parent": 514
+          }
+        },
+        "538": {
+          "json": {
+            "position": {
+              "x": -25.96623420715332,
+              "y": 41.99995803833008,
+              "z": 12.982224464416504
+            },
+            "rotation": {
+              "x": -1.3294896916704602e-7,
+              "y": 0.6087614893913269,
+              "z": 2.224993806976272e-7,
+              "w": 0.7933533191680908
+            },
+            "scale": {
+              "x": 0.9999997019767761,
+              "y": 1,
+              "z": 0.9999999403953552
+            },
+            "parent": 564
           }
         },
         "539": {
@@ -1014,6 +1035,27 @@
             "parent": 559
           }
         },
+        "558": {
+          "json": {
+            "position": {
+              "x": -3.7707037925720215,
+              "y": 26.499969482421875,
+              "z": 2.262528657913208
+            },
+            "rotation": {
+              "x": -1.3294896916704602e-7,
+              "y": 0.6087614893913269,
+              "z": 2.224993806976272e-7,
+              "w": 0.7933533191680908
+            },
+            "scale": {
+              "x": 0.9999997019767761,
+              "y": 1,
+              "z": 0.9999999403953552
+            },
+            "parent": 564
+          }
+        },
         "559": {
           "json": {
             "position": {
@@ -1033,6 +1075,27 @@
               "w": 1
             },
             "parent": 514
+          }
+        },
+        "560": {
+          "json": {
+            "position": {
+              "x": -30.520708084106445,
+              "y": 41.99995422363281,
+              "z": -0.2374666929244995
+            },
+            "rotation": {
+              "x": -1.3294896916704602e-7,
+              "y": 0.6087614893913269,
+              "z": 2.224993806976272e-7,
+              "w": 0.7933533191680908
+            },
+            "scale": {
+              "x": 0.9999996423721313,
+              "y": 1,
+              "z": 0.9999998211860657
+            },
+            "parent": 564
           }
         },
         "561": {
@@ -1096,6 +1159,69 @@
               "w": 0.7071067690849304
             },
             "parent": 559
+          }
+        },
+        "564": {
+          "json": {
+            "position": {
+              "x": -0.0000011748973065550672,
+              "y": 6.199545055096678e-7,
+              "z": -0.0000011509226851558196
+            },
+            "rotation": {
+              "x": 6.123947623486105e-17,
+              "y": 3.929009442046763e-16,
+              "z": 2.2692957098678895e-15,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 514
+          }
+        },
+        "565": {
+          "json": {
+            "position": {
+              "x": -17.25,
+              "y": 60,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0.7071484923362732,
+              "y": 0.09148702025413513,
+              "z": -0.09309786558151245,
+              "w": 0.6949129104614258
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 564
+          }
+        },
+        "566": {
+          "json": {
+            "position": {
+              "x": -17.25,
+              "y": 30,
+              "z": 0
+            },
+            "rotation": {
+              "x": -0.6902608871459961,
+              "y": 0.1238546371459961,
+              "z": -0.1217116191983223,
+              "w": -0.7024145722389221
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 564
           }
         }
       }
@@ -1231,6 +1357,12 @@
             "entityId": 8016
           }
         },
+        "538": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8043
+          }
+        },
         "539": {
           "json": {
             "networkId": 0,
@@ -1309,6 +1441,18 @@
             "entityId": 8031
           }
         },
+        "558": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8044
+          }
+        },
+        "560": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8045
+          }
+        },
         "561": {
           "json": {
             "networkId": 0,
@@ -1325,6 +1469,18 @@
           "json": {
             "networkId": 0,
             "entityId": 8034
+          }
+        },
+        "565": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8046
+          }
+        },
+        "566": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8047
           }
         }
       }
@@ -2894,6 +3050,11 @@
             "states": []
           }
         },
+        "538": {
+          "json": {
+            "states": []
+          }
+        },
         "539": {
           "json": {
             "states": [
@@ -3079,7 +3240,17 @@
             "states": []
           }
         },
+        "558": {
+          "json": {
+            "states": []
+          }
+        },
         "559": {
+          "json": {
+            "states": []
+          }
+        },
+        "560": {
           "json": {
             "states": []
           }
@@ -3124,6 +3295,21 @@
                 "shouldReset": false
               }
             ]
+          }
+        },
+        "564": {
+          "json": {
+            "states": []
+          }
+        },
+        "565": {
+          "json": {
+            "states": []
+          }
+        },
+        "566": {
+          "json": {
+            "states": []
           }
         }
       }
@@ -3570,6 +3756,141 @@
               }
             }
           }
+        },
+        "538": {
+          "json": {
+            "material": {
+              "$case": "unlit",
+              "unlit": {
+                "texture": {
+                  "tex": {
+                    "$case": "texture",
+                    "texture": {
+                      "src": "assets/scene/Images/camera.png",
+                      "wrapMode": 0,
+                      "filterMode": 0
+                    }
+                  }
+                },
+                "alphaTest": 0.5,
+                "castShadows": true,
+                "diffuseColor": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            }
+          }
+        },
+        "558": {
+          "json": {
+            "material": {
+              "$case": "unlit",
+              "unlit": {
+                "texture": {
+                  "tex": {
+                    "$case": "texture",
+                    "texture": {
+                      "src": "assets/scene/Images/camera.png",
+                      "wrapMode": 0,
+                      "filterMode": 0
+                    }
+                  }
+                },
+                "alphaTest": 0.5,
+                "castShadows": true,
+                "diffuseColor": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            }
+          }
+        },
+        "560": {
+          "json": {
+            "material": {
+              "$case": "unlit",
+              "unlit": {
+                "texture": {
+                  "tex": {
+                    "$case": "texture",
+                    "texture": {
+                      "src": "assets/scene/Images/camera.png",
+                      "wrapMode": 0,
+                      "filterMode": 0
+                    }
+                  }
+                },
+                "alphaTest": 0.5,
+                "castShadows": true,
+                "diffuseColor": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            }
+          }
+        },
+        "565": {
+          "json": {
+            "material": {
+              "$case": "unlit",
+              "unlit": {
+                "texture": {
+                  "tex": {
+                    "$case": "texture",
+                    "texture": {
+                      "src": "assets/scene/Images/camera.png",
+                      "wrapMode": 0,
+                      "filterMode": 0
+                    }
+                  }
+                },
+                "alphaTest": 0.5,
+                "castShadows": true,
+                "diffuseColor": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            }
+          }
+        },
+        "566": {
+          "json": {
+            "material": {
+              "$case": "unlit",
+              "unlit": {
+                "texture": {
+                  "tex": {
+                    "$case": "texture",
+                    "texture": {
+                      "src": "assets/scene/Images/camera.png",
+                      "wrapMode": 0,
+                      "filterMode": 0
+                    }
+                  }
+                },
+                "alphaTest": 0.5,
+                "castShadows": true,
+                "diffuseColor": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -3643,6 +3964,56 @@
           }
         },
         "531": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "538": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "558": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "560": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "565": {
+          "json": {
+            "mesh": {
+              "$case": "box",
+              "box": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "566": {
           "json": {
             "mesh": {
               "$case": "box",
@@ -3792,6 +4163,11 @@
             "value": "Banner"
           }
         },
+        "538": {
+          "json": {
+            "value": "VCameraRef5"
+          }
+        },
         "539": {
           "json": {
             "value": "confetti"
@@ -3887,9 +4263,19 @@
             "value": "confetti_4_6_7_8"
           }
         },
+        "558": {
+          "json": {
+            "value": "VCameraRef6"
+          }
+        },
         "559": {
           "json": {
             "value": "Effects"
+          }
+        },
+        "560": {
+          "json": {
+            "value": "VCameraRef4"
           }
         },
         "561": {
@@ -3905,6 +4291,21 @@
         "563": {
           "json": {
             "value": "Lights Bottom"
+          }
+        },
+        "564": {
+          "json": {
+            "value": "Cameras"
+          }
+        },
+        "565": {
+          "json": {
+            "value": "VCameraRef7"
+          }
+        },
+        "566": {
+          "json": {
+            "value": "VCameraRef8"
           }
         }
       }
@@ -4110,6 +4511,13 @@
             ]
           }
         },
+        "538": {
+          "json": {
+            "componentIds": [
+              1
+            ]
+          }
+        },
         "539": {
           "json": {
             "componentIds": [
@@ -4230,6 +4638,20 @@
             ]
           }
         },
+        "558": {
+          "json": {
+            "componentIds": [
+              1
+            ]
+          }
+        },
+        "560": {
+          "json": {
+            "componentIds": [
+              1
+            ]
+          }
+        },
         "561": {
           "json": {
             "componentIds": [
@@ -4253,6 +4675,20 @@
             "componentIds": [
               1042,
               1081,
+              1
+            ]
+          }
+        },
+        "565": {
+          "json": {
+            "componentIds": [
+              1
+            ]
+          }
+        },
+        "566": {
+          "json": {
+            "componentIds": [
               1
             ]
           }
@@ -4395,6 +4831,11 @@
             "visible": false
           }
         },
+        "538": {
+          "json": {
+            "visible": false
+          }
+        },
         "539": {
           "json": {
             "visible": false
@@ -4475,6 +4916,16 @@
             "visible": false
           }
         },
+        "558": {
+          "json": {
+            "visible": false
+          }
+        },
+        "560": {
+          "json": {
+            "visible": false
+          }
+        },
         "561": {
           "json": {
             "visible": false
@@ -4486,6 +4937,16 @@
           }
         },
         "563": {
+          "json": {
+            "visible": false
+          }
+        },
+        "565": {
+          "json": {
+            "visible": false
+          }
+        },
+        "566": {
           "json": {
             "visible": false
           }
@@ -4505,9 +4966,9 @@
         "serializationType": "map"
       },
       "data": {
-        "0": {
+        "514": {
           "json": {
-            "gizmo": 3
+            "gizmo": 1
           }
         }
       }
@@ -6459,9 +6920,12 @@
             "thumbnail": "assets/scene/theatre.png",
             "categories": [],
             "author": "SDK",
-            "email": "",
             "tags": [],
             "layout": {
+              "base": {
+                "x": 1,
+                "y": 1
+              },
               "parcels": [
                 {
                   "x": 1,
@@ -8063,14 +8527,8 @@
                   "x": 20,
                   "y": 20
                 }
-              ],
-              "base": {
-                "x": 1,
-                "y": 1
-              }
+              ]
             },
-            "silenceVoiceChat": false,
-            "disablePortableExperiences": false,
             "spawnPoints": [
               {
                 "name": "Spawn Point 1",
@@ -8160,9 +8618,6 @@
                   517,
                   518,
                   525,
-                  526,
-                  527,
-                  531,
                   535,
                   533,
                   553
@@ -8176,7 +8631,8 @@
                   534,
                   559,
                   520,
-                  537
+                  537,
+                  564
                 ]
               },
               {
@@ -8353,7 +8809,6 @@
               },
               {
                 "entity": 559,
-                "open": true,
                 "children": [
                   541,
                   542,
@@ -8392,7 +8847,6 @@
               },
               {
                 "entity": 520,
-                "open": true,
                 "children": [
                   519
                 ]
@@ -8403,7 +8857,6 @@
               },
               {
                 "entity": 537,
-                "open": true,
                 "children": [
                   521
                 ]
@@ -8415,6 +8868,40 @@
                   516,
                   540
                 ]
+              },
+              {
+                "entity": 538,
+                "children": []
+              },
+              {
+                "entity": 558,
+                "children": []
+              },
+              {
+                "entity": 560,
+                "children": []
+              },
+              {
+                "entity": 564,
+                "open": true,
+                "children": [
+                  527,
+                  526,
+                  531,
+                  560,
+                  538,
+                  558,
+                  565,
+                  566
+                ]
+              },
+              {
+                "entity": 565,
+                "children": []
+              },
+              {
+                "entity": 566,
+                "children": []
               }
             ]
           }
@@ -9139,7 +9626,7 @@
               {
                 "name": "Sequence1",
                 "type": "set_state",
-                "jsonPayload": "{ \"state\": \"Activated\" }",
+                "jsonPayload": "{\"state\":\"Sequence1\"}",
                 "allowedInBasicView": true
               },
               {
@@ -9151,7 +9638,12 @@
               {
                 "name": "Sequence2",
                 "type": "set_state",
-                "jsonPayload": "{\"state\":\"Activated\"}"
+                "jsonPayload": "{\"state\":\"Sequence2\"}"
+              },
+              {
+                "name": "Sequence3",
+                "type": "set_state",
+                "jsonPayload": "{\"state\":\"Sequence3\"}"
               }
             ]
           }
@@ -11159,6 +11651,9 @@
         "537": {
           "json": {}
         },
+        "538": {
+          "json": {}
+        },
         "540": {
           "json": {}
         },
@@ -11212,7 +11707,13 @@
             "porportionalScaling": true
           }
         },
+        "558": {
+          "json": {}
+        },
         "559": {
+          "json": {}
+        },
+        "560": {
           "json": {}
         },
         "561": {
@@ -11227,6 +11728,15 @@
           "json": {
             "porportionalScaling": true
           }
+        },
+        "564": {
+          "json": {}
+        },
+        "565": {
+          "json": {}
+        },
+        "566": {
+          "json": {}
         }
       }
     },

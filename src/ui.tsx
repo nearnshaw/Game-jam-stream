@@ -3,38 +3,42 @@ import * as ui from 'dcl-ui-toolkit'
 import { getActions, sceneMessageBus } from './utils'
 import { checkForPedestal, hidePedestal } from './effects/pedestal'
 import * as utils from '@dcl-sdk/utils'
-import { changeBanner } from './effects/banner'
+import { changeShowcasedUser } from './effects/banner'
+
+
+export const uIprompt = ui.createComponent(ui.FillInPrompt, {
+  title: 'Showcase user:',
+  onAccept: (value: string) => {
+    console.log('showcase user:', value)
+
+    hidePedestal()
+    changeShowcasedUser(value)
+
+    utils.timers.setTimeout(() => {
+      sceneMessageBus.emit("Pedestal", { player: value})
+    }, 1050)
+
+    //getActions("button")?.emit("Ping", {})
+    //checkForPedestal(value)
+  },
+}) 
+
 
 export function uiSetup(){
 
     ReactEcsRenderer.setUiRenderer(ui.render) 
     
-    const prompt = ui.createComponent(ui.FillInPrompt, {
-        title: 'Showcase user:',
-        onAccept: (value: string) => {
-          console.log('showcase user:', value)
-
-          hidePedestal()
-          changeBanner(value)
-
-          utils.timers.setTimeout(() => {
-            sceneMessageBus.emit("Pedestal", { player: value})
-          }, 1050)
-
-          //getActions("button")?.emit("Ping", {})
-          //checkForPedestal(value)
-        },
-      })
+    
       
   
     
     
-    getActions("pedestalControl")?.on("Deactivate", () => {
-        prompt.hide()
-    })
+    //getActions("pedestalControl")?.on("Deactivate", () => {
+    //    uIprompt.hide()
+    //})
 
-    getActions("pedestalControl")?.on("Activate", () => {
-        prompt.show()
-    })
+    //getActions("pedestalControl")?.on("Activate", () => {
+    //    uIprompt.show()
+    //})
     
     }

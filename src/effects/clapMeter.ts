@@ -5,6 +5,7 @@ import { AvatarEmoteCommand } from '@dcl/sdk/ecs'
 import { EntityEnumId, getActions } from '../utils'
 import { Schemas } from '@dcl/sdk/ecs'
 import { syncEntity } from '@dcl/sdk/network'
+import { uIprompt } from '../ui'
 
 // Constants
 const NEEDLE_ENTITY_NAME = 'Needle'
@@ -18,10 +19,12 @@ const MIN_ANGLE_INCREMENT = 1 // Minimum increment for late claps
 // Component definition
 export const ClapScore = engine.defineComponent('ClapScore', {
   score: Schemas.Number,
-  active: Schemas.Boolean
+  active: Schemas.Boolean,
+  player: Schemas.String
 }, {
   score: 0,
-  active: false
+  active: false,
+  player: ""
 })
 
 // State variables
@@ -86,6 +89,8 @@ function setupActionListeners(needle: Entity, board: Entity, score: { active: bo
  * @param score - The score component
  */
 function activateClapMeter(needle: Entity, board: Entity, score: { active: boolean, score: number }) {
+    uIprompt.show()  
+  
     VisibilityComponent.getMutable(needle).visible = true
     VisibilityComponent.getMutable(board).visible = true
     score.active = true
@@ -101,6 +106,8 @@ function activateClapMeter(needle: Entity, board: Entity, score: { active: boole
  * @param score - The score component
  */
 function deactivateClapMeter(needle: Entity, board: Entity, score: { active: boolean, score: number }) {
+    uIprompt.hide()    
+  
     VisibilityComponent.getMutable(needle).visible = false
     VisibilityComponent.getMutable(board).visible = false
     score.active = false
@@ -174,7 +181,7 @@ function handleClap(needle: Entity) {
 /**
  * Resets the clap meter to its initial state
  */
-export function resetClapMeter() {
+export function resetClapMeter(newPlayer: string = "") {
     const clapMeterNeedle = engine.getEntityOrNullByName(NEEDLE_ENTITY_NAME)
     
     if (!clapMeterNeedle || !clapMeterCommsEntity) {
@@ -184,6 +191,7 @@ export function resetClapMeter() {
 
     // Reset score and needle rotation
     ClapScore.getMutable(clapMeterCommsEntity).score = 0
+    ClapScore.getMutable(clapMeterCommsEntity).player = newPlayer
     currentNeedleRotation = START_ANGLE
     Transform.getMutable(clapMeterNeedle).rotation = Quaternion.fromEulerDegrees(0, 0, currentNeedleRotation)
 }

@@ -1,7 +1,7 @@
 import { engine, TextShape } from "@dcl/sdk/ecs";
 
 
-export function changeBanner(text: string){
+export function changeShowcasedUser(text: string){
 
     const banner = engine.getEntityOrNullByName("BannerText")
 
