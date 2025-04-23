@@ -12,8 +12,8 @@ import { uiSetup } from './ui'
 import { emoteSetup } from './effects/emotes'
 import { lightsSetup } from './effects/lights/discoBall'
 import { clapMeterSetup } from './effects/clapMeter'
-import { downloadScheduleData } from './effects/googleDocsLink'
-
+import { downloadScheduleData, sendClapData } from './effects/googleDocsLink'
+import { setupSchedulControllerData } from './effects/googleDocsLink'
 /**
  * Main entry point for the scene
  * Initializes all scene components and systems
@@ -33,8 +33,11 @@ export function main() {
 	// lightsSetup()
 
 	downloadScheduleData()	
+	setupSchedulControllerData()
 	
 	console.log("Scene initialization complete")
+
+	sendClapData("test", "test", 10)
 }
 
 

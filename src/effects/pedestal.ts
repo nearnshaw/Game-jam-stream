@@ -158,4 +158,7 @@ export function hidePedestal() {
     
     const spiralActions = getActionEvents(spiral)
     spiralActions.emit('Hide', {})
+
+	// free player movement
+	enablePlayerMovement()
 }

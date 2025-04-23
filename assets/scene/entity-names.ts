@@ -56,6 +56,7 @@ export enum EntityNames {
   pedestal = "pedestal",
   pedestalControl = "pedestalControl",
   pedestal_old = "pedestal_old",
+  scheduleController = "scheduleController",
   screen = "screen",
   spiral = "spiral",
 } 

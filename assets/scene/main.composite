@@ -283,19 +283,19 @@
           "json": {
             "position": {
               "x": 122.69456481933594,
-              "y": 0.000003661262326204451,
+              "y": 0.0000036612586882256437,
               "z": 87.24613952636719
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1.0000001192092896
             },
             "rotation": {
               "x": 1.2411579319859811e-8,
               "y": -3.7116933970793298e-9,
               "z": -1.7409939800927532e-7,
               "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1.0000001192092896
             },
             "parent": 535
           }
@@ -1223,6 +1223,27 @@
             },
             "parent": 564
           }
+        },
+        "567": {
+          "json": {
+            "position": {
+              "x": 202,
+              "y": -1.611191757268371e-12,
+              "z": 94.75
+            },
+            "rotation": {
+              "x": -1.4731038506297196e-16,
+              "y": -1.620661886950645e-18,
+              "z": -3.308722450212111e-24,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 535
+          }
         }
       }
     },
@@ -1481,6 +1502,12 @@
           "json": {
             "networkId": 0,
             "entityId": 8047
+          }
+        },
+        "567": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8048
           }
         }
       }
@@ -3311,6 +3338,11 @@
           "json": {
             "states": []
           }
+        },
+        "567": {
+          "json": {
+            "states": []
+          }
         }
       }
     },
@@ -4307,6 +4339,11 @@
           "json": {
             "value": "VCameraRef8"
           }
+        },
+        "567": {
+          "json": {
+            "value": "scheduleController"
+          }
         }
       }
     },
@@ -4692,6 +4729,16 @@
               1
             ]
           }
+        },
+        "567": {
+          "json": {
+            "componentIds": [
+              1081,
+              2709697014,
+              1042,
+              1
+            ]
+          }
         }
       }
     },
@@ -4966,9 +5013,9 @@
         "serializationType": "map"
       },
       "data": {
-        "514": {
+        "522": {
           "json": {
-            "gizmo": 1
+            "gizmo": 3
           }
         }
       }
@@ -8537,8 +8584,8 @@
                   "x": {
                     "$case": "range",
                     "value": [
-                      237,
-                      243
+                      192,
+                      208
                     ]
                   },
                   "y": {
@@ -8551,15 +8598,15 @@
                   "z": {
                     "$case": "range",
                     "value": [
-                      197,
-                      203
+                      192,
+                      208
                     ]
                   }
                 },
                 "cameraTarget": {
-                  "x": 8,
-                  "y": 1,
-                  "z": 8
+                  "x": 240,
+                  "y": 40,
+                  "z": 200
                 }
               }
             ]
@@ -8698,7 +8745,8 @@
                   528,
                   536,
                   543,
-                  552
+                  552,
+                  567
                 ]
               },
               {
@@ -8901,6 +8949,10 @@
               },
               {
                 "entity": 566,
+                "children": []
+              },
+              {
+                "entity": 567,
                 "children": []
               }
             ]
@@ -10310,6 +10362,35 @@
               }
             ]
           }
+        },
+        "567": {
+          "json": {
+            "id": 64,
+            "value": [
+              {
+                "name": "Next",
+                "type": "set_state",
+                "jsonPayload": "{\"state\":\"Next\"}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Deactivate",
+                "type": "set_state",
+                "jsonPayload": "{ \"state\": \"Deactivated\" }",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Previous",
+                "type": "set_state",
+                "jsonPayload": "{\"state\":\"Previous\"}"
+              },
+              {
+                "name": "First",
+                "type": "set_state",
+                "jsonPayload": "{\"state\":\"First\"}"
+              }
+            ]
+          }
         }
       }
     },
@@ -10333,7 +10414,7 @@
         "0": {
           "json": {
             "id": 0,
-            "value": 63
+            "value": 65
           }
         },
         "517": {
@@ -11077,6 +11158,34 @@
               }
             ]
           }
+        },
+        "567": {
+          "json": {
+            "value": [
+              {
+                "type": "on_state_change",
+                "conditions": [
+                  {
+                    "id": 65,
+                    "type": "when_state_is",
+                    "value": "Toggle"
+                  },
+                  {
+                    "id": 65,
+                    "type": "when_previous_state_is",
+                    "value": "Deactivated"
+                  }
+                ],
+                "operation": "and",
+                "actions": [
+                  {
+                    "id": 64,
+                    "name": "Sequence1"
+                  }
+                ]
+              }
+            ]
+          }
         }
       }
     },
@@ -11236,6 +11345,18 @@
             "value": [
               "Activated",
               "Deactivated"
+            ],
+            "defaultValue": "Deactivated"
+          }
+        },
+        "567": {
+          "json": {
+            "id": 65,
+            "value": [
+              "Next",
+              "Deactivated",
+              "Previous",
+              "First"
             ],
             "defaultValue": "Deactivated"
           }
@@ -11552,6 +11673,11 @@
                   "entity": 520,
                   "customName": "Clap Meter",
                   "defaultAction": "Activate"
+                },
+                {
+                  "entity": 567,
+                  "customName": "Schedule",
+                  "defaultAction": "Next"
                 }
               ]
             },
@@ -11736,6 +11862,9 @@
           "json": {}
         },
         "566": {
+          "json": {}
+        },
+        "567": {
           "json": {}
         }
       }
