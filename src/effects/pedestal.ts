@@ -101,7 +101,17 @@ function activatePedestal(playerPosition: Vector3) {
  */
 function getOffPedestal() {
     // Re-enable player movement
-    enablePlayerMovement()
+	if(InputModifier.has(engine.PlayerEntity)){
+		InputModifier.createOrReplace(engine.PlayerEntity, {
+			mode: InputModifier.Mode.Standard({
+				disableJog: false,
+				disableRun: false,
+				disableJump: false,
+				disableWalk: false,
+				disableEmote: false
+			}),
+		})
+	}
     
     isPlayerOnPedestal = false
     console.log("Player is no longer on the pedestal")
@@ -116,21 +126,8 @@ function disablePlayerMovement() {
             disableJog: true,
             disableRun: true,
             disableJump: true,
-            disableWalk: true
-        }),
-    })
-}
-
-/**
- * Enables player movement controls
- */
-function enablePlayerMovement() {
-    InputModifier.createOrReplace(engine.PlayerEntity, {
-        mode: InputModifier.Mode.Standard({
-            disableJog: false,
-            disableRun: false,
-            disableJump: false,
-            disableWalk: false
+            disableWalk: true,
+			disableEmote: false
         }),
     })
 }
@@ -160,5 +157,5 @@ export function hidePedestal() {
     spiralActions.emit('Hide', {})
 
 	// free player movement
-	enablePlayerMovement()
+	getOffPedestal()
 }
