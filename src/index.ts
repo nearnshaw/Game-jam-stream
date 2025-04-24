@@ -8,12 +8,12 @@ import { triggerEmote } from '~system/RestrictedActions'
 import { pedestalSetup } from './effects/pedestal'
 import { tiltWorldSetup } from './effects/tiltWorld'
 import { cameraSetup } from './effects/camera'
-import { uiSetup } from './ui'
+import { uiSetup } from './modules/ui'
 import { emoteSetup } from './effects/emotes'
 import { lightsSetup } from './effects/lights/discoBall'
-import { clapMeterSetup } from './effects/clapMeter'
-import { downloadScheduleData, sendClapData } from './effects/googleDocsLink'
-import { setupSchedulControllerData } from './effects/googleDocsLink'
+import { clapMeterSetup } from './modules/clapMeter'
+import { downloadScheduleData, sendClapData } from './modules/googleDocsLink'
+import { setupSchedulControllerData } from './modules/googleDocsLink'
 /**
  * Main entry point for the scene
  * Initializes all scene components and systems

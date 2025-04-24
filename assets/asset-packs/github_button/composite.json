@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "components": [
+    {
+      "name": "core::GltfContainer",
+      "data": {
+        "0": {
+          "json": {
+            "src": "{assetPath}/github.glb"
+          }
+        }
+      }
+    },
+    {
+      "name": "asset-packs::Actions",
+      "data": {
+        "0": {
+          "json": {
+            "id": "{self}",
+            "value": [
+              {
+                "name": "Open Link",
+                "type": "open_link",
+                "jsonPayload": "{ \"url\": \"https://github.com\" }"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "asset-packs::Triggers",
+      "data": {
+        "0": {
+          "json": {
+            "value": [
+              {
+                "type": "on_click",
+                "actions": [
+                  {
+                    "id": "{self:asset-packs::Actions}",
+                    "name": "Open Link"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

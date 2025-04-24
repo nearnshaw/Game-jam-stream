@@ -1,6 +1,6 @@
 import { EasingFunction, engine, Entity, GltfContainer, Material, MeshRenderer, Schemas, Transform, Tween, TweenLoop, TweenSequence, VisibilityComponent } from "@dcl/sdk/ecs"
 import { Color4, Quaternion, Vector3 } from "@dcl/sdk/math"
-import { getActions, getRandomHexColor } from "../../utils"
+import { getActions, getRandomHexColor } from "../../modules/utils"
 
 
 export function lightsSetup(){

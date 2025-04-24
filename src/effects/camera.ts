@@ -1,5 +1,5 @@
 import { getPlayer } from "@dcl/sdk/src/players"
-import { EntityEnumId, getActions, getTransform, getTriggers, sceneMessageBus } from "../utils"
+import { EntityEnumId, getActions, getTransform, getTriggers, sceneMessageBus } from "../modules/utils"
 import { engine, InputModifier, Transform, VirtualCamera, MainCamera, Entity, Schemas, VisibilityComponent } from "@dcl/sdk/ecs"
 import { Vector3 } from "@dcl/sdk/math"
 import { triggerEmote } from "~system/RestrictedActions"
@@ -36,7 +36,7 @@ export function cameraSetup(){
 
     if(cameraRef &&screen && cam1 && cam2 && cam3 && cam4 && cam5 && cam6 && cam7 && cam8){
         VirtualCamera.create(cam1, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(0) } })
-        VirtualCamera.create(cam2, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(3) } })
+        VirtualCamera.create(cam2, {lookAtEntity:screen,  defaultTransition: {transitionMode: VirtualCamera.Transition.Time(3) } })
         VirtualCamera.create(cam3, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(10) } })
         VirtualCamera.create(cam4, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(6) } })
         VirtualCamera.create(cam5, {lookAtEntity:screen, defaultTransition: {transitionMode: VirtualCamera.Transition.Time(6) } })

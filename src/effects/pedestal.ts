@@ -1,11 +1,11 @@
 import { getPlayer } from "@dcl/sdk/src/players"
-import { getActions, getTriggers, sceneMessageBus } from "../utils"
+import { getActions, getTriggers, sceneMessageBus } from "../modules/utils"
 import { engine, InputModifier, Transform } from "@dcl/sdk/ecs"
 import { Vector3 } from "@dcl/sdk/math"
 import { triggerEmote } from "~system/RestrictedActions"
 import { getTriggerEvents, getActionEvents } from '@dcl/asset-packs/dist/events'
 import { randomDanceEmotes } from "./emotes"
-import { resetClapMeter } from "./clapMeter"
+import { resetClapMeter } from "../modules/clapMeter"
 import * as utils from '@dcl-sdk/utils'
 
 // Constants

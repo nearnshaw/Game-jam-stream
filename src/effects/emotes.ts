@@ -1,5 +1,5 @@
 import { triggerEmote } from "~system/RestrictedActions"
-import { EntityEnumId, getActions, sceneMessageBus } from "../utils"
+import { EntityEnumId, getActions, sceneMessageBus } from "../modules/utils"
 import { engine, Schemas, Entity } from "@dcl/sdk/ecs"
 import { getActionEvents } from "@dcl/asset-packs/dist/events"
 import { syncEntity } from "@dcl/sdk/network"
