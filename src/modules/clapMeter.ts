@@ -1,4 +1,4 @@
-import { engine, Entity, Transform, VisibilityComponent } from '@dcl/sdk/ecs'
+import { engine, Entity, TextShape, Transform, VisibilityComponent } from '@dcl/sdk/ecs'
 import { Quaternion } from '@dcl/sdk/math'
 import * as utils from '@dcl-sdk/utils'
 import { AvatarEmoteCommand } from '@dcl/sdk/ecs'
@@ -42,7 +42,9 @@ export function clapMeterSetup() {
     const clapMeterNeedle = engine.getEntityOrNullByName(NEEDLE_ENTITY_NAME)
     const clapMeterBoard = engine.getEntityOrNullByName(CLAP_METER_ENTITY_NAME)
 
-    if (!clapMeterNeedle || !clapMeterBoard) {
+    const clapMeterText = engine.getEntityOrNullByName("clapMeterText")
+
+    if (!clapMeterNeedle || !clapMeterBoard || !clapMeterText) {
         console.error('Clap meter entities not found')
         return
     }
@@ -53,7 +55,7 @@ export function clapMeterSetup() {
     syncEntity(clapMeterCommsEntity, [ClapScore.componentId], EntityEnumId.ClapMeterComms)
 
     // Set up action event listeners
-    setupActionListeners(clapMeterNeedle, clapMeterBoard, score)
+    setupActionListeners(clapMeterNeedle, clapMeterBoard, score, clapMeterText)
     
     // Set up emote listener
     setupEmoteListener(clapMeterNeedle)
@@ -65,15 +67,15 @@ export function clapMeterSetup() {
  * @param board - The clap meter board entity
  * @param score - The score component
  */
-function setupActionListeners(needle: Entity, board: Entity, score: { active: boolean, score: number }) {
+function setupActionListeners(needle: Entity, board: Entity, score: { active: boolean, score: number }, clapMeterText: Entity) {
     // Activate clap meter
     getActions(CLAP_METER_ENTITY_NAME)?.on("Activate", () => {
-        activateClapMeter(needle, board, score)
+        activateClapMeter(needle, board, score, clapMeterText)
     })
 
     // Deactivate clap meter
     getActions(CLAP_METER_ENTITY_NAME)?.on("Deactivate", () => {
-        deactivateClapMeter(needle, board, score)
+        deactivateClapMeter(needle, board, score, clapMeterText)
     })
 
     // Reset clap meter
@@ -88,9 +90,9 @@ function setupActionListeners(needle: Entity, board: Entity, score: { active: bo
  * @param board - The clap meter board entity
  * @param score - The score component
  */
-function activateClapMeter(needle: Entity, board: Entity, score: { active: boolean, score: number }) {
+function activateClapMeter(needle: Entity, board: Entity, score: { active: boolean, score: number }, clapMeterText: Entity) {
     uIprompt.show()  
-  
+    TextShape.getMutable(clapMeterText).text = "Clap Meter"
     VisibilityComponent.getMutable(needle).visible = true
     VisibilityComponent.getMutable(board).visible = true
     score.active = true
@@ -105,10 +107,10 @@ function activateClapMeter(needle: Entity, board: Entity, score: { active: boole
  * @param board - The clap meter board entity
  * @param score - The score component
  */
-function deactivateClapMeter(needle: Entity, board: Entity, score: { active: boolean, score: number }) {
+function deactivateClapMeter(needle: Entity, board: Entity, score: { active: boolean, score: number }, clapMeterText: Entity) {
     uIprompt.hide()    
-  
-    VisibilityComponent.getMutable(needle).visible = false
+    TextShape.getMutable(clapMeterText).text = ""
+    VisibilityComponent.getMutable(needle).visible = false  
     VisibilityComponent.getMutable(board).visible = false
     score.active = false
     score.score = 0

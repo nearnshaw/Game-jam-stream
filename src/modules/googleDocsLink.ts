@@ -70,7 +70,7 @@ export async function downloadScheduleData() {
 
             console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
 
-            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo, jsonData[scheuldeIndex].description)
+            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "")
          
 
         })
@@ -81,7 +81,7 @@ export async function downloadScheduleData() {
 
             console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
 
-            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo, jsonData[scheuldeIndex].description)
+            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "")
          
         })
 
@@ -91,7 +91,7 @@ export async function downloadScheduleData() {
 
             console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
 
-            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo, jsonData[scheuldeIndex].description)
+            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "")
         })
 
         const scheduleControllerData = jsonData.find((data) => data.name === "Schedule Controller")
@@ -105,7 +105,7 @@ export async function downloadScheduleData() {
 
 
     hidePedestal()
-    changeShowcasedUser(name)
+    changeShowcasedUser(name, avatarName)
 
     if(repo){
       gitUpdate(repo)

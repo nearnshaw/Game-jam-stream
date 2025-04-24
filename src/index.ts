@@ -10,10 +10,11 @@ import { tiltWorldSetup } from './effects/tiltWorld'
 import { cameraSetup } from './effects/camera'
 import { uiSetup } from './modules/ui'
 import { emoteSetup } from './effects/emotes'
-import { lightsSetup } from './effects/lights/discoBall'
 import { clapMeterSetup } from './modules/clapMeter'
 import { downloadScheduleData, sendClapData } from './modules/googleDocsLink'
 import { setupSchedulControllerData } from './modules/googleDocsLink'
+import { gitSetup } from './modules/github'
+import { descriptionPanelSetup } from './modules/descriptionPanel'
 /**
  * Main entry point for the scene
  * Initializes all scene components and systems
@@ -28,6 +29,9 @@ export function main() {
 	uiSetup()
 	emoteSetup()
 	clapMeterSetup()
+	gitSetup()
+	descriptionPanelSetup()		
+
 	
 	// Uncomment to enable disco ball lights
 	// lightsSetup()
