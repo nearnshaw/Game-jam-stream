@@ -2,7 +2,7 @@ import { engine, TextShape } from "@dcl/sdk/ecs";
 import { resetClapMeter } from "./clapMeter";
 
 
-export function changeShowcasedUser(name: string, avatarName: string){
+export function changeShowcasedUser(avatarName: string, name?: string){
 
     resetClapMeter(avatarName)
 
@@ -10,7 +10,7 @@ export function changeShowcasedUser(name: string, avatarName: string){
     const banner2 = engine.getEntityOrNullByName("BannerText_2")
 
     if(banner && banner2){
-        TextShape.getMutable(banner).text = name
+        TextShape.getMutable(banner).text = name || ""
         TextShape.getMutable(banner2).text = avatarName
 
     

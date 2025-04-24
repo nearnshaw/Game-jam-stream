@@ -105,7 +105,7 @@ export async function downloadScheduleData() {
 
 
     hidePedestal()
-    changeShowcasedUser(name, avatarName)
+    changeShowcasedUser(avatarName, name)
 
     if(repo){
       gitUpdate(repo)

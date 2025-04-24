@@ -3,7 +3,7 @@
   "runtimeVersion": "7",
   "display": {
     "title": "Game jam stream",
-    "description": "Stream live or prerecorded videos into a large screen in this scene.",
+    "description": "The venue where we'll get together to watch everyone's game jam projects. It hides many special surprises.",
     "navmapThumbnail": "assets/scene/theatre.png",
     "favicon": "favicon_asset"
   },
@@ -462,5 +462,6 @@
   },
   "worldConfiguration": {
     "name": "mallorca2025.dcl.eth"
-  }
+  },
+  "rating": "T"
 }
