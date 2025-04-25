@@ -1,4 +1,4 @@
-import { engine } from "@dcl/sdk/ecs"
+import { AudioSource, engine } from "@dcl/sdk/ecs"
 import { getActions, sceneMessageBus } from "./utils"
 import { changeShowcasedUser } from "./banner"
 import { hidePedestal } from "../effects/pedestal"
@@ -6,6 +6,8 @@ import * as utils from '@dcl-sdk/utils'
 import { gitHide, gitUpdate } from "./github"
 import { descriptionHide } from "./descriptionPanel"
 import { descriptionUpdate } from "./descriptionPanel"
+import { codeIconHide } from "./code-icon"
+import { codeIconUpdate } from "./code-icon"
 
 
 // using file https://docs.google.com/spreadsheets/d/1dFvdn0OuTKa8slpCruf-EiNp-LJpG3z6kejsMeYZDDI/edit?gid=495861440#gid=495861440
@@ -50,7 +52,7 @@ export async function downloadScheduleData() {
     }
   }
 
-  var scheuldeIndex:number = 0
+  var scheuldeIndex:number = -1
 
   export function setupSchedulControllerData(){
 
@@ -72,7 +74,7 @@ export async function downloadScheduleData() {
 
             console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
 
-            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "")
+            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "", jsonData[scheuldeIndex].codeUse? jsonData[scheuldeIndex].codeUse : "")
          
 
         })
@@ -83,7 +85,7 @@ export async function downloadScheduleData() {
 
             console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
 
-            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "")
+            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "", jsonData[scheuldeIndex].codeUse? jsonData[scheuldeIndex].codeUse : "")
          
         })
 
@@ -93,7 +95,7 @@ export async function downloadScheduleData() {
 
             console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
 
-            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "")
+            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "", jsonData[scheuldeIndex].codeUse? jsonData[scheuldeIndex].codeUse : "")
         })
 
         const scheduleControllerData = jsonData.find((data) => data.name === "Schedule Controller")
@@ -103,9 +105,9 @@ export async function downloadScheduleData() {
   }
 
 
-  export function setFeaturedUser(name:string, avatarName:string, repo?:string, description?:string){
+  export function setFeaturedUser(name:string, avatarName:string, repo?:string, description?:string, codeUse?:string){
 
-
+    playSlideSound()
     hidePedestal()
     changeShowcasedUser(avatarName, name)
 
@@ -121,6 +123,12 @@ export async function downloadScheduleData() {
       descriptionHide()
     }
 
+    if(codeUse){
+      codeIconUpdate(codeUse)
+    } else {
+      codeIconHide()
+    }
+
     utils.timers.setTimeout(() => {
       sceneMessageBus.emit("Pedestal", { player: avatarName})
     }, 1050)
@@ -131,6 +139,10 @@ export async function downloadScheduleData() {
 
   export async function sendClapData(name:string, userName:string, clapCount:number){
 
+    //TODO: remove this
+    return
+
+
     const url = `https://maker.ifttt.com/trigger/ClapMeterData/json/with/key/ryQWdJ3ckOFpkFPlUSN_-`
 
     const formattedRow:string = name + "|||" + clapCount.toString()
@@ -140,7 +152,9 @@ export async function downloadScheduleData() {
     const data = {
       filename: "Clap Meter",
       formatted_row: formattedRow,
-    
+      json_body: {
+        formatted_row: formattedRow
+      }
     }
 
     const response = await fetch(url, {
@@ -151,3 +165,15 @@ export async function downloadScheduleData() {
     console.log("response: ", response)
 
   }
+
+
+  export function playSlideSound(){
+
+    const slideSound = engine.getEntityOrNullByName("slideSound")
+
+    if(slideSound){
+        AudioSource.getMutable(slideSound).global = true
+        AudioSource.playSound(slideSound, "assets/scene/Audio/slide-sound.mp3", true)
+    }
+
+}

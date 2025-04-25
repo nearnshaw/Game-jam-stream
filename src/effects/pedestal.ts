@@ -51,7 +51,8 @@ export function checkForPedestal(avatarName: string = TEST_AVATAR) {
         console.log("Player is the chosen one")
         activatePedestal(currentPlayer.position)
 	
-    } else if (isPlayerOnPedestal) {
+    } else //if (isPlayerOnPedestal) 
+	{
         // Player should get off pedestal
         getOffPedestal()
     }

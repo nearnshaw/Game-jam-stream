@@ -90,6 +90,27 @@
         "serializationType": "transform"
       },
       "data": {
+        "513": {
+          "json": {
+            "position": {
+              "x": -0.9839035272598267,
+              "y": 0.3749999403953552,
+              "z": 0.03999946266412735
+            },
+            "scale": {
+              "x": 0.49000000953674316,
+              "y": 0.5,
+              "z": 0.49000000953674316
+            },
+            "rotation": {
+              "x": 1.3419813186860054e-14,
+              "y": -6.014962562316678e-14,
+              "z": -4.558619107197792e-13,
+              "w": 1
+            },
+            "parent": 568
+          }
+        },
         "514": {
           "json": {
             "position": {
@@ -1227,20 +1248,20 @@
         "568": {
           "json": {
             "position": {
-              "x": 8.550609588623047,
-              "y": 9.000003814697266,
-              "z": 27.205020904541016
+              "x": 8.550000190734863,
+              "y": 9,
+              "z": 27.209999084472656
             },
             "scale": {
-              "x": 3.999999523162842,
-              "y": 4,
-              "z": 3.999999523162842
+              "x": 4,
+              "y": 4.000000476837158,
+              "z": 4.000000476837158
             },
             "rotation": {
-              "x": -3.1809852230849523e-15,
-              "y": -0.7071067690849304,
-              "z": 8.348633707912136e-15,
-              "w": 0.7071067690849304
+              "x": 0,
+              "y": 0.7071067690849304,
+              "z": 0,
+              "w": -0.7071067690849304
             },
             "parent": 514
           }
@@ -1369,6 +1390,27 @@
               "w": 1
             },
             "parent": 520
+          }
+        },
+        "575": {
+          "json": {
+            "position": {
+              "x": 19.500001907348633,
+              "y": 19.750001907348633,
+              "z": -0.004152422305196524
+            },
+            "rotation": {
+              "x": 2.9905247826971394e-15,
+              "y": -0.7071067690849304,
+              "z": 9.476541086410068e-15,
+              "w": 0.7071067690849304
+            },
+            "scale": {
+              "x": 23.9580020904541,
+              "y": 18,
+              "z": 18
+            },
+            "parent": 514
           }
         },
         "578": {
@@ -1699,6 +1741,11 @@
       },
       "data": {
         "0": {
+          "json": {
+            "states": []
+          }
+        },
+        "513": {
           "json": {
             "states": []
           }
@@ -3577,6 +3624,11 @@
             "states": []
           }
         },
+        "575": {
+          "json": {
+            "states": []
+          }
+        },
         "578": {
           "json": {
             "states": []
@@ -4001,7 +4053,7 @@
                   "tex": {
                     "$case": "videoTexture",
                     "videoTexture": {
-                      "videoPlayerEntity": 0
+                      "videoPlayerEntity": 536
                     }
                   }
                 },
@@ -4146,6 +4198,79 @@
               }
             }
           }
+        },
+        "575": {
+          "json": {
+            "material": {
+              "$case": "pbr",
+              "pbr": {
+                "texture": {
+                  "tex": {
+                    "$case": "texture",
+                    "texture": {
+                      "src": "assets/scene/Images/mallorca.png",
+                      "wrapMode": 0,
+                      "filterMode": 0
+                    }
+                  }
+                },
+                "alphaTest": 0.5,
+                "castShadows": true,
+                "alphaTexture": {
+                  "tex": {
+                    "$case": "texture",
+                    "texture": {
+                      "src": "",
+                      "wrapMode": 0,
+                      "filterMode": 0
+                    }
+                  }
+                },
+                "emissiveTexture": {
+                  "tex": {
+                    "$case": "texture",
+                    "texture": {
+                      "src": "",
+                      "wrapMode": 0,
+                      "filterMode": 0
+                    }
+                  }
+                },
+                "bumpTexture": {
+                  "tex": {
+                    "$case": "texture",
+                    "texture": {
+                      "src": "",
+                      "wrapMode": 0,
+                      "filterMode": 0
+                    }
+                  }
+                },
+                "albedoColor": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                },
+                "emissiveColor": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "reflectivityColor": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "transparencyMode": 4,
+                "metallic": 0.5,
+                "roughness": 0.5,
+                "specularIntensity": 1,
+                "emissiveIntensity": 0,
+                "directIntensity": 1
+              }
+            }
+          }
         }
       }
     },
@@ -4158,7 +4283,25 @@
         "protocolBuffer": "PBMeshCollider"
       },
       "data": {
+        "513": {
+          "json": {
+            "collisionMask": 0,
+            "mesh": {
+              "$case": "box",
+              "box": {}
+            }
+          }
+        },
         "536": {
+          "json": {
+            "collisionMask": 1,
+            "mesh": {
+              "$case": "plane",
+              "plane": {}
+            }
+          }
+        },
+        "575": {
           "json": {
             "collisionMask": 1,
             "mesh": {
@@ -4178,6 +4321,16 @@
         "protocolBuffer": "PBMeshRenderer"
       },
       "data": {
+        "513": {
+          "json": {
+            "mesh": {
+              "$case": "plane",
+              "plane": {
+                "uvs": []
+              }
+            }
+          }
+        },
         "525": {
           "json": {
             "mesh": {
@@ -4277,6 +4430,16 @@
               }
             }
           }
+        },
+        "575": {
+          "json": {
+            "mesh": {
+              "$case": "plane",
+              "plane": {
+                "uvs": []
+              }
+            }
+          }
         }
       }
     },
@@ -4293,6 +4456,11 @@
         "serializationType": "map"
       },
       "data": {
+        "513": {
+          "json": {
+            "value": "panelIcon"
+          }
+        },
         "514": {
           "json": {
             "value": "base"
@@ -4598,9 +4766,14 @@
             "value": "clapMeterText"
           }
         },
+        "575": {
+          "json": {
+            "value": "mallorca"
+          }
+        },
         "578": {
           "json": {
-            "value": "Ambient Sound - Birds"
+            "value": "slideSound"
           }
         }
       }
@@ -5223,6 +5396,11 @@
         "protocolBuffer": "PBVisibilityComponent"
       },
       "data": {
+        "513": {
+          "json": {
+            "visible": false
+          }
+        },
         "516": {
           "json": {
             "visible": false
@@ -5433,9 +5611,9 @@
         "serializationType": "map"
       },
       "data": {
-        "0": {
+        "575": {
           "json": {
-            "gizmo": 3
+            "gizmo": 2
           }
         }
       }
@@ -7383,14 +7561,19 @@
         "0": {
           "json": {
             "name": "Game jam stream",
-            "description": "The venue where we'll get together to watch everyone's game jam projects. It hides many special surprises.",
+            "description": "The venue where we'll get together to watch everyone's game jam projects.",
             "thumbnail": "assets/scene/theatre.png",
             "ageRating": "T",
             "categories": [],
             "author": "SDK",
-            "email": "",
-            "tags": [],
+            "tags": [
+              ""
+            ],
             "layout": {
+              "base": {
+                "x": 1,
+                "y": 1
+              },
               "parcels": [
                 {
                   "x": 1,
@@ -8992,14 +9175,8 @@
                   "x": 20,
                   "y": 20
                 }
-              ],
-              "base": {
-                "x": 1,
-                "y": 1
-              }
+              ]
             },
-            "silenceVoiceChat": false,
-            "disablePortableExperiences": false,
             "spawnPoints": [
               {
                 "name": "Spawn Point 1",
@@ -9106,7 +9283,8 @@
                   537,
                   564,
                   569,
-                  568
+                  568,
+                  575
                 ]
               },
               {
@@ -9398,7 +9576,8 @@
                 "entity": 568,
                 "open": true,
                 "children": [
-                  572
+                  572,
+                  513
                 ]
               },
               {
@@ -9419,6 +9598,14 @@
               },
               {
                 "entity": 578,
+                "children": []
+              },
+              {
+                "entity": 513,
+                "children": []
+              },
+              {
+                "entity": 575,
                 "children": []
               }
             ]
@@ -11966,7 +12153,7 @@
                 {
                   "entity": 528,
                   "customName": "Emotes",
-                  "defaultAction": "Flag"
+                  "defaultAction": "Shrug"
                 },
                 {
                   "entity": 543,
@@ -12040,6 +12227,11 @@
         "serializationType": "map"
       },
       "data": {
+        "513": {
+          "json": {
+            "porportionalScaling": true
+          }
+        },
         "514": {
           "json": {}
         },
@@ -12221,6 +12413,9 @@
           "json": {}
         },
         "574": {
+          "json": {}
+        },
+        "575": {
           "json": {}
         },
         "578": {

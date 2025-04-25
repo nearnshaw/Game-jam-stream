@@ -17,7 +17,7 @@ export function descriptionPanelSetup(){
 
     TextShape.getMutable(paneltext).textWrapping = true
     TextShape.getMutable(paneltext).height = 7
-    TextShape.getMutable(paneltext).width = 2.9
+    TextShape.getMutable(paneltext).width = 2.7
 }   
 
 
@@ -53,9 +53,9 @@ export function descriptionUpdate(description: string) {
 
     VisibilityComponent.getMutable(infoPanel).visible = true
 
-    //limit the length of description to 400 characters
-    if (description.length > 400) {
-        description = description.substring(0, 400)
+    //limit the length of description to 340 characters
+    if (description.length > 340) {
+        description = description.substring(0, 340) + "..."
     }
    
     TextShape.getMutable(paneltext).text = description
