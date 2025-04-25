@@ -12,6 +12,8 @@ import { descriptionUpdate } from "./descriptionPanel"
 
 export var jsonData: any[] = []
 
+export var lastUser: string = ""
+
 export async function downloadScheduleData() {
 
 
@@ -131,11 +133,14 @@ export async function downloadScheduleData() {
 
     const url = `https://maker.ifttt.com/trigger/ClapMeterData/json/with/key/ryQWdJ3ckOFpkFPlUSN_-`
 
-    const formattedRow = name + "|||" + userName + "|||" + clapCount
+    const formattedRow:string = name + "|||" + clapCount.toString()
+
+    console.log("formattedRow: ", formattedRow)
 
     const data = {
       filename: "Clap Meter",
-      formatted_row: formattedRow
+      formatted_row: formattedRow,
+    
     }
 
     const response = await fetch(url, {

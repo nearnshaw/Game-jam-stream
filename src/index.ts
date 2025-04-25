@@ -41,7 +41,7 @@ export function main() {
 	
 	console.log("Scene initialization complete")
 
-	sendClapData("test", "test", 10)
+	
 }
 
 

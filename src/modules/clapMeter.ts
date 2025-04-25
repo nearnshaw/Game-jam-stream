@@ -6,6 +6,7 @@ import { EntityEnumId, getActions } from './utils'
 import { Schemas } from '@dcl/sdk/ecs'
 import { syncEntity } from '@dcl/sdk/network'
 import { uIprompt } from './ui'
+import { sendClapData } from './googleDocsLink'
 
 // Constants
 const NEEDLE_ENTITY_NAME = 'Needle'
@@ -20,11 +21,13 @@ const MIN_ANGLE_INCREMENT = 1 // Minimum increment for late claps
 export const ClapScore = engine.defineComponent('ClapScore', {
   score: Schemas.Number,
   active: Schemas.Boolean,
-  player: Schemas.String
+  player: Schemas.String,
+  avatarName: Schemas.String
 }, {
   score: 0,
   active: false,
-  player: ""
+  player: "",
+  avatarName: ""
 })
 
 // State variables
@@ -126,7 +129,7 @@ function setupEmoteListener(needle: Entity) {
     AvatarEmoteCommand.onChange(engine.PlayerEntity, (emote) => {
         if (!emote || !clapMeterCommsEntity) return
         
-        console.log('Emote played:', emote)
+        //console.log('Emote played:', emote)
         
         if (emote.emoteUrn === 'clap') {
             handleClap(needle)
@@ -169,7 +172,7 @@ function handleClap(needle: Entity) {
     // Calculate new needle rotation
     currentNeedleRotation = START_ANGLE - (currentScore * angleIncrement)
 
-    console.log('Clap detected, current score:', currentScore, 'angle increment:', angleIncrement, 'current needle rotation:', currentNeedleRotation)
+    //console.log('Clap detected, current score:', currentScore, 'angle increment:', angleIncrement, 'current needle rotation:', currentNeedleRotation)
 
     // Ensure needle doesn't go beyond end angle
     if (currentNeedleRotation < END_ANGLE) {
@@ -190,6 +193,9 @@ export function resetClapMeter(newPlayer: string = "") {
         console.error('Clap meter needle not found')
         return
     }
+
+
+    sendClapData(ClapScore.getMutable(clapMeterCommsEntity).player, "test", ClapScore.getMutable(clapMeterCommsEntity).score)
 
     // Reset score and needle rotation
     ClapScore.getMutable(clapMeterCommsEntity).score = 0
