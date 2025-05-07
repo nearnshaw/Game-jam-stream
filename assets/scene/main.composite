@@ -573,27 +573,6 @@
             "parent": 0
           }
         },
-        "536": {
-          "json": {
-            "position": {
-              "x": 18.19999885559082,
-              "y": 20.200000762939453,
-              "z": -0.0000018683928146856488
-            },
-            "scale": {
-              "x": 39,
-              "y": 20,
-              "z": 0.9999998807907104
-            },
-            "rotation": {
-              "x": 1.1861403854018966e-14,
-              "y": 0.7071067690849304,
-              "z": 2.0966906393049024e-14,
-              "w": 0.7071067690849304
-            },
-            "parent": 514
-          }
-        },
         "537": {
           "json": {
             "position": {
@@ -1399,16 +1378,37 @@
               "y": 19.750001907348633,
               "z": -0.004152422305196524
             },
+            "scale": {
+              "x": 23.9580020904541,
+              "y": 18,
+              "z": 18
+            },
             "rotation": {
               "x": 2.9905247826971394e-15,
               "y": -0.7071067690849304,
               "z": 9.476541086410068e-15,
               "w": 0.7071067690849304
             },
+            "parent": 514
+          }
+        },
+        "576": {
+          "json": {
+            "position": {
+              "x": 18.19999885559082,
+              "y": 20.200000762939453,
+              "z": -0.0000018683928146856488
+            },
+            "rotation": {
+              "x": 2.615128250803506e-15,
+              "y": 0.7071067690849304,
+              "z": 2.0966906393049024e-14,
+              "w": 0.7071067690849304
+            },
             "scale": {
-              "x": 23.9580020904541,
-              "y": 18,
-              "z": 18
+              "x": 39,
+              "y": 20,
+              "z": 0.9999998211860657
             },
             "parent": 514
           }
@@ -1553,12 +1553,6 @@
           "json": {
             "networkId": 0,
             "entityId": 8013
-          }
-        },
-        "536": {
-          "json": {
-            "networkId": 0,
-            "entityId": 8055
           }
         },
         "538": {
@@ -1727,6 +1721,12 @@
           "json": {
             "networkId": 0,
             "entityId": 8054
+          }
+        },
+        "576": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8056
           }
         }
       }
@@ -3286,11 +3286,6 @@
             "states": []
           }
         },
-        "536": {
-          "json": {
-            "states": []
-          }
-        },
         "537": {
           "json": {
             "states": []
@@ -4044,26 +4039,6 @@
             }
           }
         },
-        "536": {
-          "json": {
-            "material": {
-              "$case": "pbr",
-              "pbr": {
-                "texture": {
-                  "tex": {
-                    "$case": "videoTexture",
-                    "videoTexture": {
-                      "videoPlayerEntity": 536
-                    }
-                  }
-                },
-                "metallic": 0,
-                "roughness": 1,
-                "specularIntensity": 0
-              }
-            }
-          }
-        },
         "538": {
           "json": {
             "material": {
@@ -4271,6 +4246,26 @@
               }
             }
           }
+        },
+        "576": {
+          "json": {
+            "material": {
+              "$case": "pbr",
+              "pbr": {
+                "texture": {
+                  "tex": {
+                    "$case": "videoTexture",
+                    "videoTexture": {
+                      "videoPlayerEntity": 0
+                    }
+                  }
+                },
+                "metallic": 0,
+                "roughness": 1,
+                "specularIntensity": 0
+              }
+            }
+          }
         }
       }
     },
@@ -4292,7 +4287,7 @@
             }
           }
         },
-        "536": {
+        "575": {
           "json": {
             "collisionMask": 1,
             "mesh": {
@@ -4301,7 +4296,7 @@
             }
           }
         },
-        "575": {
+        "576": {
           "json": {
             "collisionMask": 1,
             "mesh": {
@@ -4371,16 +4366,6 @@
             }
           }
         },
-        "536": {
-          "json": {
-            "mesh": {
-              "$case": "plane",
-              "plane": {
-                "uvs": []
-              }
-            }
-          }
-        },
         "538": {
           "json": {
             "mesh": {
@@ -4432,6 +4417,16 @@
           }
         },
         "575": {
+          "json": {
+            "mesh": {
+              "$case": "plane",
+              "plane": {
+                "uvs": []
+              }
+            }
+          }
+        },
+        "576": {
           "json": {
             "mesh": {
               "$case": "plane",
@@ -4569,11 +4564,6 @@
         "535": {
           "json": {
             "value": "Utils"
-          }
-        },
-        "536": {
-          "json": {
-            "value": "screen"
           }
         },
         "537": {
@@ -4771,6 +4761,11 @@
             "value": "mallorca"
           }
         },
+        "576": {
+          "json": {
+            "value": "Screen"
+          }
+        },
         "578": {
           "json": {
             "value": "slideSound"
@@ -4959,13 +4954,6 @@
               2709697014,
               1042,
               1
-            ]
-          }
-        },
-        "536": {
-          "json": {
-            "componentIds": [
-              1043
             ]
           }
         },
@@ -5208,6 +5196,13 @@
               1042
             ]
           }
+        },
+        "576": {
+          "json": {
+            "componentIds": [
+              1043
+            ]
+          }
         }
       }
     },
@@ -5378,11 +5373,10 @@
         "protocolBuffer": "PBVideoPlayer"
       },
       "data": {
-        "536": {
+        "576": {
           "json": {
-            "src": "https://boedo.casla",
-            "playing": true,
-            "volume": 1
+            "src": "https://player.vimeo.com/external/552481870.m3u8?s=c312c8533f97e808fccc92b0510b085c8122a875",
+            "playing": true
           }
         }
       }
@@ -5611,9 +5605,9 @@
         "serializationType": "map"
       },
       "data": {
-        "575": {
+        "522": {
           "json": {
-            "gizmo": 2
+            "gizmo": 3
           }
         }
       }
@@ -7566,9 +7560,7 @@
             "ageRating": "T",
             "categories": [],
             "author": "SDK",
-            "tags": [
-              ""
-            ],
+            "tags": [],
             "layout": {
               "base": {
                 "x": 1,
@@ -9276,7 +9268,7 @@
                 "entity": 514,
                 "open": true,
                 "children": [
-                  536,
+                  576,
                   534,
                   559,
                   520,
@@ -9593,10 +9585,6 @@
                 "children": []
               },
               {
-                "entity": 536,
-                "children": []
-              },
-              {
                 "entity": 578,
                 "children": []
               },
@@ -9606,6 +9594,10 @@
               },
               {
                 "entity": 575,
+                "children": []
+              },
+              {
+                "entity": 576,
                 "children": []
               }
             ]
@@ -11875,11 +11867,11 @@
         "serializationType": "map"
       },
       "data": {
-        "536": {
+        "576": {
           "json": {
             "thumbnail": "https://boedo.casla",
             "defaultMediaSource": 0,
-            "defaultURL": "https://boedo.casla"
+            "defaultURL": "https://player.vimeo.com/external/552481870.m3u8?s=c312c8533f97e808fccc92b0510b085c8122a875"
           }
         }
       }
@@ -12131,7 +12123,7 @@
               "linkAllVideoPlayers": false,
               "videoPlayers": [
                 {
-                  "entity": 536,
+                  "entity": 576,
                   "customName": "Screen"
                 }
               ]
@@ -12294,9 +12286,6 @@
         "535": {
           "json": {}
         },
-        "536": {
-          "json": {}
-        },
         "537": {
           "json": {}
         },
@@ -12416,6 +12405,9 @@
           "json": {}
         },
         "575": {
+          "json": {}
+        },
+        "576": {
           "json": {}
         },
         "578": {
@@ -12768,19 +12760,6 @@
             "assetId": "0c419cb9-bc21-4c51-977f-41a505a097f0"
           }
         },
-        "536": {
-          "json": {
-            "isBasicViewEnabled": true,
-            "componentName": "Video Screen",
-            "fields": [
-              {
-                "name": "Config",
-                "type": "asset-packs::VideoScreen"
-              }
-            ],
-            "assetId": "dc5ec17b-aa1a-4bd0-bace-7d615d9bdc71"
-          }
-        },
         "539": {
           "json": {
             "isBasicViewEnabled": true,
@@ -12915,6 +12894,19 @@
             "componentName": "Arrow",
             "fields": [],
             "assetId": "8a172b9e-b57d-4920-a804-55cb77f46816"
+          }
+        },
+        "576": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Video Screen",
+            "fields": [
+              {
+                "name": "Config",
+                "type": "asset-packs::VideoScreen"
+              }
+            ],
+            "assetId": "dc5ec17b-aa1a-4bd0-bace-7d615d9bdc71"
           }
         },
         "578": {
