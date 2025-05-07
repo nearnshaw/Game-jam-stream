@@ -132,27 +132,6 @@
             "parent": 0
           }
         },
-        "515": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 0,
-              "z": 0
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "parent": 0
-          }
-        },
         "516": {
           "json": {
             "position": {
@@ -181,37 +160,16 @@
               "y": 0,
               "z": 10
             },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
             "scale": {
               "x": 1,
               "y": 1,
               "z": 1
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "parent": 0
-          }
-        },
-        "518": {
-          "json": {
-            "position": {
-              "x": 40.539485931396484,
-              "y": -4.539192985181897e-17,
-              "z": 10.974939346313477
-            },
-            "scale": {
-              "x": 2.4000000953674316,
-              "y": 2.4000000953674316,
-              "z": 2.4000000953674316
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
             },
             "parent": 0
           }
@@ -1399,16 +1357,16 @@
               "y": 20.200000762939453,
               "z": -0.0000018683928146856488
             },
+            "scale": {
+              "x": 39,
+              "y": 20,
+              "z": 0.9999998211860657
+            },
             "rotation": {
               "x": 2.615128250803506e-15,
               "y": 0.7071067690849304,
               "z": 2.0966906393049024e-14,
               "w": 0.7071067690849304
-            },
-            "scale": {
-              "x": 39,
-              "y": 20,
-              "z": 0.9999998211860657
             },
             "parent": 514
           }
@@ -1457,12 +1415,6 @@
           "json": {
             "networkId": 0,
             "entityId": 8017
-          }
-        },
-        "515": {
-          "json": {
-            "networkId": 0,
-            "entityId": 8003
           }
         },
         "516": {
@@ -3164,11 +3116,6 @@
             ]
           }
         },
-        "515": {
-          "json": {
-            "states": []
-          }
-        },
         "516": {
           "json": {
             "states": [
@@ -3195,11 +3142,6 @@
                 "shouldReset": false
               }
             ]
-          }
-        },
-        "518": {
-          "json": {
-            "states": []
           }
         },
         "519": {
@@ -3624,6 +3566,11 @@
             "states": []
           }
         },
+        "576": {
+          "json": {
+            "states": []
+          }
+        },
         "578": {
           "json": {
             "states": []
@@ -3662,13 +3609,6 @@
             "src": "assets/Decentraland Theatre/base_theatre.glb"
           }
         },
-        "515": {
-          "json": {
-            "src": "assets/asset-packs/rising_pillar_temple/Rising_Pillar_Temple.glb",
-            "visibleMeshesCollisionMask": 2,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
         "516": {
           "json": {
             "src": "assets/custom/square_spiral/square_spiral.glb",
@@ -3679,13 +3619,6 @@
         "517": {
           "json": {
             "src": "assets/asset-packs/black_button/black_fantasy_button.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "518": {
-          "json": {
-            "src": "assets/asset-packs/archway_of_kindness/ChineseGate_03/ChineseGate_03.glb",
             "visibleMeshesCollisionMask": 1,
             "invisibleMeshesCollisionMask": 2
           }
@@ -4256,7 +4189,7 @@
                   "tex": {
                     "$case": "videoTexture",
                     "videoTexture": {
-                      "videoPlayerEntity": 0
+                      "videoPlayerEntity": 576
                     }
                   }
                 },
@@ -4461,11 +4394,6 @@
             "value": "base"
           }
         },
-        "515": {
-          "json": {
-            "value": "pedestal_old"
-          }
-        },
         "516": {
           "json": {
             "value": "spiral"
@@ -4474,11 +4402,6 @@
         "517": {
           "json": {
             "value": "button"
-          }
-        },
-        "518": {
-          "json": {
-            "value": "Archway of Kindness"
           }
         },
         "519": {
@@ -4821,14 +4744,6 @@
             "componentIds": [
               1,
               1042
-            ]
-          }
-        },
-        "515": {
-          "json": {
-            "componentIds": [
-              2709697014,
-              1020
             ]
           }
         },
@@ -5200,7 +5115,8 @@
         "576": {
           "json": {
             "componentIds": [
-              1043
+              1043,
+              1042
             ]
           }
         }
@@ -5348,23 +5264,6 @@
       }
     },
     {
-      "name": "core::TweenSequence",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {},
-        "serializationType": "protocol-buffer",
-        "protocolBuffer": "PBTweenSequence"
-      },
-      "data": {
-        "515": {
-          "json": {
-            "sequence": [],
-            "loop": 0
-          }
-        }
-      }
-    },
-    {
       "name": "core::VideoPlayer",
       "jsonSchema": {
         "type": "object",
@@ -5375,8 +5274,8 @@
       "data": {
         "576": {
           "json": {
-            "src": "https://player.vimeo.com/external/552481870.m3u8?s=c312c8533f97e808fccc92b0510b085c8122a875",
-            "playing": true
+            "src": "livekit-video://current-stream",
+            "playing": false
           }
         }
       }
@@ -5605,7 +5504,7 @@
         "serializationType": "map"
       },
       "data": {
-        "522": {
+        "576": {
           "json": {
             "gizmo": 3
           }
@@ -9254,9 +9153,7 @@
                 "open": true,
                 "children": [
                   514,
-                  515,
                   517,
-                  518,
                   525,
                   535,
                   533,
@@ -9288,20 +9185,11 @@
                 "children": []
               },
               {
-                "entity": 515,
-                "open": true,
-                "children": []
-              },
-              {
                 "entity": 516,
                 "children": []
               },
               {
                 "entity": 517,
-                "children": []
-              },
-              {
-                "entity": 518,
                 "children": []
               },
               {
@@ -9504,7 +9392,6 @@
               },
               {
                 "entity": 553,
-                "open": true,
                 "children": [
                   516,
                   540
@@ -9893,55 +9780,6 @@
                 "name": "Restore",
                 "type": "start_tween",
                 "jsonPayload": "{\"type\":\"rotate_item\",\"end\":{\"x\":0,\"y\":0,\"z\":0},\"relative\":false,\"interpolationType\":\"linear\",\"duration\":\"5.00\"}"
-              }
-            ]
-          }
-        },
-        "515": {
-          "json": {
-            "id": 3,
-            "value": [
-              {
-                "name": "Sink",
-                "type": "batch",
-                "jsonPayload": "{ \"actions\": [\"Going to Start\", \"Tween to Start\"] }",
-                "allowedInBasicView": true
-              },
-              {
-                "name": "Rise",
-                "type": "batch",
-                "jsonPayload": "{ \"actions\": [\"Going to End\", \"Tween to End\"] }",
-                "allowedInBasicView": true
-              },
-              {
-                "name": "Going to Start",
-                "type": "set_state",
-                "jsonPayload": "{ \"state\": \"GoingToStart\" }"
-              },
-              {
-                "name": "Going to End",
-                "type": "set_state",
-                "jsonPayload": "{ \"state\": \"GoingToEnd\" }"
-              },
-              {
-                "name": "Tween to Start",
-                "type": "start_tween",
-                "jsonPayload": "{\"type\":\"move_item\",\"end\":{\"x\":0,\"y\":-3,\"z\":0},\"relative\":true,\"interpolationType\":\"linear\",\"duration\":3}"
-              },
-              {
-                "name": "Tween to End",
-                "type": "start_tween",
-                "jsonPayload": "{\"type\":\"move_item\",\"end\":{\"x\":0,\"y\":3,\"z\":0},\"relative\":true,\"interpolationType\":\"linear\",\"duration\":3}"
-              },
-              {
-                "name": "Play Sound",
-                "type": "play_sound",
-                "jsonPayload": "{\"src\":\"assets/asset-packs/rising_pillar_temple/RisingPillar.mp3\"}"
-              },
-              {
-                "name": "Hide",
-                "type": "start_tween",
-                "jsonPayload": "{\"type\":\"move_item\",\"end\":{\"x\":0,\"y\":-4,\"z\":0},\"relative\":true,\"interpolationType\":\"easeinsine\",\"duration\":\"1.00\"}"
               }
             ]
           }
@@ -11206,22 +11044,6 @@
         "serializationType": "map"
       },
       "data": {
-        "515": {
-          "json": {
-            "value": [
-              {
-                "type": "on_state_change",
-                "conditions": [],
-                "actions": [
-                  {
-                    "id": 3,
-                    "name": "Play Sound"
-                  }
-                ]
-              }
-            ]
-          }
-        },
         "517": {
           "json": {
             "value": [
@@ -11727,16 +11549,6 @@
         "serializationType": "map"
       },
       "data": {
-        "515": {
-          "json": {
-            "id": 4,
-            "value": [
-              "GoingToEnd",
-              "GoingToStart"
-            ],
-            "defaultValue": "GoingToEnd"
-          }
-        },
         "520": {
           "json": {
             "id": 61,
@@ -11870,7 +11682,7 @@
         "576": {
           "json": {
             "thumbnail": "https://boedo.casla",
-            "defaultMediaSource": 0,
+            "defaultMediaSource": 1,
             "defaultURL": "https://player.vimeo.com/external/552481870.m3u8?s=c312c8533f97e808fccc92b0510b085c8122a875"
           }
         }
@@ -12227,16 +12039,10 @@
         "514": {
           "json": {}
         },
-        "515": {
-          "json": {}
-        },
         "516": {
           "json": {}
         },
         "517": {
-          "json": {}
-        },
-        "518": {
           "json": {}
         },
         "519": {
@@ -12706,29 +12512,6 @@
         "serializationType": "map"
       },
       "data": {
-        "515": {
-          "json": {
-            "isBasicViewEnabled": false,
-            "componentName": "Rising Pillar",
-            "fields": [
-              {
-                "name": "Tween",
-                "type": "core::Tween"
-              },
-              {
-                "name": "When End Reached",
-                "type": "asset-packs::Triggers",
-                "basicViewId": "trigger-when-end-reached"
-              },
-              {
-                "name": "When Start Reached",
-                "type": "asset-packs::Triggers",
-                "basicViewId": "trigger-when-start-reached"
-              }
-            ],
-            "assetId": "0bc5bfff-e355-4258-9c11-c04f2cbe4f99"
-          }
-        },
         "517": {
           "json": {
             "isBasicViewEnabled": false,

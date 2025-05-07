@@ -6,7 +6,6 @@
  */
 export enum EntityNames {
   Admin_Tools = "Admin Tools",
-  Archway_of_Kindness = "Archway of Kindness",
   Banner = "Banner",
   BannerText = "BannerText",
   BannerText_2 = "BannerText_2",
@@ -64,7 +63,6 @@ export enum EntityNames {
   panelText = "panelText",
   pedestal = "pedestal",
   pedestalControl = "pedestalControl",
-  pedestal_old = "pedestal_old",
   scheduleController = "scheduleController",
   slideSound = "slideSound",
   spiral = "spiral",
