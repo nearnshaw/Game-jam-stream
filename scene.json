@@ -2,8 +2,8 @@
   "ecs7": true,
   "runtimeVersion": "7",
   "display": {
-    "title": "Game jam stream",
-    "description": "The venue where we'll get together to watch everyone's game jam projects.",
+    "title": "The Office",
+    "description": "The venue where we conduct the weekly Office Hours meetings, where the community finds out what's new for content creators, and they can share their issues and feature requests.",
     "navmapThumbnail": "assets/scene/theatre.png",
     "favicon": "favicon_asset"
   },
@@ -13,7 +13,10 @@
     "email": ""
   },
   "main": "bin/index.js",
-  "tags": [],
+  "tags": [
+    "social",
+    "education"
+  ],
   "scene": {
     "parcels": [
       "1,1",
