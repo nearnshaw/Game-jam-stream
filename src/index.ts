@@ -20,28 +20,28 @@ import { descriptionPanelSetup } from './modules/descriptionPanel'
  * Initializes all scene components and systems
  */
 export function main() {
-	console.log("Initializing scene components...")
-	
-	// Set up scene components
-	pedestalSetup()
-	tiltWorldSetup()
-	cameraSetup()
-	uiSetup()
-	emoteSetup()
-	clapMeterSetup()
-	gitSetup()
-	descriptionPanelSetup()		
+  console.log("Initializing scene components...")
 
-	
-	// Uncomment to enable disco ball lights
-	// lightsSetup()
+  // Set up scene components
+  pedestalSetup()
+  tiltWorldSetup()
+  cameraSetup()
+  uiSetup()
+  //emoteSetup()
+  clapMeterSetup()
+  gitSetup()
+  descriptionPanelSetup()
 
-	downloadScheduleData()	
-	setupSchedulControllerData()
-	
-	console.log("Scene initialization complete")
 
-	
+  // Uncomment to enable disco ball lights
+  // lightsSetup()
+
+  downloadScheduleData()
+  setupSchedulControllerData()
+
+  console.log("Scene initialization complete")
+
+
 }
 
 

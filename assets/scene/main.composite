@@ -5302,8 +5302,9 @@
       "data": {
         "515": {
           "json": {
-            "src": "https://player.vimeo.com/external/552481870.m3u8?s=c312c8533f97e808fccc92b0510b085c8122a875",
-            "playing": true
+            "src": "livekit-video://current-stream",
+            "playing": true,
+            "loop": true
           }
         }
       }
@@ -5534,7 +5535,7 @@
       "data": {
         "0": {
           "json": {
-            "gizmo": 3
+            "gizmo": 0
           }
         }
       }
@@ -7201,10 +7202,18 @@
       }
     },
     {
-      "name": "inspector::SceneMetadata",
+      "name": "inspector::SceneMetadata-v1",
       "jsonSchema": {
         "type": "object",
         "properties": {
+          "version": {
+            "type": "integer",
+            "serializationType": "optional",
+            "optionalJsonSchema": {
+              "type": "integer",
+              "serializationType": "int32"
+            }
+          },
           "name": {
             "type": "string",
             "serializationType": "optional",
@@ -7367,6 +7376,43 @@
               "serializationType": "boolean"
             }
           },
+          "skyboxConfig": {
+            "type": "object",
+            "serializationType": "optional",
+            "optionalJsonSchema": {
+              "type": "object",
+              "properties": {
+                "fixedTime": {
+                  "type": "integer",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "integer",
+                    "serializationType": "int32"
+                  }
+                },
+                "transitionMode": {
+                  "type": "integer",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "default": 0,
+                    "serializationType": "enum-int",
+                    "enumObject": {
+                      "0": "TM_FORWARD",
+                      "1": "TM_BACKWARD",
+                      "TM_FORWARD": 0,
+                      "TM_BACKWARD": 1
+                    }
+                  }
+                }
+              },
+              "serializationType": "map"
+            }
+          },
           "spawnPoints": {
             "type": "array",
             "serializationType": "optional",
@@ -7481,20 +7527,18 @@
       "data": {
         "0": {
           "json": {
-            "name": "Game jam stream",
-            "description": "The venue where we'll get together to ",
+            "name": "The Office",
+            "description": "The venue where we conduct the weekly Office Hours meetings, where the community finds out what's new for content creators, and they can share their issues and feature requests.",
             "thumbnail": "assets/scene/theatre.png",
             "ageRating": "T",
-            "categories": [],
-            "author": "SDK",
-            "tags": [
-              ""
+            "categories": [
+              "social",
+              "education"
             ],
+            "author": "SDK",
+            "email": "",
+            "tags": [],
             "layout": {
-              "base": {
-                "x": 1,
-                "y": 1
-              },
               "parcels": [
                 {
                   "x": 1,
@@ -9096,7 +9140,16 @@
                   "x": 20,
                   "y": 20
                 }
-              ]
+              ],
+              "base": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "silenceVoiceChat": false,
+            "disablePortableExperiences": false,
+            "skyboxConfig": {
+              "fixedTime": 86340
             },
             "spawnPoints": [
               {
@@ -11705,7 +11758,7 @@
         "515": {
           "json": {
             "thumbnail": "https://boedo.casla",
-            "defaultMediaSource": 0,
+            "defaultMediaSource": 1,
             "defaultURL": "https://player.vimeo.com/external/552481870.m3u8?s=c312c8533f97e808fccc92b0510b085c8122a875"
           }
         }
@@ -12423,20 +12476,14 @@
                     "core::VideoPlayer",
                     "core::VisibilityComponent",
                     "inspector::Selection",
-                    "inspector::SceneMetadata",
+                    "inspector::SceneMetadata-v1",
                     "inspector::Nodes",
                     "asset-packs::ActionTypes",
-                    "ActionTypes",
                     "asset-packs::Actions",
-                    "Actions",
                     "asset-packs::Counter",
-                    "Counter",
                     "asset-packs::CounterBar",
-                    "CounterBar",
                     "asset-packs::Triggers",
-                    "Triggers",
                     "asset-packs::States",
-                    "States",
                     "inspector::TransformConfig",
                     "inspector::Hide",
                     "inspector::Lock",
@@ -12445,11 +12492,8 @@
                     "inspector::Tile",
                     "inspector::CustomAsset",
                     "asset-packs::AdminTools",
-                    "AdminTools",
                     "asset-packs::Rewards",
-                    "Rewards",
-                    "asset-packs::VideoScreen",
-                    "VideoScreen"
+                    "asset-packs::VideoScreen"
                   ],
                   "default": "asset-packs::Actions",
                   "serializationType": "enum-string",
@@ -12473,20 +12517,14 @@
                     "VIDEO_PLAYER": "core::VideoPlayer",
                     "VISIBILITY_COMPONENT": "core::VisibilityComponent",
                     "Selection": "inspector::Selection",
-                    "Scene": "inspector::SceneMetadata",
+                    "Scene": "inspector::SceneMetadata-v1",
                     "Nodes": "inspector::Nodes",
                     "ActionTypes": "asset-packs::ActionTypes",
-                    "asset-packs::ActionTypes": "ActionTypes",
                     "Actions": "asset-packs::Actions",
-                    "asset-packs::Actions": "Actions",
                     "Counter": "asset-packs::Counter",
-                    "asset-packs::Counter": "Counter",
                     "CounterBar": "asset-packs::CounterBar",
-                    "asset-packs::CounterBar": "CounterBar",
                     "Triggers": "asset-packs::Triggers",
-                    "asset-packs::Triggers": "Triggers",
                     "States": "asset-packs::States",
-                    "asset-packs::States": "States",
                     "TransformConfig": "inspector::TransformConfig",
                     "Hide": "inspector::Hide",
                     "Lock": "inspector::Lock",
@@ -12495,11 +12533,8 @@
                     "Tile": "inspector::Tile",
                     "CustomAsset": "inspector::CustomAsset",
                     "AdminTools": "asset-packs::AdminTools",
-                    "asset-packs::AdminTools": "AdminTools",
                     "Rewards": "asset-packs::Rewards",
-                    "asset-packs::Rewards": "Rewards",
-                    "VideoScreen": "asset-packs::VideoScreen",
-                    "asset-packs::VideoScreen": "VideoScreen"
+                    "VideoScreen": "asset-packs::VideoScreen"
                   }
                 },
                 "layout": {
