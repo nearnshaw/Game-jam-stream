@@ -10,8 +10,8 @@
     "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next"
   },
   "devDependencies": {
-    "@dcl/js-runtime": "7.9.6",
-    "@dcl/sdk": "7.9.6"
+    "@dcl/js-runtime": "7.17.0",
+    "@dcl/sdk": "latest"
   },
   "engines": {
     "node": ">=16.0.0",
@@ -25,12 +25,9 @@
   },
   "dependencies": {
     "@dcl-sdk/utils": "latest",
+    "@dcl/asset-packs": "https://sdk-team-cdn.decentraland.org/creator-hub/branch/feat/is-admin-asset-packs/@dcl/asset-packs/dcl-asset-packs-2.10.0-commit-e6757d007ed6ad7fc20fc4ea86d32d9b45506844.tgz",
     "dcl-ui-toolkit": "latest"
   },
-  "requiredPermissions": [
-    "ALLOW_MEDIA_HOSTNAMES"
-  ],
-  "allowedMediaHostnames": [
-    "decentraland.org"
-  ]
+  "requiredPermissions": [],
+  "allowedMediaHostnames": []
 }

@@ -1,179 +1,179 @@
-import { AudioSource, engine } from "@dcl/sdk/ecs"
-import { getActions, sceneMessageBus } from "./utils"
-import { changeShowcasedUser } from "./banner"
-import { hidePedestal } from "../effects/pedestal"
-import * as utils from '@dcl-sdk/utils'
-import { gitHide, gitUpdate } from "./github"
-import { descriptionHide } from "./descriptionPanel"
-import { descriptionUpdate } from "./descriptionPanel"
-import { codeIconHide } from "./code-icon"
-import { codeIconUpdate } from "./code-icon"
+// import { AudioSource, engine } from "@dcl/sdk/ecs"
+// import { getActions, sceneMessageBus } from "./utils"
+// import { changeShowcasedUser } from "./banner"
+// import { hidePedestal } from "../effects/pedestal"
+// import * as utils from '@dcl-sdk/utils'
+// import { gitHide, gitUpdate } from "./github"
+// import { descriptionHide } from "./descriptionPanel"
+// import { descriptionUpdate } from "./descriptionPanel"
+// import { codeIconHide } from "./code-icon"
+// import { codeIconUpdate } from "./code-icon"
 
 
-// using file https://docs.google.com/spreadsheets/d/1dFvdn0OuTKa8slpCruf-EiNp-LJpG3z6kejsMeYZDDI/edit?gid=495861440#gid=495861440
+// // using file https://docs.google.com/spreadsheets/d/1dFvdn0OuTKa8slpCruf-EiNp-LJpG3z6kejsMeYZDDI/edit?gid=495861440#gid=495861440
 
-export var jsonData: any[] = []
+// export var jsonData: any[] = []
 
-export var lastUser: string = ""
+// export var lastUser: string = ""
 
-export async function downloadScheduleData() {
-
-
-    const url = 'https://docs.google.com/spreadsheets/d/1dFvdn0OuTKa8slpCruf-EiNp-LJpG3z6kejsMeYZDDI/gviz/tq?tqx=out:json&gid=0&headers=1'
-    // //'https://docs.google.com/spreadsheets/d/1pZsS3M-7Gjpir0R-LtMjh0tVcf-ron73fP3h93GTqpU/gviz/tq?tqx=out:json&gid=1429457611'
-        //gid=1429457611 refers to the target tab of the g-doc
-    const txt = await fetch(url).then((res) => res.text())
-
-    //parsing data into json format
-    const r = txt.match(/google\.visualization\.Query\.setResponse\(([\s\S\w]+)\)/i)
-    console.log("r: ", r)
-    if (r && r.length == 2) {
-      const obj = JSON.parse(r[1])
-      const table = obj.table
-      const header = table.cols.map(({ label }: { label: string }) => label)
-      const rows = table.rows.map(({ c }: { c: any }) => c.map((e: any) => e ? (e.v || "") : ""))
-
-      console.log("header: ", header);
-      console.log("rows: ", rows);
-
-      jsonData = []
-      for (const row of rows) {
-        let rowData: { [key: string]: any } = {}
-        header.forEach((column: string, i: number) => {
-          if (row[i]) {
-            rowData[column] = row[i]
-          }
-        })
-
-        jsonData.push(rowData)
-        console.log("rowData: ", JSON.stringify(rowData))
-      }
-      //console.log("Downloaded schedule data : ", jsonData)
-    }
-  }
-
-  var scheuldeIndex:number = -1
-
-  export function setupSchedulControllerData(){
-
-    const scheduleController = engine.getEntityOrNullByName("scheduleController")
-
-    if(scheduleController){
+// export async function downloadScheduleData() {
 
 
-        getActions("scheduleController")?.on("Deactivate", () => {
+//     const url = 'https://docs.google.com/spreadsheets/d/1dFvdn0OuTKa8slpCruf-EiNp-LJpG3z6kejsMeYZDDI/gviz/tq?tqx=out:json&gid=0&headers=1'
+//     // //'https://docs.google.com/spreadsheets/d/1pZsS3M-7Gjpir0R-LtMjh0tVcf-ron73fP3h93GTqpU/gviz/tq?tqx=out:json&gid=1429457611'
+//         //gid=1429457611 refers to the target tab of the g-doc
+//     const txt = await fetch(url).then((res) => res.text())
+
+//     //parsing data into json format
+//     const r = txt.match(/google\.visualization\.Query\.setResponse\(([\s\S\w]+)\)/i)
+//     console.log("r: ", r)
+//     if (r && r.length == 2) {
+//       const obj = JSON.parse(r[1])
+//       const table = obj.table
+//       const header = table.cols.map(({ label }: { label: string }) => label)
+//       const rows = table.rows.map(({ c }: { c: any }) => c.map((e: any) => e ? (e.v || "") : ""))
+
+//       console.log("header: ", header);
+//       console.log("rows: ", rows);
+
+//       jsonData = []
+//       for (const row of rows) {
+//         let rowData: { [key: string]: any } = {}
+//         header.forEach((column: string, i: number) => {
+//           if (row[i]) {
+//             rowData[column] = row[i]
+//           }
+//         })
+
+//         jsonData.push(rowData)
+//         console.log("rowData: ", JSON.stringify(rowData))
+//       }
+//       //console.log("Downloaded schedule data : ", jsonData)
+//     }
+//   }
+
+//   var scheuldeIndex:number = -1
+
+//   export function setupSchedulControllerData(){
+
+//     const scheduleController = engine.getEntityOrNullByName("scheduleController")
+
+//     if(scheduleController){
 
 
-            console.log("scheduleController: ", scheduleController)
+//         getActions("scheduleController")?.on("Deactivate", () => {
+
+
+//             console.log("scheduleController: ", scheduleController)
           
-        })
+//         })
 
-        getActions("scheduleController")?.on("Next", () => {
+//         getActions("scheduleController")?.on("Next", () => {
             
-            scheuldeIndex ++
+//             scheuldeIndex ++
 
-            console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
+//             console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
 
-            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "", jsonData[scheuldeIndex].codeUse? jsonData[scheuldeIndex].codeUse : "")
+//             setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "", jsonData[scheuldeIndex].codeUse? jsonData[scheuldeIndex].codeUse : "")
          
 
-        })
+//         })
 
-        getActions("scheduleController")?.on("Previous", () => {
+//         getActions("scheduleController")?.on("Previous", () => {
             
-            scheuldeIndex --    
+//             scheuldeIndex --    
 
-            console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
+//             console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
 
-            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "", jsonData[scheuldeIndex].codeUse? jsonData[scheuldeIndex].codeUse : "")
+//             setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "", jsonData[scheuldeIndex].codeUse? jsonData[scheuldeIndex].codeUse : "")
          
-        })
+//         })
 
-        getActions("scheduleController")?.on("First", () => {
+//         getActions("scheduleController")?.on("First", () => {
             
-            scheuldeIndex = 0
+//             scheuldeIndex = 0
 
-            console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
+//             console.log("scheduleController: ", scheuldeIndex, JSON.stringify(jsonData[scheuldeIndex]))
 
-            setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "", jsonData[scheuldeIndex].codeUse? jsonData[scheuldeIndex].codeUse : "")
-        })
+//             setFeaturedUser(jsonData[scheuldeIndex].name, jsonData[scheuldeIndex].avatarName, jsonData[scheuldeIndex].repo? jsonData[scheuldeIndex].repo : "", jsonData[scheuldeIndex].description? jsonData[scheuldeIndex].description : "", jsonData[scheuldeIndex].codeUse? jsonData[scheuldeIndex].codeUse : "")
+//         })
 
-        const scheduleControllerData = jsonData.find((data) => data.name === "Schedule Controller")
-        console.log("scheduleControllerData: ", scheduleControllerData)
-    }
+//         const scheduleControllerData = jsonData.find((data) => data.name === "Schedule Controller")
+//         console.log("scheduleControllerData: ", scheduleControllerData)
+//     }
 
-  }
+//   }
 
 
-  export function setFeaturedUser(name:string, avatarName:string, repo?:string, description?:string, codeUse?:string){
+//   export function setFeaturedUser(name:string, avatarName:string, repo?:string, description?:string, codeUse?:string){
 
-    playSlideSound()
-    hidePedestal()
-    changeShowcasedUser(avatarName, name)
+//     playSlideSound()
+//     hidePedestal()
+//     changeShowcasedUser(avatarName, name)
 
-    if(repo){
-      gitUpdate(repo)
-    } else {
-      gitHide()
-    }
+//     if(repo){
+//       gitUpdate(repo)
+//     } else {
+//       gitHide()
+//     }
 
-    if(description){
-      descriptionUpdate(description)
-    } else {
-      descriptionHide()
-    }
+//     if(description){
+//       descriptionUpdate(description)
+//     } else {
+//       descriptionHide()
+//     }
 
-    if(codeUse){
-      codeIconUpdate(codeUse)
-    } else {
-      codeIconHide()
-    }
+//     if(codeUse){
+//       codeIconUpdate(codeUse)
+//     } else {
+//       codeIconHide()
+//     }
 
-    utils.timers.setTimeout(() => {
-      sceneMessageBus.emit("Pedestal", { player: avatarName})
-    }, 1050)
+//     utils.timers.setTimeout(() => {
+//       sceneMessageBus.emit("Pedestal", { player: avatarName})
+//     }, 1050)
     
-  }
+//   }
 
 
 
-  export async function sendClapData(name:string, userName:string, clapCount:number){
+//   export async function sendClapData(name:string, userName:string, clapCount:number){
 
-    //TODO: remove this
-    return
+//     //TODO: remove this
+//     return
 
 
-    const url = `https://maker.ifttt.com/trigger/ClapMeterData/json/with/key/ryQWdJ3ckOFpkFPlUSN_-`
+//     const url = `https://maker.ifttt.com/trigger/ClapMeterData/json/with/key/ryQWdJ3ckOFpkFPlUSN_-`
 
-    const formattedRow:string = name + "|||" + clapCount.toString()
+//     const formattedRow:string = name + "|||" + clapCount.toString()
 
-    console.log("formattedRow: ", formattedRow)
+//     console.log("formattedRow: ", formattedRow)
 
-    const data = {
-      filename: "Clap Meter",
-      formatted_row: formattedRow,
-      json_body: {
-        formatted_row: formattedRow
-      }
-    }
+//     const data = {
+//       filename: "Clap Meter",
+//       formatted_row: formattedRow,
+//       json_body: {
+//         formatted_row: formattedRow
+//       }
+//     }
 
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(data)
-    })
+//     const response = await fetch(url, {
+//       method: 'POST',
+//       body: JSON.stringify(data)
+//     })
     
-    console.log("response: ", response)
+//     console.log("response: ", response)
 
-  }
+//   }
 
 
-  export function playSlideSound(){
+//   export function playSlideSound(){
 
-    const slideSound = engine.getEntityOrNullByName("slideSound")
+//     const slideSound = engine.getEntityOrNullByName("slideSound")
 
-    if(slideSound){
-        AudioSource.getMutable(slideSound).global = true
-        AudioSource.playSound(slideSound, "assets/scene/Audio/slide-sound.mp3", true)
-    }
+//     if(slideSound){
+//         AudioSource.getMutable(slideSound).global = true
+//         AudioSource.playSound(slideSound, "assets/scene/Audio/slide-sound.mp3", true)
+//     }
 
-}
+// }

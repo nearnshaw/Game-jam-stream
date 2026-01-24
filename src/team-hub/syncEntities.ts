@@ -1,0 +1,9 @@
+export enum SyncEntityEnumId {
+  KICK = 1,
+  HOSTS = 2,
+  MESSAGE_BUS = 3,
+  INTERACTABLE = 4,
+  CUSTOMIZATION_STATE = 6,
+  PLAYER_STATES = 7,
+  ACTIVITIES = 8
+}
