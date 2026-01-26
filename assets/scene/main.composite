@@ -90,27 +90,6 @@
         "serializationType": "transform"
       },
       "data": {
-        "513": {
-          "json": {
-            "position": {
-              "x": -0.9839035272598267,
-              "y": 0.3749999403953552,
-              "z": 0.03999946266412735
-            },
-            "scale": {
-              "x": 0.49000000953674316,
-              "y": 0.5,
-              "z": 0.49000000953674316
-            },
-            "rotation": {
-              "x": 1.3419813186860054e-14,
-              "y": -6.014962562316678e-14,
-              "z": -4.558619107197792e-13,
-              "w": 1
-            },
-            "parent": 568
-          }
-        },
         "514": {
           "json": {
             "position": {
@@ -132,6 +111,48 @@
             "parent": 0
           }
         },
+        "515": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0.07999999821186066,
+              "z": 0
+            },
+            "scale": {
+              "x": 0.15000000596046448,
+              "y": 0.15000000596046448,
+              "z": 0.15000000596046448
+            },
+            "rotation": {
+              "x": 0.7041000127792358,
+              "y": 0,
+              "z": 0,
+              "w": -0.710099995136261
+            },
+            "parent": 516
+          }
+        },
+        "516": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0.05000000074505806,
+              "z": 0
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "rotation": {
+              "x": 1,
+              "y": 0,
+              "z": 0,
+              "w": 0
+            },
+            "parent": 520
+          }
+        },
         "518": {
           "json": {
             "position": {
@@ -151,6 +172,27 @@
               "w": 0.707099974155426
             },
             "parent": 514
+          }
+        },
+        "520": {
+          "json": {
+            "position": {
+              "x": -1.75,
+              "y": 1.25,
+              "z": -0.3310000002384186
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "rotation": {
+              "x": 0.7070000171661377,
+              "y": 0,
+              "z": 0,
+              "w": 0.7070000171661377
+            },
+            "parent": 539
           }
         },
         "521": {
@@ -531,6 +573,48 @@
             "parent": 564
           }
         },
+        "539": {
+          "json": {
+            "position": {
+              "x": 224.5,
+              "y": 9.5,
+              "z": 224.25
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "540": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0.07999999821186066,
+              "z": 0
+            },
+            "scale": {
+              "x": 0.15000000596046448,
+              "y": 0.15000000596046448,
+              "z": 0.15000000596046448
+            },
+            "rotation": {
+              "x": 0.7041000127792358,
+              "y": 0,
+              "z": 0,
+              "w": -0.710099995136261
+            },
+            "parent": 553
+          }
+        },
         "541": {
           "json": {
             "position": {
@@ -781,6 +865,27 @@
               "w": 1
             },
             "parent": 535
+          }
+        },
+        "553": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0.052000001072883606,
+              "z": 0
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "rotation": {
+              "x": 1,
+              "y": 0,
+              "z": 0,
+              "w": 0
+            },
+            "parent": 570
           }
         },
         "554": {
@@ -1077,46 +1182,25 @@
             "parent": 535
           }
         },
-        "568": {
+        "570": {
           "json": {
             "position": {
-              "x": 8.550000190734863,
-              "y": 9,
-              "z": 27.209999084472656
+              "x": 1.75,
+              "y": 1.25,
+              "z": -0.33000001311302185
             },
             "scale": {
-              "x": 4,
-              "y": 4.000000476837158,
-              "z": 4.000000476837158
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0.7071067690849304,
-              "z": 0,
-              "w": -0.7071067690849304
-            },
-            "parent": 514
-          }
-        },
-        "572": {
-          "json": {
-            "position": {
-              "x": -1.0000025033950806,
-              "y": 1.9999994039535522,
-              "z": 0.01643141359090805
-            },
-            "scale": {
-              "x": 0.5,
-              "y": 0.5,
-              "z": 0.5
-            },
-            "rotation": {
-              "x": 6.123412933938151e-17,
+              "x": 1,
               "y": 1,
-              "z": 6.807888400153089e-15,
-              "w": -1.5324818237322235e-14
+              "z": 1
             },
-            "parent": 568
+            "rotation": {
+              "x": 0.707099974155426,
+              "y": 0,
+              "z": 0,
+              "w": 0.707099974155426
+            },
+            "parent": 539
           }
         },
         "573": {
@@ -1222,153 +1306,6 @@
               "w": 1
             },
             "parent": 0
-          }
-        },
-        "579": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 0.07999999821186066,
-              "z": 0
-            },
-            "scale": {
-              "x": 0.15000000596046448,
-              "y": 0.15000000596046448,
-              "z": 0.15000000596046448
-            },
-            "rotation": {
-              "x": 0.7041000127792358,
-              "y": 0,
-              "z": 0,
-              "w": -0.710099995136261
-            },
-            "parent": 580
-          }
-        },
-        "580": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 0.05000000074505806,
-              "z": 0
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": 1,
-              "y": 0,
-              "z": 0,
-              "w": 0
-            },
-            "parent": 581
-          }
-        },
-        "581": {
-          "json": {
-            "position": {
-              "x": -1.75,
-              "y": 1.25,
-              "z": -0.3310000002384186
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": 0.7070000171661377,
-              "y": 0,
-              "z": 0,
-              "w": 0.7070000171661377
-            },
-            "parent": 582
-          }
-        },
-        "582": {
-          "json": {
-            "position": {
-              "x": -0.27000001072883606,
-              "y": 9.25,
-              "z": 29.010000228881836
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "parent": 514
-          }
-        },
-        "583": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 0.07999999821186066,
-              "z": 0
-            },
-            "scale": {
-              "x": 0.15000000596046448,
-              "y": 0.15000000596046448,
-              "z": 0.15000000596046448
-            },
-            "rotation": {
-              "x": 0.7041000127792358,
-              "y": 0,
-              "z": 0,
-              "w": -0.710099995136261
-            },
-            "parent": 584
-          }
-        },
-        "584": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 0.052000001072883606,
-              "z": 0
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": 1,
-              "y": 0,
-              "z": 0,
-              "w": 0
-            },
-            "parent": 585
-          }
-        },
-        "585": {
-          "json": {
-            "position": {
-              "x": 1.75,
-              "y": 1.25,
-              "z": -0.33000001311302185
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": 0.707099974155426,
-              "y": 0,
-              "z": 0,
-              "w": 0.707099974155426
-            },
-            "parent": 582
           }
         },
         "586": {
@@ -1669,6 +1606,12 @@
             "entityId": 8017
           }
         },
+        "515": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8064
+          }
+        },
         "518": {
           "json": {
             "networkId": 0,
@@ -1751,6 +1694,12 @@
           "json": {
             "networkId": 0,
             "entityId": 8043
+          }
+        },
+        "540": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8065
           }
         },
         "541": {
@@ -1867,18 +1816,6 @@
             "entityId": 8048
           }
         },
-        "568": {
-          "json": {
-            "networkId": 0,
-            "entityId": 8052
-          }
-        },
-        "572": {
-          "json": {
-            "networkId": 0,
-            "entityId": 8050
-          }
-        },
         "573": {
           "json": {
             "networkId": 0,
@@ -1896,18 +1833,6 @@
             "networkId": 0,
             "entityId": 8061
           }
-        },
-        "579": {
-          "json": {
-            "networkId": 0,
-            "entityId": 8062
-          }
-        },
-        "583": {
-          "json": {
-            "networkId": 0,
-            "entityId": 8063
-          }
         }
       }
     },
@@ -1921,11 +1846,6 @@
       },
       "data": {
         "0": {
-          "json": {
-            "states": []
-          }
-        },
-        "513": {
           "json": {
             "states": []
           }
@@ -3688,16 +3608,6 @@
             "states": []
           }
         },
-        "568": {
-          "json": {
-            "states": []
-          }
-        },
-        "572": {
-          "json": {
-            "states": []
-          }
-        },
         "573": {
           "json": {
             "states": []
@@ -3924,11 +3834,25 @@
             "src": "assets/Decentraland Theatre/base_theatre.glb"
           }
         },
+        "516": {
+          "json": {
+            "src": "assets/custom/photo_mural/button_square_red.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 3
+          }
+        },
         "518": {
           "json": {
             "src": "assets/asset-packs/video_screen/video_player.glb",
             "visibleMeshesCollisionMask": 1,
             "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "520": {
+          "json": {
+            "src": "assets/custom/photo_mural/button_base_square.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 3
           }
         },
         "522": {
@@ -3971,6 +3895,13 @@
             "src": "assets/asset-packs/sign_neon_rect/sign_square.glb",
             "visibleMeshesCollisionMask": 1,
             "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "539": {
+          "json": {
+            "src": "assets/custom/photo_mural/billboard.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 3
           }
         },
         "541": {
@@ -4043,6 +3974,13 @@
             "invisibleMeshesCollisionMask": 0
           }
         },
+        "553": {
+          "json": {
+            "src": "assets/custom/photo_mural/button_square_red.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 3
+          }
+        },
         "554": {
           "json": {
             "src": "assets/asset-packs/confetti/confetti.glb",
@@ -4092,52 +4030,17 @@
             "invisibleMeshesCollisionMask": 0
           }
         },
-        "568": {
+        "570": {
           "json": {
-            "src": "assets/scene/Models/glassgalleryinfo/glassgalleryinfo.glb",
+            "src": "assets/custom/photo_mural/button_base_square.glb",
             "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 0
+            "invisibleMeshesCollisionMask": 3
           }
         },
         "576": {
           "json": {
             "src": "assets/asset-packs/clap_meter/clapMeterBoard.glb",
             "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "580": {
-          "json": {
-            "src": "assets/asset-packs/photo_mural/button_square_red.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "581": {
-          "json": {
-            "src": "assets/asset-packs/photo_mural/button_base_square.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "582": {
-          "json": {
-            "src": "assets/asset-packs/photo_mural/billboard.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "584": {
-          "json": {
-            "src": "assets/asset-packs/photo_mural/button_square_red.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
-        "585": {
-          "json": {
-            "src": "assets/asset-packs/photo_mural/button_base_square.glb",
-            "visibleMeshesCollisionMask": 0,
             "invisibleMeshesCollisionMask": 3
           }
         },
@@ -4595,15 +4498,6 @@
         "protocolBuffer": "PBMeshCollider"
       },
       "data": {
-        "513": {
-          "json": {
-            "collisionMask": 0,
-            "mesh": {
-              "$case": "box",
-              "box": {}
-            }
-          }
-        },
         "575": {
           "json": {
             "collisionMask": 1,
@@ -4624,16 +4518,6 @@
         "protocolBuffer": "PBMeshRenderer"
       },
       "data": {
-        "513": {
-          "json": {
-            "mesh": {
-              "$case": "plane",
-              "plane": {
-                "uvs": []
-              }
-            }
-          }
-        },
         "526": {
           "json": {
             "mesh": {
@@ -4739,19 +4623,29 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {
-            "value": "panelIcon"
-          }
-        },
         "514": {
           "json": {
             "value": "base"
           }
         },
+        "515": {
+          "json": {
+            "value": "Text_3"
+          }
+        },
+        "516": {
+          "json": {
+            "value": "previous_red_2"
+          }
+        },
         "518": {
           "json": {
             "value": "Video Screen"
+          }
+        },
+        "520": {
+          "json": {
+            "value": "previous_button_2"
           }
         },
         "521": {
@@ -4844,6 +4738,16 @@
             "value": "VCameraRef5"
           }
         },
+        "539": {
+          "json": {
+            "value": "photo_mural"
+          }
+        },
+        "540": {
+          "json": {
+            "value": "Text_4"
+          }
+        },
         "541": {
           "json": {
             "value": "firework"
@@ -4902,6 +4806,11 @@
         "552": {
           "json": {
             "value": "confettiControl"
+          }
+        },
+        "553": {
+          "json": {
+            "value": "next_red_2"
           }
         },
         "554": {
@@ -4974,14 +4883,9 @@
             "value": "scheduleController"
           }
         },
-        "568": {
+        "570": {
           "json": {
-            "value": "infoPanel"
-          }
-        },
-        "572": {
-          "json": {
-            "value": "panelText"
+            "value": "next_button_2"
           }
         },
         "573": {
@@ -5007,41 +4911,6 @@
         "578": {
           "json": {
             "value": "slideSound"
-          }
-        },
-        "579": {
-          "json": {
-            "value": "Text"
-          }
-        },
-        "580": {
-          "json": {
-            "value": "previous_red"
-          }
-        },
-        "581": {
-          "json": {
-            "value": "previous_button"
-          }
-        },
-        "582": {
-          "json": {
-            "value": "billboard.glb"
-          }
-        },
-        "583": {
-          "json": {
-            "value": "Text_2"
-          }
-        },
-        "584": {
-          "json": {
-            "value": "next_red"
-          }
-        },
-        "585": {
-          "json": {
-            "value": "next_button"
           }
         },
         "586": {
@@ -5133,6 +5002,14 @@
             "componentIds": [
               1,
               1042
+            ]
+          }
+        },
+        "515": {
+          "json": {
+            "componentIds": [
+              1030,
+              3981387903
             ]
           }
         },
@@ -5250,6 +5127,14 @@
             ]
           }
         },
+        "540": {
+          "json": {
+            "componentIds": [
+              1030,
+              3981387903
+            ]
+          }
+        },
         "541": {
           "json": {
             "componentIds": [
@@ -5416,21 +5301,6 @@
             ]
           }
         },
-        "568": {
-          "json": {
-            "componentIds": [
-              1081
-            ]
-          }
-        },
-        "572": {
-          "json": {
-            "componentIds": [
-              1030,
-              1081
-            ]
-          }
-        },
         "573": {
           "json": {
             "componentIds": [
@@ -5459,22 +5329,6 @@
               2709697014
             ]
           }
-        },
-        "579": {
-          "json": {
-            "componentIds": [
-              1030,
-              3981387903
-            ]
-          }
-        },
-        "583": {
-          "json": {
-            "componentIds": [
-              1030,
-              3981387903
-            ]
-          }
         }
       }
     },
@@ -5487,6 +5341,15 @@
         "protocolBuffer": "PBTextShape"
       },
       "data": {
+        "515": {
+          "json": {
+            "text": "<",
+            "font": 2,
+            "fontSize": 4,
+            "fontAutoSize": true,
+            "textAlign": 4
+          }
+        },
         "521": {
           "json": {
             "text": "Office Hours",
@@ -5513,30 +5376,13 @@
             }
           }
         },
-        "572": {
+        "540": {
           "json": {
-            "text": "",
+            "text": ">",
             "font": 2,
-            "fontSize": 2.5,
-            "fontAutoSize": false,
-            "textAlign": 4,
-            "paddingTop": 0,
-            "paddingRight": 0,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "lineSpacing": 0,
-            "outlineWidth": 0,
-            "outlineColor": {
-              "r": 1,
-              "g": 1,
-              "b": 1
-            },
-            "textColor": {
-              "r": 0,
-              "g": 0,
-              "b": 0,
-              "a": 1
-            }
+            "fontSize": 4,
+            "fontAutoSize": true,
+            "textAlign": 4
           }
         },
         "573": {
@@ -5590,24 +5436,6 @@
               "a": 1
             }
           }
-        },
-        "579": {
-          "json": {
-            "text": "<",
-            "font": 2,
-            "fontSize": 4,
-            "fontAutoSize": true,
-            "textAlign": 4
-          }
-        },
-        "583": {
-          "json": {
-            "text": ">",
-            "font": 2,
-            "fontSize": 4,
-            "fontAutoSize": true,
-            "textAlign": 4
-          }
         }
       }
     },
@@ -5655,11 +5483,6 @@
         "protocolBuffer": "PBVisibilityComponent"
       },
       "data": {
-        "513": {
-          "json": {
-            "visible": false
-          }
-        },
         "522": {
           "json": {
             "visible": false
@@ -5806,11 +5629,6 @@
           }
         },
         "566": {
-          "json": {
-            "visible": false
-          }
-        },
-        "568": {
           "json": {
             "visible": false
           }
@@ -5952,9 +5770,9 @@
         "serializationType": "map"
       },
       "data": {
-        "0": {
+        "576": {
           "json": {
-            "gizmo": 0
+            "gizmo": 1
           }
         }
       }
@@ -9658,7 +9476,8 @@
                   514,
                   535,
                   533,
-                  578
+                  578,
+                  539
                 ]
               },
               {
@@ -9669,12 +9488,10 @@
                   559,
                   537,
                   564,
-                  568,
                   575,
                   518,
                   586,
                   576,
-                  582,
                   588
                 ]
               },
@@ -9897,26 +9714,11 @@
                 "children": []
               },
               {
-                "entity": 568,
-                "children": [
-                  572,
-                  513
-                ]
-              },
-              {
-                "entity": 572,
-                "children": []
-              },
-              {
                 "entity": 573,
                 "children": []
               },
               {
                 "entity": 578,
-                "children": []
-              },
-              {
-                "entity": 513,
                 "children": []
               },
               {
@@ -9941,45 +9743,6 @@
               {
                 "entity": 577,
                 "children": []
-              },
-              {
-                "entity": 579,
-                "children": []
-              },
-              {
-                "entity": 580,
-                "children": [
-                  579
-                ]
-              },
-              {
-                "entity": 581,
-                "children": [
-                  580
-                ]
-              },
-              {
-                "entity": 582,
-                "children": [
-                  585,
-                  581
-                ]
-              },
-              {
-                "entity": 583,
-                "children": []
-              },
-              {
-                "entity": 584,
-                "children": [
-                  583
-                ]
-              },
-              {
-                "entity": 585,
-                "children": [
-                  584
-                ]
               },
               {
                 "entity": 586,
@@ -10050,6 +9813,45 @@
               {
                 "entity": 600,
                 "children": []
+              },
+              {
+                "entity": 515,
+                "children": []
+              },
+              {
+                "entity": 516,
+                "children": [
+                  515
+                ]
+              },
+              {
+                "entity": 520,
+                "children": [
+                  516
+                ]
+              },
+              {
+                "entity": 539,
+                "children": [
+                  570,
+                  520
+                ]
+              },
+              {
+                "entity": 540,
+                "children": []
+              },
+              {
+                "entity": 553,
+                "children": [
+                  540
+                ]
+              },
+              {
+                "entity": 570,
+                "children": [
+                  553
+                ]
               }
             ]
           }
@@ -12392,21 +12194,6 @@
               "linkAllSmartItems": false,
               "smartItems": [
                 {
-                  "entity": 532,
-                  "customName": "Camera",
-                  "defaultAction": "Sequence1"
-                },
-                {
-                  "entity": 524,
-                  "customName": "Pedestal",
-                  "defaultAction": "Activate"
-                },
-                {
-                  "entity": 528,
-                  "customName": "Emotes",
-                  "defaultAction": "Shrug"
-                },
-                {
                   "entity": 543,
                   "customName": "Fireworks",
                   "defaultAction": "Activate"
@@ -12497,6 +12284,17 @@
             ]
           }
         },
+        "539": {
+          "json": {
+            "value": [
+              {
+                "path": "assets/custom/photo_mural/photoMural.ts",
+                "priority": 0,
+                "layout": "{\"params\":{\"use_current_scene\":{\"type\":\"boolean\",\"optional\":true,\"value\":true},\"coordinates\":{\"type\":\"string\",\"optional\":false,\"value\":\"0,0\"},\"world_id\":{\"type\":\"string\",\"optional\":true,\"value\":\"\"}}}"
+              }
+            ]
+          }
+        },
         "576": {
           "json": {
             "value": [
@@ -12504,17 +12302,6 @@
                 "path": "assets/asset-packs/clap_meter/ClapMeter.ts",
                 "priority": 0,
                 "layout": "{\"params\":{\"emoteDetected\":{\"type\":\"string\",\"optional\":true,\"value\":\"clap\"},\"max_increment\":{\"type\":\"number\",\"optional\":true,\"value\":2},\"min_increment\":{\"type\":\"number\",\"optional\":true,\"value\":1},\"diminishing_threshold\":{\"type\":\"number\",\"optional\":true,\"value\":25}}}"
-              }
-            ]
-          }
-        },
-        "582": {
-          "json": {
-            "value": [
-              {
-                "path": "assets/asset-packs/photo_mural/photoMural.ts",
-                "priority": 0,
-                "layout": "{\"params\":{\"button_prev\":{\"type\":\"entity\",\"optional\":false,\"value\":518},\"button_next\":{\"type\":\"entity\",\"optional\":false,\"value\":522},\"coordinates\":{\"type\":\"string\",\"optional\":false,\"value\":\"0,0\"}}}"
               }
             ]
           }
@@ -12538,11 +12325,6 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
-          "json": {
-            "porportionalScaling": true
-          }
-        },
         "514": {
           "json": {}
         },
@@ -12602,6 +12384,9 @@
           "json": {}
         },
         "538": {
+          "json": {}
+        },
+        "539": {
           "json": {}
         },
         "541": {
@@ -12685,15 +12470,7 @@
         "567": {
           "json": {}
         },
-        "568": {
-          "json": {
-            "porportionalScaling": true
-          }
-        },
         "569": {
-          "json": {}
-        },
-        "572": {
           "json": {}
         },
         "573": {
@@ -12706,9 +12483,6 @@
           "json": {}
         },
         "578": {
-          "json": {}
-        },
-        "582": {
           "json": {}
         },
         "586": {
@@ -13304,6 +13078,92 @@
         "serializationType": "map"
       },
       "data": {
+        "515": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "",
+            "fields": [],
+            "assetId": "4e8ed7d0-f65b-4840-9369-5cf54ca273f3",
+            "label": "Text Settings",
+            "sections": [
+              {
+                "id": "text-settings",
+                "items": [
+                  {
+                    "component": "core::TextShape",
+                    "widget": "TextArea",
+                    "label": "Text",
+                    "type": "text",
+                    "path": "text"
+                  }
+                ]
+              },
+              {
+                "id": "font-size-settings",
+                "items": [
+                  {
+                    "component": "core::TextShape",
+                    "widget": "TextField",
+                    "label": "Font Size",
+                    "type": "number",
+                    "path": "fontSize"
+                  },
+                  {
+                    "component": "core::TextShape",
+                    "widget": "CheckboxField",
+                    "label": "Auto-Size",
+                    "type": "boolean",
+                    "path": "fontAutoSize"
+                  }
+                ],
+                "columns": 2
+              },
+              {
+                "id": "color-align-settings",
+                "items": [
+                  {
+                    "component": "core::TextShape",
+                    "widget": "ColorField",
+                    "label": "Color",
+                    "type": "Color4",
+                    "path": "textColor",
+                    "props": {
+                      "basic": true
+                    },
+                    "transform": {
+                      "in": {
+                        "steps": [
+                          {
+                            "op": "toHex"
+                          }
+                        ]
+                      },
+                      "out": {
+                        "steps": [
+                          {
+                            "op": "toColor4"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component": "core::TextShape",
+                    "widget": "Dropdown",
+                    "label": "Text align",
+                    "type": "text",
+                    "path": "textAlign",
+                    "dataSource": {
+                      "kind": "textAlign"
+                    }
+                  }
+                ],
+                "columns": 2
+              }
+            ],
+            "version": 2
+          }
+        },
         "518": {
           "json": {
             "isBasicViewEnabled": true,
@@ -13332,6 +13192,92 @@
               }
             ],
             "assetId": "0c419cb9-bc21-4c51-977f-41a505a097f0"
+          }
+        },
+        "540": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "",
+            "fields": [],
+            "assetId": "4e8ed7d0-f65b-4840-9369-5cf54ca273f3",
+            "label": "Text Settings",
+            "sections": [
+              {
+                "id": "text-settings",
+                "items": [
+                  {
+                    "component": "core::TextShape",
+                    "widget": "TextArea",
+                    "label": "Text",
+                    "type": "text",
+                    "path": "text"
+                  }
+                ]
+              },
+              {
+                "id": "font-size-settings",
+                "items": [
+                  {
+                    "component": "core::TextShape",
+                    "widget": "TextField",
+                    "label": "Font Size",
+                    "type": "number",
+                    "path": "fontSize"
+                  },
+                  {
+                    "component": "core::TextShape",
+                    "widget": "CheckboxField",
+                    "label": "Auto-Size",
+                    "type": "boolean",
+                    "path": "fontAutoSize"
+                  }
+                ],
+                "columns": 2
+              },
+              {
+                "id": "color-align-settings",
+                "items": [
+                  {
+                    "component": "core::TextShape",
+                    "widget": "ColorField",
+                    "label": "Color",
+                    "type": "Color4",
+                    "path": "textColor",
+                    "props": {
+                      "basic": true
+                    },
+                    "transform": {
+                      "in": {
+                        "steps": [
+                          {
+                            "op": "toHex"
+                          }
+                        ]
+                      },
+                      "out": {
+                        "steps": [
+                          {
+                            "op": "toColor4"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "component": "core::TextShape",
+                    "widget": "Dropdown",
+                    "label": "Text align",
+                    "type": "text",
+                    "path": "textAlign",
+                    "dataSource": {
+                      "kind": "textAlign"
+                    }
+                  }
+                ],
+                "columns": 2
+              }
+            ],
+            "version": 2
           }
         },
         "541": {
@@ -13461,178 +13407,6 @@
             "assetId": "5c8b4646-6ec0-41a0-8e9b-415a58728a9e"
           }
         },
-        "579": {
-          "json": {
-            "isBasicViewEnabled": true,
-            "componentName": "",
-            "fields": [],
-            "assetId": "14b8fec1-5d65-490e-83da-f5da1ada4c7a",
-            "label": "Text Settings",
-            "sections": [
-              {
-                "id": "text-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "TextArea",
-                    "label": "Text",
-                    "type": "text",
-                    "path": "text"
-                  }
-                ]
-              },
-              {
-                "id": "font-size-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "TextField",
-                    "label": "Font Size",
-                    "type": "number",
-                    "path": "fontSize"
-                  },
-                  {
-                    "component": "core::TextShape",
-                    "widget": "CheckboxField",
-                    "label": "Auto-Size",
-                    "type": "boolean",
-                    "path": "fontAutoSize"
-                  }
-                ],
-                "columns": 2
-              },
-              {
-                "id": "color-align-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "ColorField",
-                    "label": "Color",
-                    "type": "Color4",
-                    "path": "textColor",
-                    "props": {
-                      "basic": true
-                    },
-                    "transform": {
-                      "in": {
-                        "steps": [
-                          {
-                            "op": "toHex"
-                          }
-                        ]
-                      },
-                      "out": {
-                        "steps": [
-                          {
-                            "op": "toColor4"
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "component": "core::TextShape",
-                    "widget": "Dropdown",
-                    "label": "Text align",
-                    "type": "text",
-                    "path": "textAlign",
-                    "dataSource": {
-                      "kind": "textAlign"
-                    }
-                  }
-                ],
-                "columns": 2
-              }
-            ],
-            "version": 2
-          }
-        },
-        "583": {
-          "json": {
-            "isBasicViewEnabled": true,
-            "componentName": "",
-            "fields": [],
-            "assetId": "14b8fec1-5d65-490e-83da-f5da1ada4c7a",
-            "label": "Text Settings",
-            "sections": [
-              {
-                "id": "text-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "TextArea",
-                    "label": "Text",
-                    "type": "text",
-                    "path": "text"
-                  }
-                ]
-              },
-              {
-                "id": "font-size-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "TextField",
-                    "label": "Font Size",
-                    "type": "number",
-                    "path": "fontSize"
-                  },
-                  {
-                    "component": "core::TextShape",
-                    "widget": "CheckboxField",
-                    "label": "Auto-Size",
-                    "type": "boolean",
-                    "path": "fontAutoSize"
-                  }
-                ],
-                "columns": 2
-              },
-              {
-                "id": "color-align-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "ColorField",
-                    "label": "Color",
-                    "type": "Color4",
-                    "path": "textColor",
-                    "props": {
-                      "basic": true
-                    },
-                    "transform": {
-                      "in": {
-                        "steps": [
-                          {
-                            "op": "toHex"
-                          }
-                        ]
-                      },
-                      "out": {
-                        "steps": [
-                          {
-                            "op": "toColor4"
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "component": "core::TextShape",
-                    "widget": "Dropdown",
-                    "label": "Text align",
-                    "type": "text",
-                    "path": "textAlign",
-                    "dataSource": {
-                      "kind": "textAlign"
-                    }
-                  }
-                ],
-                "columns": 2
-              }
-            ],
-            "version": 2
-          }
-        },
         "586": {
           "json": {
             "isBasicViewEnabled": true,
@@ -13717,6 +13491,11 @@
         "534": {
           "json": {
             "assetId": "4e4ffd4e-4f0d-45f1-9d1e-d26661f6b15e"
+          }
+        },
+        "539": {
+          "json": {
+            "assetId": "4e8ed7d0-f65b-4840-9369-5cf54ca273f3"
           }
         },
         "588": {
