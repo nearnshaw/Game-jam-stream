@@ -580,16 +580,16 @@
               "y": 9.5,
               "z": 224.25
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 0
           }
@@ -5772,7 +5772,7 @@
       "data": {
         "576": {
           "json": {
-            "gizmo": 1
+            "gizmo": 0
           }
         }
       }
@@ -12299,9 +12299,9 @@
           "json": {
             "value": [
               {
-                "path": "assets/asset-packs/clap_meter/ClapMeter.ts",
+                "path": "assets/custom/clap_meter/ClapMeter.ts",
                 "priority": 0,
-                "layout": "{\"params\":{\"emoteDetected\":{\"type\":\"string\",\"optional\":true,\"value\":\"clap\"},\"max_increment\":{\"type\":\"number\",\"optional\":true,\"value\":2},\"min_increment\":{\"type\":\"number\",\"optional\":true,\"value\":1},\"diminishing_threshold\":{\"type\":\"number\",\"optional\":true,\"value\":25}}}"
+                "layout": "{\"params\":{\"emoteDetected\":{\"type\":\"string\",\"optional\":true,\"value\":\"urn:decentraland:off-chain:base-emotes:clap\"},\"max_increment\":{\"type\":\"number\",\"optional\":true,\"value\":2},\"min_increment\":{\"type\":\"number\",\"optional\":true,\"value\":1},\"diminishing_threshold\":{\"type\":\"number\",\"optional\":true,\"value\":25}}}"
               }
             ]
           }

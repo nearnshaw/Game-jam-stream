@@ -131,3 +131,5 @@ dist
 package-lock.json
 bin/index.js
 bin/index.js
+bin/index.js
+bin/index.js.map

@@ -111,16 +111,17 @@ export class ClapMeter {
     AvatarEmoteCommand.onChange(engine.PlayerEntity, (emote) => {
       if (!emote) return
 
-      console.log('ClapMeter: Emote played:', emote.emoteUrn)
+      
 
       if (emote.emoteUrn === this.emoteDetected) {
-        
+        console.log('ClapMeter: Emote played:', emote.emoteUrn)
         this.handleClap()
       }
     })
   }
 
   /**
+ * @Action
  * Resets the clap meter to its initial state
  */
   public resetClapMeter(newPlayer: string = "") {
