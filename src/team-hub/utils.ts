@@ -1,6 +1,7 @@
 import { type BaseComponent, type DeepReadonly, type Entity, Schemas, Transform, engine } from '@dcl/sdk/ecs'
 import { type Vector3 } from '@dcl/sdk/math'
 import { getPlayer } from '@dcl/sdk/src/players'
+import { isServer } from '@dcl/sdk/network'
 
 export function getRandomHexColor(): string {
   const letters = '0123456789ABCDEF'
@@ -65,6 +66,7 @@ export async function waitForPlayerInfo(timeout: number = 10): Promise<PlayerInf
 }
 
 export function withPlayerInfo(cb: (playerInfo: PlayerInfo) => void): void {
+  if (isServer()) return
   waitForPlayerInfo()
     .then(cb)
     .catch((err) => {

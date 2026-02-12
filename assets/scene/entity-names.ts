@@ -18,6 +18,8 @@ export enum EntityNames {
   Lights_Bottom = "Lights Bottom",
   Lights_Top = "Lights Top",
   Needle = "Needle",
+  Red_Button = "Red Button",
+  Red_Button_2 = "Red Button_2",
   Snow = "Snow",
   Text_3 = "Text_3",
   Text_4 = "Text_4",

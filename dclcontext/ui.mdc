@@ -153,7 +153,7 @@ const styledBar = ui.createBar({
 ```typescript
 // Create an icon in the corner
 const icon = ui.createCornerIcon({
-  image: 'assets/scene/Images/team-hub/icon.png',
+  image: 'images/icon.png',
   xOffset: 10,
   yOffset: 200,
   width: 64,
@@ -168,7 +168,7 @@ icon.show()
 ### Styled Corner Icon
 ```typescript
 const styledIcon = ui.createCornerIcon({
-  image: 'assets/scene/Images/team-hub/health-icon.png',
+  image: 'images/health-icon.png',
   xOffset: 80,
   yOffset: 200,
   width: 48,
@@ -219,7 +219,7 @@ const styledLoading = ui.createLoadingIcon({
 ```typescript
 // Display a large image
 const largeImage = ui.createLargeImage({
-  image: 'assets/scene/Images/team-hub/background.jpg',
+  image: 'images/background.jpg',
   xOffset: 0,
   yOffset: 0,
   width: 800,
@@ -234,7 +234,7 @@ largeImage.show()
 ### Styled Large Image
 ```typescript
 const styledImage = ui.createLargeImage({
-  image: 'assets/scene/Images/team-hub/artwork.png',
+  image: 'images/artwork.png',
   xOffset: 50,
   yOffset: 50,
   width: 400,
@@ -435,7 +435,7 @@ ui.PromptSwitchStyles.SQUARERED     // Square red switch
 ### Add Icon to Custom Prompt
 ```typescript
 const promptIcon = customPrompt.addIcon({
-  image: 'assets/scene/Images/team-hub/icon.png',
+  image: 'images/icon.png',
   xPosition: 0,
   yPosition: 60,
   width: 64,
@@ -539,7 +539,7 @@ const promptButtonF = customPrompt.addButton({
 
 // Add icon
 const promptIcon = customPrompt.addIcon({
-  image: 'assets/scene/Images/team-hub/scene-thumbnail.png',
+  image: 'images/scene-thumbnail.png',
 })
 
 // Show the prompt
@@ -608,7 +608,7 @@ function createGameHUD() {
   
   // Weapon icon
   const weaponIcon = ui.createCornerIcon({
-    image: 'assets/scene/Images/team-hub/weapon.png',
+    image: 'images/weapon.png',
     xOffset: 10,
     yOffset: 100,
     width: 48,

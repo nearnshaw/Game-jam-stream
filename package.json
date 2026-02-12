@@ -10,8 +10,10 @@
     "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next"
   },
   "devDependencies": {
-    "@dcl/js-runtime": "7.17.0",
-    "@dcl/sdk": "latest"
+    "@dcl/asset-packs": "^2.11.2",
+    "@dcl/hammurabi-server": "^1.0.0-21071169532.commit-9d5053a",
+    "@dcl/js-runtime": "https://sdk-team-cdn.decentraland.org/@dcl/js-sdk-toolchain/branch/feat/authorative-server/@dcl/js-runtime/dcl-js-runtime-7.20.1-21925407654.commit-3a8603e.tgz",
+    "@dcl/sdk": "https://sdk-team-cdn.decentraland.org/@dcl/js-sdk-toolchain/branch/feat/authorative-server/dcl-sdk-7.20.1-21925407654.commit-3a8603e.tgz"
   },
   "engines": {
     "node": ">=16.0.0",
@@ -25,9 +27,6 @@
   },
   "dependencies": {
     "@dcl-sdk/utils": "latest",
-    "@dcl/asset-packs": "https://sdk-team-cdn.decentraland.org/creator-hub/branch/feat/is-admin-asset-packs/@dcl/asset-packs/dcl-asset-packs-2.10.0-commit-e6757d007ed6ad7fc20fc4ea86d32d9b45506844.tgz",
     "dcl-ui-toolkit": "latest"
-  },
-  "requiredPermissions": [],
-  "allowedMediaHostnames": []
+  }
 }

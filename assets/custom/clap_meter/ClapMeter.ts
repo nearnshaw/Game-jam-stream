@@ -1,7 +1,7 @@
-
 import { AvatarEmoteCommand, engine, Entity, Name, Schemas, Transform } from '@dcl/sdk/ecs'
 import { syncEntity } from '@dcl/sdk/network'
 import { Quaternion } from '@dcl/sdk/math'
+import { getActionEvents } from '@dcl/asset-packs/dist/events'
 
 
 // Component definition
@@ -87,8 +87,10 @@ export class ClapMeter {
     const score = ClapScore.create(this.entity)
     syncEntity(this.entity, [ClapScore.componentId])
 
-    // Set up action event listeners
-    //setupActionListeners(clapMeterNeedle, clapMeterBoard, score, clapMeterText)
+    // Listen for "Reset" event and reset the clap meter when triggered
+    getActionEvents(this.entity).on('Reset', () => {
+      this.resetClapMeter()
+    })
 
     // Set up emote listener
     this.setupEmoteListener()

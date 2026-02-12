@@ -110,7 +110,7 @@ export class PlayerController {
         this.removeFromBanList(userId)
       }
 
-      this.gameController.kickUI.updateKickStatus()
+      // this.gameController.kickUI.updateKickStatus()
     })
   }
 

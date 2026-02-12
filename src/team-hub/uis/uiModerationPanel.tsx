@@ -68,13 +68,13 @@ export class ModerationPanel {
     this.currentPage = 0
   }
 
-  banPlayer(player: Player): void {
-    this.gameController.playerController.setBan(player.wallet, true)
-  }
+  // banPlayer(player: Player): void {
+  //   this.gameController.playerController.setBan(player.wallet, true)
+  // }
 
-  unbanPlayer(player: Player): void {
-    this.gameController.playerController.setBan(player.wallet, false)
-  }
+  // unbanPlayer(player: Player): void {
+  //   this.gameController.playerController.setBan(player.wallet, false)
+  // }
 
   giveHost(player: Player): void {
     this.gameController.playerController.setHost(player.wallet, true)
@@ -325,7 +325,7 @@ export class ModerationPanel {
                 'Ban Player',
                 'assets/scene/Images/team-hub/moderatormenu/ban svg.png',
                 () => {
-                  this.banPlayer(player)
+                  // this.banPlayer(player)
                 },
                 isBanned || (isHost && currentPlayerIsLocal)
               )}
@@ -333,7 +333,7 @@ export class ModerationPanel {
                 'Unban Player',
                 'assets/scene/Images/team-hub/moderatormenu/un ban player svg.png',
                 () => {
-                  this.unbanPlayer(player)
+                  // this.unbanPlayer(player)
                 },
                 !isBanned
               )}

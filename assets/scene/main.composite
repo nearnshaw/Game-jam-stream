@@ -93,20 +93,20 @@
         "514": {
           "json": {
             "position": {
-              "x": 225.52000427246094,
+              "x": 228.0203399658203,
               "y": 0,
-              "z": 197.49000549316406
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
+              "z": 195.91844177246094
             },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
             },
             "parent": 0
           }
@@ -198,9 +198,9 @@
         "521": {
           "json": {
             "position": {
-              "x": 2.9255385669557654e-8,
-              "y": 0.7291861176490784,
-              "z": 0.02999868616461754
+              "x": 0.026614971458911896,
+              "y": 0.7291860580444336,
+              "z": -0.062505342066288
             },
             "scale": {
               "x": 0.17000000178813934,
@@ -1182,6 +1182,27 @@
             "parent": 535
           }
         },
+        "568": {
+          "json": {
+            "position": {
+              "x": 226.29930114746094,
+              "y": 8.449999809265137,
+              "z": 193.46473693847656
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 10,
+              "y": 10,
+              "z": 10
+            },
+            "parent": 0
+          }
+        },
         "570": {
           "json": {
             "position": {
@@ -1814,6 +1835,12 @@
           "json": {
             "networkId": 0,
             "entityId": 8048
+          }
+        },
+        "568": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8067
           }
         },
         "573": {
@@ -3608,6 +3635,20 @@
             "states": []
           }
         },
+        "568": {
+          "json": {
+            "states": [
+              {
+                "clip": "trigger",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": false,
+                "shouldReset": false
+              }
+            ]
+          }
+        },
         "573": {
           "json": {
             "states": []
@@ -3812,6 +3853,12 @@
         "protocolBuffer": "PBAudioSource"
       },
       "data": {
+        "568": {
+          "json": {
+            "volume": 1,
+            "audioClipUrl": "assets/scene/Audio/buzzer.mp3"
+          }
+        },
         "578": {
           "json": {
             "volume": 1,
@@ -4028,6 +4075,13 @@
             "src": "assets/scene/Lights_Down.gltf",
             "visibleMeshesCollisionMask": 1,
             "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "568": {
+          "json": {
+            "src": "assets/asset-packs/red_button/red_button.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 3
           }
         },
         "570": {
@@ -4883,6 +4937,11 @@
             "value": "scheduleController"
           }
         },
+        "568": {
+          "json": {
+            "value": "Red Button_2"
+          }
+        },
         "570": {
           "json": {
             "value": "next_button_2"
@@ -5301,6 +5360,14 @@
             ]
           }
         },
+        "568": {
+          "json": {
+            "componentIds": [
+              1042,
+              1020
+            ]
+          }
+        },
         "573": {
           "json": {
             "componentIds": [
@@ -5314,7 +5381,6 @@
             "componentIds": [
               3981387903,
               2193198513,
-              2709697014,
               1,
               1042,
               1081
@@ -5352,7 +5418,7 @@
         },
         "521": {
           "json": {
-            "text": "Office Hours",
+            "text": "Meetups",
             "font": 2,
             "fontSize": 7,
             "fontAutoSize": false,
@@ -5387,7 +5453,7 @@
         },
         "573": {
           "json": {
-            "text": "2025",
+            "text": "2026",
             "font": 2,
             "fontSize": 7,
             "fontAutoSize": false,
@@ -5770,7 +5836,7 @@
         "serializationType": "map"
       },
       "data": {
-        "576": {
+        "568": {
           "json": {
             "gizmo": 0
           }
@@ -9477,7 +9543,8 @@
                   535,
                   533,
                   578,
-                  539
+                  539,
+                  568
                 ]
               },
               {
@@ -9670,6 +9737,7 @@
               },
               {
                 "entity": 537,
+                "open": true,
                 "children": [
                   521,
                   573
@@ -9852,6 +9920,10 @@
                 "children": [
                   553
                 ]
+              },
+              {
+                "entity": 568,
+                "children": []
               }
             ]
           }
@@ -10123,6 +10195,10 @@
               {
                 "type": "reset_skybox",
                 "jsonSchema": "{\"type\":\"object\",\"properties\":{},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "call_script_method",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"scriptPath\":{\"type\":\"string\",\"serializationType\":\"utf8-string\"},\"methodName\":{\"type\":\"string\",\"serializationType\":\"utf8-string\"},\"params\":{\"type\":\"object\",\"serializationType\":\"optional\",\"optionalJsonSchema\":{\"type\":\"object\",\"properties\":{},\"serializationType\":\"map\"}}},\"serializationType\":\"map\"}"
               }
             ]
           }
@@ -11093,14 +11169,31 @@
             ]
           }
         },
+        "568": {
+          "json": {
+            "id": 76,
+            "value": [
+              {
+                "name": "Play Activate Animation",
+                "type": "play_animation",
+                "jsonPayload": "{ \"animation\": \"trigger\" }"
+              },
+              {
+                "name": "Play Sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/scene/Audio/buzzer.wav\"}"
+              }
+            ]
+          }
+        },
         "576": {
           "json": {
             "id": 70,
             "value": [
               {
                 "name": "Reset",
-                "type": "set_state",
-                "jsonPayload": "{\"state\":\"On\"}"
+                "type": "stop_tween",
+                "jsonPayload": "{}"
               }
             ]
           }
@@ -11144,7 +11237,7 @@
         "0": {
           "json": {
             "id": 0,
-            "value": 74
+            "value": 76
           }
         },
         "536": {
@@ -11702,54 +11795,6 @@
               }
             ]
           }
-        },
-        "576": {
-          "json": {
-            "value": [
-              {
-                "type": "on_state_change",
-                "conditions": [
-                  {
-                    "id": 73,
-                    "type": "when_state_is",
-                    "value": "On"
-                  }
-                ],
-                "operation": "and",
-                "actions": [
-                  {
-                    "id": 71,
-                    "name": "Show"
-                  },
-                  {
-                    "id": 70,
-                    "name": "Activate"
-                  }
-                ]
-              },
-              {
-                "type": "on_state_change",
-                "conditions": [
-                  {
-                    "id": 73,
-                    "type": "when_state_is",
-                    "value": "Off"
-                  }
-                ],
-                "operation": "and",
-                "actions": [
-                  {
-                    "id": 71,
-                    "name": "Hide"
-                  },
-                  {
-                    "id": 70,
-                    "name": "Deactivate"
-                  }
-                ]
-              }
-            ]
-          }
         }
       }
     },
@@ -11882,16 +11927,6 @@
               "First"
             ],
             "defaultValue": "Deactivated"
-          }
-        },
-        "576": {
-          "json": {
-            "id": 73,
-            "value": [
-              "Off",
-              "On"
-            ],
-            "defaultValue": "On"
           }
         }
       }
@@ -12279,7 +12314,12 @@
               {
                 "path": "assets/scene/Scripts/CameraFocus.ts",
                 "priority": 0,
-                "layout": "{\"params\":{\"cameraEntity\":{\"type\":\"entity\",\"optional\":false,\"value\":586}}}"
+                "layout": "{\"params\":{\"cameraEntity\":{\"type\":\"entity\",\"optional\":false,\"value\":586}},\"actions\":[]}"
+              },
+              {
+                "path": "assets/scene/Scripts/Server-assisted-streaming.ts",
+                "priority": 0,
+                "layout": "{\"params\":{\"syncForceInterval\":{\"type\":\"number\",\"optional\":false,\"value\":10}}}"
               }
             ]
           }
@@ -12290,7 +12330,18 @@
               {
                 "path": "assets/custom/photo_mural/photoMural.ts",
                 "priority": 0,
-                "layout": "{\"params\":{\"use_current_scene\":{\"type\":\"boolean\",\"optional\":true,\"value\":true},\"coordinates\":{\"type\":\"string\",\"optional\":false,\"value\":\"0,0\"},\"world_id\":{\"type\":\"string\",\"optional\":true,\"value\":\"\"}}}"
+                "layout": "{\"params\":{\"use_current_scene\":{\"type\":\"boolean\",\"optional\":true,\"value\":true},\"coordinates\":{\"type\":\"string\",\"optional\":false,\"value\":\"\"},\"world_id\":{\"type\":\"string\",\"optional\":true,\"value\":\"\"}},\"actions\":[]}"
+              }
+            ]
+          }
+        },
+        "568": {
+          "json": {
+            "value": [
+              {
+                "path": "assets/scene/Scripts/BuzzAnswer.tsx",
+                "priority": 0,
+                "layout": "{\"params\":{},\"actions\":[]}"
               }
             ]
           }
@@ -12301,7 +12352,7 @@
               {
                 "path": "assets/custom/clap_meter/ClapMeter.ts",
                 "priority": 0,
-                "layout": "{\"params\":{\"emoteDetected\":{\"type\":\"string\",\"optional\":true,\"value\":\"urn:decentraland:off-chain:base-emotes:clap\"},\"max_increment\":{\"type\":\"number\",\"optional\":true,\"value\":2},\"min_increment\":{\"type\":\"number\",\"optional\":true,\"value\":1},\"diminishing_threshold\":{\"type\":\"number\",\"optional\":true,\"value\":25}}}"
+                "layout": "{\"params\":{\"emoteDetected\":{\"type\":\"string\",\"optional\":true,\"value\":\"urn:decentraland:off-chain:base-emotes:clap\"},\"max_increment\":{\"type\":\"number\",\"optional\":true,\"value\":2},\"min_increment\":{\"type\":\"number\",\"optional\":true,\"value\":1},\"diminishing_threshold\":{\"type\":\"number\",\"optional\":true,\"value\":25}},\"actions\":[]}"
               }
             ]
           }
@@ -12469,6 +12520,11 @@
         },
         "567": {
           "json": {}
+        },
+        "568": {
+          "json": {
+            "porportionalScaling": true
+          }
         },
         "569": {
           "json": {}
@@ -13390,6 +13446,28 @@
             "componentName": "Confetti",
             "fields": [],
             "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
+        "568": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Button",
+            "fields": [
+              {
+                "name": "Hover Text",
+                "type": "core::PointerEvents"
+              },
+              {
+                "name": "When Clicked",
+                "type": "asset-packs::Triggers",
+                "basicViewId": "trigger-when-clicked"
+              }
+            ],
+            "assetId": "89d3e0e7-b9cd-406e-bd95-8abba3b37cc6",
+            "helpTooltip": {
+              "text": "Configure the button's hover text and actions. Set what happens when the button is clicked by configuring triggers and actions."
+            },
+            "version": 1
           }
         },
         "578": {

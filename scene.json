@@ -464,11 +464,18 @@
     "projectId": "95d704c8-5f97-4eae-a111-65b44b01477c"
   },
   "worldConfiguration": {
-    "name": "mallorca2025.dcl.eth"
+    "name": "olavra.dcl.eth"
   },
   "rating": "T",
   "skyboxConfig": {
     "fixedTime": 86340
   },
-  "creator": ""
+  "creator": "",
+  "authoritativeMultiplayer": true,
+  "multiplayerId": "olavra",
+  "logsPermissions": [
+    "0xe2b6024873d218B2E83B462D3658D8D7C3f55a18",
+    "0x6438c3B1FA97Ba144eA38FCBceE5f0CcF4539B1d",
+    "0x8a89a7348d464bbb8c516a4d5390e7de51affa5d"
+  ]
 }

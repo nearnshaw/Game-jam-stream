@@ -285,7 +285,7 @@ const uiComponent = () => (
   }}
   uiBackground={{
     color: Color4.White(),
-    texture: { src: 'assets/scene/Images/team-hub/image.png' },
+    texture: { src: 'images/image.png' },
     textureMode: 'stretch',      // 'stretch', 'nine-slices', 'center'
     avatarTexture: { userId: 'user-id' } // For rendering avatar
   }}

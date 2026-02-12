@@ -15,31 +15,31 @@ export class KickUI {
   constructor(gameController: GameController) {
     this.gameController = gameController
     engine.addSystem(() => {
-      this.updateKickStatus()
+      // this.updateKickStatus()
     })
   }
 
-  updateKickStatus(): void {
-    const player = getPlayer()
-    if (player == null) return
+  // updateKickStatus(): void {
+  //   const player = getPlayer()
+  //   if (player == null) return
 
-    const bannedList = PlayerStateComponent.get(this.gameController.playerController.playerState).banList
-    const isBanned = bannedList.includes(player.userId.toLowerCase()) || bannedList.includes(player.name.toLowerCase())
+  //   const bannedList = PlayerStateComponent.get(this.gameController.playerController.playerState).banList
+  //   const isBanned = bannedList.includes(player.userId.toLowerCase()) || bannedList.includes(player.name.toLowerCase())
 
-    if (isBanned && !this.wasKicked) {
-      void movePlayerTo({ newRelativePosition: JAIL_CENTER })
-      this.gameController.uiController.closeAllUis()
-      this.blackScreenVisibility = true
-      this.wasKicked = true
-      this.gameController.removeHostUI.removeHostByUserId(player.userId.toLowerCase())
-    }
+  //   if (isBanned && !this.wasKicked) {
+  //     void movePlayerTo({ newRelativePosition: JAIL_CENTER })
+  //     this.gameController.uiController.closeAllUis()
+  //     this.blackScreenVisibility = true
+  //     this.wasKicked = true
+  //     this.gameController.removeHostUI.removeHostByUserId(player.userId.toLowerCase())
+  //   }
 
-    if (!isBanned && this.wasKicked) {
-      void movePlayerTo({ newRelativePosition: Vector3.create(1, 1, 1) })
-      this.blackScreenVisibility = false
-      this.wasKicked = false
-    }
-  }
+  //   if (!isBanned && this.wasKicked) {
+  //     void movePlayerTo({ newRelativePosition: Vector3.create(1, 1, 1) })
+  //     this.blackScreenVisibility = false
+  //     this.wasKicked = false
+  //   }
+  // }
 
   createBlackScreen(): ReactEcs.JSX.Element | null {
     if (this.gameController.uiController.canvasInfo === null) return null
