@@ -1,171 +1,272 @@
 
-import { engine, Entity, Schemas, Billboard, TextShape, Transform, pointerEventsSystem, InputAction, AudioSource, Animator } from '@dcl/sdk/ecs'
+import { engine, Entity, Schemas, Billboard, TextShape, Transform, pointerEventsSystem, InputAction, AudioSource, Animator, AssetLoad, GltfNodeModifiers } from '@dcl/sdk/ecs'
 import { isServer, registerMessages } from '@dcl/sdk/network'
 import { Color4, Vector3 } from '@dcl/sdk/math'
 import { getPlayer } from '@dcl/sdk/src/players'
-import ReactEcs, { Button, Label, ReactEcsRenderer, UiEntity } from '@dcl/sdk/react-ecs'
+import ReactEcs, { Button, Input, Label, ReactEcsRenderer, UiEntity } from '@dcl/sdk/react-ecs'
 import { isAdmin } from '@dcl/asset-packs/dist/admin'
+import { getActionEvents } from '@dcl/asset-packs/dist/events'
 import type { ActionCallback } from '~sdk/script-utils'
 
 enum BuzzMessageType {
-  BUZZ_PRESS = 'BUZZ_PRESS',
-  BUZZ_WINNER = 'BUZZ_WINNER',
-  BUZZ_RESET = 'BUZZ_RESET',
-  ADMIN_CORRECT = 'ADMIN_CORRECT',
+  BUZZ_PRESS      = 'BUZZ_PRESS',
+  BUZZ_WINNER     = 'BUZZ_WINNER',
+  BUZZ_RESET      = 'BUZZ_RESET',
+  SET_ENABLED     = 'SET_ENABLED',
+  BUTTON_STATE    = 'BUTTON_STATE',
+  ADMIN_CORRECT   = 'ADMIN_CORRECT',
   ADMIN_INCORRECT = 'ADMIN_INCORRECT',
-  ANSWER_CORRECT = 'ANSWER_CORRECT',
-  SCORE_UPDATE = 'SCORE_UPDATE'
+  ANSWER_CORRECT  = 'ANSWER_CORRECT',
+  SCORE_UPDATE    = 'SCORE_UPDATE',
+  ANSWER_TYPE     = 'ANSWER_TYPE',
+  ANSWER_UPDATE   = 'ANSWER_UPDATE',
+  INCORRECT_SOUND = 'INCORRECT_SOUND',
+  REQUEST_STATE   = 'REQUEST_STATE'
 }
 
 const BuzzMessages = {
-  [BuzzMessageType.BUZZ_PRESS]: Schemas.Map({
-    playerName: Schemas.String
-  }),
-  [BuzzMessageType.BUZZ_WINNER]: Schemas.Map({
-    winnerName: Schemas.String,
-    topFour: Schemas.String
-  }),
-  [BuzzMessageType.BUZZ_RESET]: Schemas.Map({}),
-  [BuzzMessageType.ADMIN_CORRECT]: Schemas.Map({}),
+  [BuzzMessageType.BUZZ_PRESS]:      Schemas.Map({ playerName: Schemas.String }),
+  [BuzzMessageType.BUZZ_WINNER]:     Schemas.Map({ winnerName: Schemas.String, topFour: Schemas.String }),
+  [BuzzMessageType.BUZZ_RESET]:      Schemas.Map({}),
+  [BuzzMessageType.SET_ENABLED]:     Schemas.Map({ enabled: Schemas.Boolean }),
+  [BuzzMessageType.BUTTON_STATE]:    Schemas.Map({ enabled: Schemas.Boolean }),
+  [BuzzMessageType.ADMIN_CORRECT]:   Schemas.Map({}),
   [BuzzMessageType.ADMIN_INCORRECT]: Schemas.Map({}),
-  [BuzzMessageType.ANSWER_CORRECT]: Schemas.Map({
-    playerName: Schemas.String
-  }),
-  [BuzzMessageType.SCORE_UPDATE]: Schemas.Map({
-    leaderboard: Schemas.String // JSON stringified Record<string, number>
-  })
+  [BuzzMessageType.ANSWER_CORRECT]:  Schemas.Map({ playerName: Schemas.String }),
+  [BuzzMessageType.SCORE_UPDATE]:    Schemas.Map({ leaderboard: Schemas.String }),
+  [BuzzMessageType.ANSWER_TYPE]:     Schemas.Map({ text: Schemas.String }),
+  [BuzzMessageType.ANSWER_UPDATE]:   Schemas.Map({ text: Schemas.String }),
+  [BuzzMessageType.INCORRECT_SOUND]: Schemas.Map({}),
+  [BuzzMessageType.REQUEST_STATE]:   Schemas.Map({})
 }
 
 const buzzRoom = registerMessages(BuzzMessages)
 
-// --- UI state (module-level so the renderer closure can read it) ---
-let uiVisible = false
-let uiIsWinner = false
-let uiCountdown = 30
-let uiCurrentAnswerer = ''
+// ---------------------------------------------------------------------------
+// Shared UI state
+// ---------------------------------------------------------------------------
+const VIRTUAL_W  = 1920
+const VIRTUAL_H  = 1080
+const PANEL_W    = 480
+const PANEL_LEFT = (VIRTUAL_W - PANEL_W) / 2
 
-// Admin UI state
-let adminUiVisible = false
-let adminOnCorrect: (() => void) | null = null
+let buttonEnabled    = false
+let uiCurrentAnswerer = ''  // empty = nobody answering
+let uiIsAnswerer     = false // is the local player the current answerer?
+let uiCountdown      = 30
+let uiTypedAnswer    = ''   // answer text synced to all in real time
+
+let adminIsRegistered = false
+let adminOnEnable:    (() => void) | null = null
+let adminOnCorrect:   (() => void) | null = null
 let adminOnIncorrect: (() => void) | null = null
-let adminOnReset: (() => void) | null = null
+let adminOnReset:     (() => void) | null = null
 
-function BuzzAnswerUi(): ReactEcs.JSX.Element | null {
-  if (!uiVisible) return null
+// Callback set by the answering client to send typed text to the server
+let onAnswerType: ((text: string) => void) | null = null
 
-  const text = uiIsWinner
-    ? `You're up!\n\nSo what's the answer?\n\n${Math.ceil(uiCountdown)}s`
-    : `Better luck next time!`
-
-  const bgColor = uiIsWinner
-    ? Color4.create(0.1, 0.6, 0.2, 0.85)
-    : Color4.create(0.15, 0.15, 0.15, 0.85)
+// ---------------------------------------------------------------------------
+// UI 2 — Answering player (lower-center, with input box)
+// ---------------------------------------------------------------------------
+function BuzzAnsweringUi(): ReactEcs.JSX.Element | null {
+  if (!uiCurrentAnswerer || !uiIsAnswerer) return null
 
   return (
-    <UiEntity
-      uiTransform={{
-        width: '100%',
-        height: '100%',
-        positionType: 'absolute',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        padding: { bottom: 40 }
-      }}
-    >
+    <UiEntity uiTransform={{ width: VIRTUAL_W, height: VIRTUAL_H, positionType: 'absolute' }}>
       <UiEntity
         uiTransform={{
-          width: 420,
+          width: PANEL_W,
           height: 'auto',
-          padding: { top: 14, bottom: 14, left: 24, right: 24 },
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-        uiBackground={{ color: bgColor }}
-      >
-        <Label
-          value={text}
-          fontSize={22}
-          color={Color4.White()}
-          textAlign="middle-center"
-        />
-      </UiEntity>
-    </UiEntity>
-  )
-}
-
-function BuzzAdminUi(): ReactEcs.JSX.Element | null {
-  if (!adminUiVisible || !uiCurrentAnswerer) return null
-
-  return (
-    <UiEntity
-      uiTransform={{
-        width: '100%',
-        height: '100%',
-        positionType: 'absolute',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        padding: { top: 80 }
-      }}
-    >
-      <UiEntity
-        uiTransform={{
-          width: 360,
-          height: 'auto',
+          positionType: 'absolute',
+          position: { bottom: 60, left: PANEL_LEFT },
           flexDirection: 'column',
           alignItems: 'center',
-          padding: 16
+          padding: { top: 16, bottom: 16, left: 24, right: 24 }
         }}
-        uiBackground={{ color: Color4.create(0.1, 0.1, 0.1, 0.9) }}
+        uiBackground={{ color: Color4.create(0.1, 0.55, 0.2, 0.9) }}
       >
         <Label
-          value={`Answering: ${uiCurrentAnswerer}\n${Math.ceil(uiCountdown)}s`}
-          fontSize={18}
+          value={`You're up!  ${Math.ceil(uiCountdown)}s`}
+          fontSize={22}
           color={Color4.White()}
           textAlign="middle-center"
           uiTransform={{ margin: { bottom: 12 } }}
         />
-        <UiEntity
-          uiTransform={{
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'center'
+        <Input
+          value={uiTypedAnswer}
+          placeholder="Type your answer here..."
+          placeholderColor={Color4.create(1, 1, 1, 0.5)}
+          fontSize={18}
+          color={Color4.White()}
+          uiTransform={{ width: '100%', height: 44 }}
+          uiBackground={{ color: Color4.create(0, 0, 0, 0.4) }}
+          onChange={(val) => {
+            uiTypedAnswer = val
+            onAnswerType?.(val)
           }}
-        >
-          <Button
-            value="Correct"
-            variant="primary"
-            fontSize={16}
-            uiTransform={{ width: 100, height: 40, margin: { right: 8 } }}
-            uiBackground={{ color: Color4.create(0.15, 0.65, 0.25, 1) }}
-            onMouseDown={() => { adminOnCorrect?.() }}
-          />
-          <Button
-            value="Incorrect"
-            variant="primary"
-            fontSize={16}
-            uiTransform={{ width: 100, height: 40, margin: { right: 8 } }}
-            uiBackground={{ color: Color4.create(0.75, 0.2, 0.2, 1) }}
-            onMouseDown={() => { adminOnIncorrect?.() }}
-          />
-          <Button
-            value="Reset"
-            variant="secondary"
-            fontSize={16}
-            uiTransform={{ width: 100, height: 40 }}
-            onMouseDown={() => { adminOnReset?.() }}
-          />
-        </UiEntity>
+        />
       </UiEntity>
     </UiEntity>
   )
 }
 
+// ---------------------------------------------------------------------------
+// UI 3 — Observer panel (lower-center, shows who's answering + live text)
+// ---------------------------------------------------------------------------
+function BuzzObserverUi(): ReactEcs.JSX.Element | null {
+  if (!uiCurrentAnswerer || uiIsAnswerer) return null
+
+  const answerDisplay = uiTypedAnswer.length > 0 ? uiTypedAnswer : '...'
+
+  return (
+    <UiEntity uiTransform={{ width: VIRTUAL_W, height: VIRTUAL_H, positionType: 'absolute' }}>
+      <UiEntity
+        uiTransform={{
+          width: PANEL_W,
+          height: 'auto',
+          positionType: 'absolute',
+          position: { bottom: 60, left: PANEL_LEFT },
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: { top: 16, bottom: 16, left: 24, right: 24 }
+        }}
+        uiBackground={{ color: Color4.create(0.12, 0.12, 0.12, 0.88) }}
+      >
+        <Label
+          value={`${uiCurrentAnswerer} is answering...`}
+          fontSize={18}
+          color={Color4.create(1, 0.85, 0.3, 1)}
+          textAlign="middle-center"
+          uiTransform={{ margin: { bottom: 6 } }}
+        />
+        <Label
+          value={`${Math.ceil(uiCountdown)}s`}
+          fontSize={15}
+          color={Color4.create(0.8, 0.8, 0.8, 1)}
+          textAlign="middle-center"
+          uiTransform={{ margin: { bottom: 10 } }}
+        />
+        <Label
+          value={answerDisplay}
+          fontSize={20}
+          color={Color4.White()}
+          textAlign="middle-center"
+        />
+      </UiEntity>
+    </UiEntity>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// UI 1 — Admin panel (top-right, always visible for admins)
+// ---------------------------------------------------------------------------
+function BuzzAdminUi(): ReactEcs.JSX.Element | null {
+  if (!adminIsRegistered) return null
+
+  const toggleLabel = buttonEnabled ? 'Disable Button' : 'Enable Button'
+  const toggleColor = buttonEnabled
+    ? Color4.create(0.55, 0.15, 0.15, 1)
+    : Color4.create(0.15, 0.5, 0.15, 1)
+
+  const statusLabel = buttonEnabled ? 'Button: OPEN' : 'Button: LOCKED'
+  const statusColor = buttonEnabled
+    ? Color4.create(0.4, 1, 0.4, 1)
+    : Color4.create(1, 0.4, 0.4, 1)
+
+  const hasAnswerer = uiCurrentAnswerer !== ''
+
+  return (
+    <UiEntity uiTransform={{ width: VIRTUAL_W, height: VIRTUAL_H, positionType: 'absolute' }}>
+      <UiEntity
+        uiTransform={{
+          width: 280,
+          height: 'auto',
+          positionType: 'absolute',
+          position: { top: 200, right: 20 },
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: 14
+        }}
+        uiBackground={{ color: Color4.create(0.08, 0.08, 0.08, 0.92) }}
+      >
+        <Label
+          value={statusLabel}
+          fontSize={14}
+          color={statusColor}
+          textAlign="middle-center"
+          uiTransform={{ margin: { bottom: 10 } }}
+        />
+        <Button
+          value={toggleLabel}
+          variant="primary"
+          fontSize={15}
+          uiTransform={{ width: 220, height: 38, margin: { bottom: hasAnswerer ? 14 : 0 } }}
+          uiBackground={{ color: toggleColor }}
+          onMouseDown={() => { adminOnEnable?.() }}
+        />
+
+        {hasAnswerer && (
+          <UiEntity
+            uiTransform={{ flexDirection: 'column', width: '100%', alignItems: 'center' }}
+          >
+            <Label
+              value={`Answering: ${uiCurrentAnswerer}\n${Math.ceil(uiCountdown)}s`}
+              fontSize={15}
+              color={Color4.White()}
+              textAlign="middle-center"
+              uiTransform={{ margin: { bottom: 8 } }}
+            />
+            {uiTypedAnswer.length > 0 && (
+              <Label
+                value={uiTypedAnswer}
+                fontSize={14}
+                color={Color4.create(0.9, 0.9, 0.5, 1)}
+                textAlign="middle-center"
+                uiTransform={{ margin: { bottom: 10 } }}
+              />
+            )}
+            <UiEntity
+              uiTransform={{ flexDirection: 'row', width: '100%', justifyContent: 'center' }}
+            >
+              <Button
+                value="Correct"
+                variant="primary"
+                fontSize={14}
+                uiTransform={{ width: 80, height: 36, margin: { right: 6 } }}
+                uiBackground={{ color: Color4.create(0.15, 0.65, 0.25, 1) }}
+                onMouseDown={() => { adminOnCorrect?.() }}
+              />
+              <Button
+                value="Incorrect"
+                variant="primary"
+                fontSize={14}
+                uiTransform={{ width: 80, height: 36, margin: { right: 6 } }}
+                uiBackground={{ color: Color4.create(0.75, 0.2, 0.2, 1) }}
+                onMouseDown={() => { adminOnIncorrect?.() }}
+              />
+              <Button
+                value="Reset"
+                variant="secondary"
+                fontSize={14}
+                uiTransform={{ width: 60, height: 36 }}
+                onMouseDown={() => { adminOnReset?.() }}
+              />
+            </UiEntity>
+          </UiEntity>
+        )}
+      </UiEntity>
+    </UiEntity>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Main class
+// ---------------------------------------------------------------------------
 export class BuzzAnswer {
   private winnerTextEntity: Entity | null = null
   private hasWinner: boolean = false
   private topFourNames: string[] = []
   private localPlayerName: string = ''
-  private localIsAdmin: boolean = false
 
   constructor(
     public src: string,
@@ -174,8 +275,7 @@ export class BuzzAnswer {
   ) {}
 
   start() {
-    console.log("BuzzAnswer initialized for entity:", this.entity)
-
+    console.log('BuzzAnswer initialized for entity:', this.entity)
     if (isServer()) {
       this.setupServer()
     } else {
@@ -183,23 +283,24 @@ export class BuzzAnswer {
     }
   }
 
+  // -------------------------------------------------------------------------
+  // Server
+  // -------------------------------------------------------------------------
   private setupServer() {
+    let enabled = false
     let currentAnswerer: string | null = null
-    let currentIndex: number = 0
+    let currentIndex = 0
     let pressOrder: string[] = []
-    let resetTimer: number = 0
-    let timerActive: boolean = false
+    let resetTimer = 0
+    let timerActive = false
     const scores: Record<string, number> = {}
 
     const broadcastScores = () => {
-      buzzRoom.send(BuzzMessageType.SCORE_UPDATE, {
-        leaderboard: JSON.stringify(scores)
-      })
+      buzzRoom.send(BuzzMessageType.SCORE_UPDATE, { leaderboard: JSON.stringify(scores) })
     }
 
     const setCurrentAnswerer = (index: number) => {
       if (index >= pressOrder.length) {
-        // No more players — full reset
         resetState()
         return
       }
@@ -207,8 +308,9 @@ export class BuzzAnswer {
       currentAnswerer = pressOrder[index]
       timerActive = true
       resetTimer = 0
+      // Clear the typed answer when a new player starts answering
+      buzzRoom.send(BuzzMessageType.ANSWER_UPDATE, { text: '' })
       console.log(`[SERVER] Now answering: ${currentAnswerer} (index ${index})`)
-
       buzzRoom.send(BuzzMessageType.BUZZ_WINNER, {
         winnerName: currentAnswerer,
         topFour: JSON.stringify(pressOrder.slice(0, 4))
@@ -222,22 +324,28 @@ export class BuzzAnswer {
       pressOrder = []
       timerActive = false
       resetTimer = 0
+      buzzRoom.send(BuzzMessageType.ANSWER_UPDATE, { text: '' })
       buzzRoom.send(BuzzMessageType.BUZZ_RESET, {})
     }
 
+    buzzRoom.onMessage(BuzzMessageType.SET_ENABLED, (data) => {
+      enabled = data.enabled
+      console.log(`[SERVER] Button ${enabled ? 'enabled' : 'disabled'}`)
+      buzzRoom.send(BuzzMessageType.BUTTON_STATE, { enabled })
+      if (!enabled) resetState()
+    })
+
     buzzRoom.onMessage(BuzzMessageType.BUZZ_PRESS, (data) => {
+      if (!enabled) return
       const playerName = data.playerName
-      if (!playerName) return
-      if (pressOrder.includes(playerName)) return
+      if (!playerName || pressOrder.includes(playerName)) return
 
       pressOrder.push(playerName)
-      console.log(`[SERVER] Buzz press from: ${playerName} (position #${pressOrder.length})`)
+      console.log(`[SERVER] Buzz press from: ${playerName} (#${pressOrder.length})`)
 
-      // First person to press becomes the answerer
       if (currentAnswerer === null) {
         setCurrentAnswerer(0)
       } else {
-        // Late press — just update the topFour list for everyone
         buzzRoom.send(BuzzMessageType.BUZZ_WINNER, {
           winnerName: currentAnswerer,
           topFour: JSON.stringify(pressOrder.slice(0, 4))
@@ -245,12 +353,16 @@ export class BuzzAnswer {
       }
     })
 
+    // Forward typed text to all clients as-is
+    buzzRoom.onMessage(BuzzMessageType.ANSWER_TYPE, (data) => {
+      buzzRoom.send(BuzzMessageType.ANSWER_UPDATE, { text: data.text })
+    })
+
     buzzRoom.onMessage(BuzzMessageType.ADMIN_CORRECT, () => {
       if (currentAnswerer === null) return
       const player = currentAnswerer
       scores[player] = (scores[player] ?? 0) + 1
-      console.log(`[SERVER] Correct answer by ${player}! Score: ${scores[player]}`)
-
+      console.log(`[SERVER] Correct! ${player} scores. Total: ${scores[player]}`)
       buzzRoom.send(BuzzMessageType.ANSWER_CORRECT, { playerName: player })
       broadcastScores()
       resetState()
@@ -258,7 +370,8 @@ export class BuzzAnswer {
 
     buzzRoom.onMessage(BuzzMessageType.ADMIN_INCORRECT, () => {
       if (currentAnswerer === null) return
-      console.log(`[SERVER] Incorrect answer by ${currentAnswerer}`)
+      console.log(`[SERVER] Incorrect by ${currentAnswerer}`)
+      buzzRoom.send(BuzzMessageType.INCORRECT_SOUND, {})
       setCurrentAnswerer(currentIndex + 1)
     })
 
@@ -266,7 +379,17 @@ export class BuzzAnswer {
       resetState()
     })
 
-    // Server-side countdown — move to next player when time runs out
+    // A late-joining client requests the current state so it sees the right button appearance
+    buzzRoom.onMessage(BuzzMessageType.REQUEST_STATE, () => {
+      buzzRoom.send(BuzzMessageType.BUTTON_STATE, { enabled })
+      if (currentAnswerer !== null) {
+        buzzRoom.send(BuzzMessageType.BUZZ_WINNER, {
+          winnerName: currentAnswerer,
+          topFour: JSON.stringify(pressOrder.slice(0, 4))
+        })
+      }
+    })
+
     engine.addSystem((dt) => {
       if (!timerActive) return
       resetTimer += dt
@@ -277,108 +400,171 @@ export class BuzzAnswer {
     })
   }
 
+  // -------------------------------------------------------------------------
+  // Client
+  // -------------------------------------------------------------------------
   private setupClient() {
-    // Register UI renderers
-    ReactEcsRenderer.addUiRenderer(this.entity, BuzzAnswerUi, { virtualWidth: 1920, virtualHeight: 1080 })
+    // Pre-load audio assets so they're ready to play instantly
+    AssetLoad.create(engine.RootEntity, {
+      assets: [
+        'assets/scene/Audio/claps.mp3',
+        'assets/scene/Audio/buzzer.mp3',
+        'assets/scene/Audio/game-over.mp3',
+        'assets/scene/Audio/slide-sound.mp3',
+        'assets/asset-packs/pirate_lever/sound.mp3'
+      ]
+    })
 
-    // Check admin status and set up admin UI
+    // Spawn a fresh entity per sound so DCL always treats it as a new play command.
+    // global: true = full volume for the local player regardless of position.
+    // The entity self-destructs after 10 s so it doesn't accumulate.
+    const playGlobalSound = (url: string) => {
+      const e = engine.addEntity()
+      AudioSource.create(e, { audioClipUrl: url, loop: false, playing: true, volume: 1, global: true })
+      Transform.create(e, { position: Vector3.create(200, 0, 200) })
+      setTimeout(() => {
+        engine.removeEntity(e)
+      }, 10000)
+    }
+
+    // Register all three UI renderers upfront (they self-gate via state)
+    ReactEcsRenderer.addUiRenderer(this.entity,     BuzzAnsweringUi, { virtualWidth: VIRTUAL_W, virtualHeight: VIRTUAL_H })
+    ReactEcsRenderer.addUiRenderer(this.entity + 1 as Entity, BuzzObserverUi,  { virtualWidth: VIRTUAL_W, virtualHeight: VIRTUAL_H })
+
+    // Wire up the typing callback (only used when this player is the answerer)
+    onAnswerType = (text) => {
+      buzzRoom.send(BuzzMessageType.ANSWER_TYPE, { text })
+    }
+
     isAdmin().then((result) => {
-      this.localIsAdmin = result
       if (result) {
-        adminOnCorrect = () => buzzRoom.send(BuzzMessageType.ADMIN_CORRECT, {})
+        adminIsRegistered = true
+        adminOnEnable    = () => buzzRoom.send(BuzzMessageType.SET_ENABLED, { enabled: !buttonEnabled })
+        adminOnCorrect   = () => buzzRoom.send(BuzzMessageType.ADMIN_CORRECT, {})
         adminOnIncorrect = () => buzzRoom.send(BuzzMessageType.ADMIN_INCORRECT, {})
-        adminOnReset = () => buzzRoom.send(BuzzMessageType.BUZZ_RESET, {})
-        adminUiVisible = true
-        ReactEcsRenderer.addUiRenderer(this.entity + 1 as Entity, BuzzAdminUi, { virtualWidth: 1920, virtualHeight: 1080 })
+        adminOnReset     = () => buzzRoom.send(BuzzMessageType.BUZZ_RESET, {})
+        ReactEcsRenderer.addUiRenderer(this.entity + 2 as Entity, BuzzAdminUi, { virtualWidth: VIRTUAL_W, virtualHeight: VIRTUAL_H })
       }
     }).catch((err) => {
       console.error('BuzzAnswer: Error checking admin status', err)
     })
 
-    // Set up button click handler
-    pointerEventsSystem.onPointerDown(
-      {
-        entity: this.entity,
-        opts: { button: InputAction.IA_POINTER, hoverText: 'I know!', maxDistance: 25 }
-      },
-      () => {
-        if (this.hasWinner) return
-
-        const player = getPlayer()
-        const playerName = player?.name ?? 'Unknown'
-        this.localPlayerName = playerName
-
-        AudioSource.playSound(this.entity, 'scene/Audio/buzzer.mp3', true)
-        Animator.playSingleAnimation(this.entity, 'trigger')
-
-        console.log(`[CLIENT] Buzzing in as: ${playerName}`)
-        buzzRoom.send(BuzzMessageType.BUZZ_PRESS, { playerName })
+    // Helper — gray when disabled, delete component when enabled to restore original textures
+    const setButtonMaterial = (disabled: boolean) => {
+      if (disabled) {
+        GltfNodeModifiers.createOrReplace(this.entity, {
+          modifiers: [{ path: '', material: { material: { $case: 'pbr', pbr: { albedoColor: Color4.create(0.35, 0.35, 0.35, 1), metallic: 0, roughness: 1 } } } }]
+        })
+      } else {
+        GltfNodeModifiers.deleteFrom(this.entity)
       }
-    )
+    }
 
-    // Listen for winner / current-answerer announcements
+    // Button starts disabled — pointer events added when server enables it
+    const registerButtonHandler = () => {
+      pointerEventsSystem.onPointerDown(
+        { entity: this.entity, opts: { button: InputAction.IA_POINTER, hoverText: 'I know!', maxDistance: 25 } },
+        () => {
+          if (this.hasWinner) return
+          const player = getPlayer()
+          const playerName = player?.name ?? 'Unknown'
+          this.localPlayerName = playerName
+          AudioSource.playSound(this.entity, 'assets/scene/Audio/buzzer.mp3', true)
+          Animator.playSingleAnimation(this.entity, 'trigger')
+          console.log(`[CLIENT] Buzzing in as: ${playerName}`)
+          buzzRoom.send(BuzzMessageType.BUZZ_PRESS, { playerName })
+        }
+      )
+    }
+
+    buzzRoom.onMessage(BuzzMessageType.BUTTON_STATE, (data) => {
+      buttonEnabled = data.enabled
+      playGlobalSound('assets/asset-packs/pirate_lever/sound.mp3')
+      if (buttonEnabled) {
+        registerButtonHandler()
+        setButtonMaterial(false)
+      } else {
+        pointerEventsSystem.removeOnPointerDown(this.entity)
+        setButtonMaterial(true)
+      }
+    })
+
     buzzRoom.onMessage(BuzzMessageType.BUZZ_WINNER, (data) => {
       const { winnerName, topFour } = data
       this.hasWinner = true
       this.topFourNames = JSON.parse(topFour)
       uiCurrentAnswerer = winnerName
-
+      uiIsAnswerer = winnerName === this.localPlayerName
+      uiCountdown = 30
+      uiTypedAnswer = ''
       console.log(`[CLIENT] Answering: ${winnerName}, Top 4: ${topFour}`)
-
-      // Show player UI banner only if this player buzzed in
-      if (this.localPlayerName) {
-        uiIsWinner = winnerName === this.localPlayerName
-        uiCountdown = 30
-        uiVisible = true
-      }
-
       this.showWinnerText(winnerName)
     })
 
-    // Listen for correct answer — fire ActivateOnSuccess callback
-    buzzRoom.onMessage(BuzzMessageType.ANSWER_CORRECT, (_data) => {
-      console.log(`[CLIENT] Answer was correct!`)
-      if (this.ActivateOnSuccess) {
-        this.ActivateOnSuccess()
+    // Live answer text from the answering player
+    buzzRoom.onMessage(BuzzMessageType.ANSWER_UPDATE, (data) => {
+      // Only update for observers — the answerer drives their own local state
+      if (!uiIsAnswerer) {
+        uiTypedAnswer = data.text
       }
     })
 
-    // Listen for score updates
+    // Play game-over sound globally for all players on incorrect answer
+    buzzRoom.onMessage(BuzzMessageType.INCORRECT_SOUND, () => {
+      playGlobalSound('assets/scene/Audio/game-over.mp3')
+    })
+
+    buzzRoom.onMessage(BuzzMessageType.ANSWER_CORRECT, (_data) => {
+      console.log('[CLIENT] Answer was correct!')
+
+      // Play claps globally
+      playGlobalSound('assets/scene/Audio/claps.mp3')
+
+      // Trigger balloons
+      const balloonsEntity = engine.getEntityOrNullByName('Balloons')
+      if (balloonsEntity !== null) {
+        getActionEvents(balloonsEntity).emit('Balloons', {})
+      }
+
+      this.ActivateOnSuccess?.()
+    })
+
     buzzRoom.onMessage(BuzzMessageType.SCORE_UPDATE, (data) => {
       const leaderboard = JSON.parse(data.leaderboard) as Record<string, number>
       console.log('[CLIENT] Leaderboard:', leaderboard)
     })
 
-    // Listen for reset
     buzzRoom.onMessage(BuzzMessageType.BUZZ_RESET, () => {
       this.hasWinner = false
       this.topFourNames = []
       this.localPlayerName = ''
-      uiVisible = false
       uiCurrentAnswerer = ''
+      uiIsAnswerer = false
+      uiTypedAnswer = ''
       this.removeWinnerText()
     })
 
-    // Client-side countdown for the UI banner
+    // Ask the server for the current state so late-joiners see the right button appearance
+    buzzRoom.send(BuzzMessageType.REQUEST_STATE, {})
+
     engine.addSystem((dt) => {
-      if (!uiVisible || !uiIsWinner) return
+      if (!uiCurrentAnswerer) return
       uiCountdown -= dt
-      if (uiCountdown <= 0) {
-        uiCountdown = 0
-      }
+      if (uiCountdown <= 0) uiCountdown = 0
     })
   }
 
+  // -------------------------------------------------------------------------
+  // Helpers
+  // -------------------------------------------------------------------------
   private showWinnerText(winnerName: string) {
     if (this.winnerTextEntity === null) {
       this.winnerTextEntity = engine.addEntity()
-
       Transform.create(this.winnerTextEntity, {
         position: Vector3.create(0, 0.3, 0),
         scale: Vector3.create(0.5, 0.5, 0.5),
         parent: this.entity
       })
-
       Billboard.create(this.winnerTextEntity)
     }
 
@@ -407,7 +593,5 @@ export class BuzzAnswer {
     }
   }
 
-  update(dt: number) {
-    // Called every frame
-  }
+  update(_dt: number) {}
 }
