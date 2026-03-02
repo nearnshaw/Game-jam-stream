@@ -1,5 +1,5 @@
 
-import { engine, Entity, Schemas, Billboard, TextShape, Transform, pointerEventsSystem, InputAction, AudioSource, Animator, AssetLoad, GltfNodeModifiers } from '@dcl/sdk/ecs'
+import { engine, Entity, Schemas, Billboard, TextShape, Transform, pointerEventsSystem, InputAction, AudioSource, Animator, AssetLoad, VisibilityComponent } from '@dcl/sdk/ecs'
 import { isServer, registerMessages } from '@dcl/sdk/network'
 import { Color4, Vector3 } from '@dcl/sdk/math'
 import { getPlayer } from '@dcl/sdk/src/players'
@@ -55,6 +55,8 @@ let uiCurrentAnswerer = ''  // empty = nobody answering
 let uiIsAnswerer     = false // is the local player the current answerer?
 let uiCountdown      = 30
 let uiTypedAnswer    = ''   // answer text synced to all in real time
+let uiInputText      = ''   // local input buffer for the active answerer
+let clearAnswerInput = false
 
 let adminIsRegistered = false
 let adminOnEnable:    (() => void) | null = null
@@ -70,6 +72,10 @@ let onAnswerType: ((text: string) => void) | null = null
 // ---------------------------------------------------------------------------
 function BuzzAnsweringUi(): ReactEcs.JSX.Element | null {
   if (!uiCurrentAnswerer || !uiIsAnswerer) return null
+
+  // Keep Input uncontrolled while typing; only set value for one-frame clears.
+  const inputValue = clearAnswerInput ? ' ' : ''
+  if (clearAnswerInput) clearAnswerInput = false
 
   return (
     <UiEntity uiTransform={{ width: VIRTUAL_W, height: VIRTUAL_H, positionType: 'absolute' }}>
@@ -93,7 +99,7 @@ function BuzzAnsweringUi(): ReactEcs.JSX.Element | null {
           uiTransform={{ margin: { bottom: 12 } }}
         />
         <Input
-          value={uiTypedAnswer}
+          value={inputValue}
           placeholder="Type your answer here..."
           placeholderColor={Color4.create(1, 1, 1, 0.5)}
           fontSize={18}
@@ -101,8 +107,9 @@ function BuzzAnsweringUi(): ReactEcs.JSX.Element | null {
           uiTransform={{ width: '100%', height: 44 }}
           uiBackground={{ color: Color4.create(0, 0, 0, 0.4) }}
           onChange={(val) => {
-            uiTypedAnswer = val
-            onAnswerType?.(val)
+            uiInputText = val
+            uiTypedAnswer = uiInputText
+            onAnswerType?.(uiInputText)
           }}
         />
       </UiEntity>
@@ -365,6 +372,9 @@ export class BuzzAnswer {
       console.log(`[SERVER] Correct! ${player} scores. Total: ${scores[player]}`)
       buzzRoom.send(BuzzMessageType.ANSWER_CORRECT, { playerName: player })
       broadcastScores()
+      // Lock the buzzer after a correct answer until admins re-open it.
+      enabled = false
+      buzzRoom.send(BuzzMessageType.BUTTON_STATE, { enabled })
       resetState()
     })
 
@@ -449,16 +459,17 @@ export class BuzzAnswer {
       console.error('BuzzAnswer: Error checking admin status', err)
     })
 
-    // Helper — gray when disabled, delete component when enabled to restore original textures
-    const setButtonMaterial = (disabled: boolean) => {
-      if (disabled) {
-        GltfNodeModifiers.createOrReplace(this.entity, {
-          modifiers: [{ path: '', material: { material: { $case: 'pbr', pbr: { albedoColor: Color4.create(0.35, 0.35, 0.35, 1), metallic: 0, roughness: 1 } } } }]
-        })
+    // Helper — show button only when enabled.
+    const setButtonVisibility = (enabled: boolean) => {
+      if (VisibilityComponent.has(this.entity)) {
+        VisibilityComponent.getMutable(this.entity).visible = enabled
       } else {
-        GltfNodeModifiers.deleteFrom(this.entity)
+        VisibilityComponent.create(this.entity, { visible: enabled })
       }
     }
+
+    // Default to hidden until authoritative state arrives.
+    setButtonVisibility(false)
 
     // Button starts disabled — pointer events added when server enables it
     const registerButtonHandler = () => {
@@ -482,10 +493,10 @@ export class BuzzAnswer {
       playGlobalSound('assets/asset-packs/pirate_lever/sound.mp3')
       if (buttonEnabled) {
         registerButtonHandler()
-        setButtonMaterial(false)
+        setButtonVisibility(true)
       } else {
         pointerEventsSystem.removeOnPointerDown(this.entity)
-        setButtonMaterial(true)
+        setButtonVisibility(false)
       }
     })
 
@@ -497,6 +508,8 @@ export class BuzzAnswer {
       uiIsAnswerer = winnerName === this.localPlayerName
       uiCountdown = 30
       uiTypedAnswer = ''
+      uiInputText = ''
+      clearAnswerInput = true
       console.log(`[CLIENT] Answering: ${winnerName}, Top 4: ${topFour}`)
       this.showWinnerText(winnerName)
     })
@@ -541,6 +554,8 @@ export class BuzzAnswer {
       uiCurrentAnswerer = ''
       uiIsAnswerer = false
       uiTypedAnswer = ''
+      uiInputText = ''
+      clearAnswerInput = true
       this.removeWinnerText()
     })
 

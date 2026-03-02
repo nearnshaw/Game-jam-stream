@@ -7,13 +7,14 @@
     "deploy": "sdk-commands deploy",
     "build": "sdk-commands build",
     "upgrade-sdk": "npm install --save-dev @dcl/sdk@latest",
-    "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next"
+    "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next",
+    "server-logs": "sdk-commands sdk-server-logs"
   },
   "devDependencies": {
     "@dcl/asset-packs": "^2.11.2",
     "@dcl/hammurabi-server": "^1.0.0-21071169532.commit-9d5053a",
-    "@dcl/js-runtime": "7.20.2-22102228700.commit-61000fc",
-    "@dcl/sdk": "^7.20.2-22102228700.commit-61000fc"
+    "@dcl/js-runtime": "7.20.4-22581991550.commit-9c72184",
+    "@dcl/sdk": "^7.20.4-22581991550.commit-9c72184"
   },
   "engines": {
     "node": ">=16.0.0",
