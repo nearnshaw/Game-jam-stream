@@ -11,7 +11,7 @@
     "server-logs": "sdk-commands sdk-server-logs"
   },
   "devDependencies": {
-    "@dcl/asset-packs": "^2.11.2",
+    "@dcl/asset-packs": "https://sdk-team-cdn.decentraland.org/creator-hub/branch/admin-ui-virtual-screen-size/@dcl/asset-packs/dcl-asset-packs-2.12.1-commit-cceabc21214dfb71702b88cb0a7c399401c56658.tgz",
     "@dcl/hammurabi-server": "^1.0.0-21071169532.commit-9d5053a",
     "@dcl/js-runtime": "7.20.4-22581991550.commit-9c72184",
     "@dcl/sdk": "^7.20.4-22581991550.commit-9c72184"
@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "@dcl-sdk/utils": "latest",
-    "dcl-ui-toolkit": "latest"
+    "dcl-ui-toolkit": "latest",
+    "install": "^0.13.0",
+    "npm": "^11.11.0"
   }
 }

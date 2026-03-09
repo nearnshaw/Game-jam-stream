@@ -60,6 +60,10 @@ let clearAnswerInput = false
 type LeaderboardEntry = { userId: string; name: string; score: number }
 let uiLeaderboard: LeaderboardEntry[] = []
 
+function normalizeUserId(userId: string | null | undefined): string {
+  return (userId ?? '').trim().toLowerCase()
+}
+
 let adminIsRegistered = false
 let adminOnEnable:    (() => void) | null = null
 let adminOnCorrect:   (() => void) | null = null
@@ -377,13 +381,17 @@ export class BuzzAnswer {
         .sort((a, b) => b.score - a.score)
         .slice(0, 5)
 
+      console.log(
+        '[SERVER] Broadcast leaderboard IDs:',
+        ranking.map((entry) => ({ name: entry.name, userId: entry.userId }))
+      )
       buzzRoom.send(BuzzMessageType.SCORE_UPDATE, { leaderboard: JSON.stringify(ranking) })
     }
     const penalizeCurrentAnswerer = () => {
       if (currentAnswererId === null) return
       const playerId = currentAnswererId
       const playerName = namesById[playerId] ?? 'Unknown'
-      scores[playerId] = (scores[playerId] ?? 0) - 1
+      scores[playerId] = Math.max(0, (scores[playerId] ?? 0) - 1)
       console.log(`[SERVER] Penalty: ${playerName} loses 1 point. Total: ${scores[playerId]}`)
       broadcastScores()
     }
@@ -427,13 +435,14 @@ export class BuzzAnswer {
 
     buzzRoom.onMessage(BuzzMessageType.BUZZ_PRESS, (data) => {
       if (!enabled) return
-      const playerId = data.playerId
+      const rawPlayerId = data.playerId
+      const playerId = normalizeUserId(rawPlayerId)
       const playerName = data.playerName
       if (!playerId || !playerName || pressOrder.includes(playerId)) return
 
       namesById[playerId] = playerName
       pressOrder.push(playerId)
-      console.log(`[SERVER] Buzz press from: ${playerName} (#${pressOrder.length})`)
+      console.log(`[SERVER] Buzz press from: ${playerName} (#${pressOrder.length}) rawId=${rawPlayerId} normalizedId=${playerId}`)
 
       if (currentAnswererId === null) {
         setCurrentAnswerer(0)
@@ -568,21 +577,31 @@ export class BuzzAnswer {
         () => {
           if (this.hasWinner) return
           const player = getPlayer()
-          const playerId = player?.userId ?? ''
+          const rawPlayerId = player?.userId ?? ''
+          const playerId = normalizeUserId(rawPlayerId)
           const playerName = player?.name ?? 'Unknown'
           if (!playerId) return
           this.localPlayerName = playerName
           AudioSource.playSound(this.entity, 'assets/scene/Audio/buzzer.mp3', true)
           Animator.playSingleAnimation(this.entity, 'trigger')
-          console.log(`[CLIENT] Buzzing in as: ${playerName} (${playerId})`)
+          console.log(`[CLIENT] Buzzing in as: ${playerName} rawId=${rawPlayerId} normalizedId=${playerId}`)
           buzzRoom.send(BuzzMessageType.BUZZ_PRESS, { playerId, playerName })
         }
       )
     }
 
+    let hasReceivedAuthoritativeButtonState = false
     buzzRoom.onMessage(BuzzMessageType.BUTTON_STATE, (data) => {
+      const previousEnabled = buttonEnabled
+      const isInitialSync = !hasReceivedAuthoritativeButtonState
+      hasReceivedAuthoritativeButtonState = true
+
       buttonEnabled = data.enabled
-      playGlobalSound('assets/asset-packs/pirate_lever/sound.mp3')
+      // Play lever sound only for intentional runtime state changes.
+      // Initial server sync (including late join bootstrap) must stay silent.
+      if (!isInitialSync && previousEnabled !== buttonEnabled) {
+        playGlobalSound('assets/asset-packs/pirate_lever/sound.mp3')
+      }
       if (buttonEnabled) {
         registerButtonHandler()
         setButtonVisibility(true)
@@ -636,8 +655,19 @@ export class BuzzAnswer {
 
     buzzRoom.onMessage(BuzzMessageType.SCORE_UPDATE, (data) => {
       const leaderboard = JSON.parse(data.leaderboard) as LeaderboardEntry[]
-      uiLeaderboard = leaderboard
-      console.log('[CLIENT] Leaderboard:', leaderboard)
+      uiLeaderboard = leaderboard.map((entry) => ({
+        ...entry,
+        userId: normalizeUserId(entry.userId)
+      }))
+      console.log(
+        '[CLIENT] Leaderboard (raw -> normalized IDs):',
+        leaderboard.map((entry, index) => ({
+          rank: index + 1,
+          name: entry.name,
+          rawUserId: entry.userId,
+          normalizedUserId: normalizeUserId(entry.userId)
+        }))
+      )
     })
 
     buzzRoom.onMessage(BuzzMessageType.BUZZ_RESET, () => {

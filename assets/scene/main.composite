@@ -6221,6 +6221,7 @@
               },
               {
                 "entity": 576,
+                "open": true,
                 "children": [
                   577,
                   536
@@ -6425,6 +6426,9 @@
           "json": {}
         },
         "535": {
+          "json": {}
+        },
+        "536": {
           "json": {}
         },
         "537": {
@@ -7506,7 +7510,7 @@
       }
     },
     {
-      "name": "inspector::SceneMetadata-v2",
+      "name": "inspector::SceneMetadata-v3",
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -7699,14 +7703,14 @@
                         "type": "object",
                         "properties": {
                           "single": {
-                            "type": "integer",
-                            "serializationType": "int32"
+                            "type": "number",
+                            "serializationType": "float32"
                           },
                           "range": {
                             "type": "array",
                             "items": {
-                              "type": "integer",
-                              "serializationType": "int32"
+                              "type": "number",
+                              "serializationType": "float32"
                             },
                             "serializationType": "array"
                           }
@@ -7717,14 +7721,14 @@
                         "type": "object",
                         "properties": {
                           "single": {
-                            "type": "integer",
-                            "serializationType": "int32"
+                            "type": "number",
+                            "serializationType": "float32"
                           },
                           "range": {
                             "type": "array",
                             "items": {
-                              "type": "integer",
-                              "serializationType": "int32"
+                              "type": "number",
+                              "serializationType": "float32"
                             },
                             "serializationType": "array"
                           }
@@ -7735,14 +7739,14 @@
                         "type": "object",
                         "properties": {
                           "single": {
-                            "type": "integer",
-                            "serializationType": "int32"
+                            "type": "number",
+                            "serializationType": "float32"
                           },
                           "range": {
                             "type": "array",
                             "items": {
-                              "type": "integer",
-                              "serializationType": "int32"
+                              "type": "number",
+                              "serializationType": "float32"
                             },
                             "serializationType": "array"
                           }
@@ -7759,16 +7763,16 @@
                       "type": "object",
                       "properties": {
                         "x": {
-                          "type": "integer",
-                          "serializationType": "int32"
+                          "type": "number",
+                          "serializationType": "float32"
                         },
                         "y": {
-                          "type": "integer",
-                          "serializationType": "int32"
+                          "type": "number",
+                          "serializationType": "float32"
                         },
                         "z": {
-                          "type": "integer",
-                          "serializationType": "int32"
+                          "type": "number",
+                          "serializationType": "float32"
                         }
                       },
                       "serializationType": "map"
@@ -9460,8 +9464,8 @@
                   "x": {
                     "$case": "range",
                     "value": [
-                      194,
-                      206
+                      205.02999877929688,
+                      217.02999877929688
                     ]
                   },
                   "y": {
@@ -9474,8 +9478,8 @@
                   "z": {
                     "$case": "range",
                     "value": [
-                      194,
-                      206
+                      188.6199951171875,
+                      200.6199951171875
                     ]
                   }
                 },
@@ -11929,7 +11933,7 @@
               {
                 "path": "assets/scene/Scripts/Server-assisted-streaming.ts",
                 "priority": 0,
-                "layout": "{\"params\":{\"syncForceInterval\":{\"type\":\"number\",\"optional\":false,\"value\":10}}}"
+                "layout": "{\"params\":{\"syncForceInterval\":{\"type\":\"number\",\"optional\":false,\"value\":10}},\"actions\":[]}"
               }
             ]
           }
@@ -11951,7 +11955,7 @@
               {
                 "path": "assets/scene/Scripts/BuzzAnswer.tsx",
                 "priority": 0,
-                "layout": "{\"params\":{},\"actions\":[]}"
+                "layout": "{\"params\":{\"ActivateOnSuccess\":{\"type\":\"action\",\"optional\":true,\"value\":{\"entity\":0,\"action\":\"\"}}},\"actions\":[]}"
               }
             ]
           }
