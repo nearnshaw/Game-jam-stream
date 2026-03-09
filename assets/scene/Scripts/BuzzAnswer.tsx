@@ -57,11 +57,62 @@ let uiCountdown      = 30
 let uiTypedAnswer    = ''   // answer text synced to all in real time
 let uiInputText      = ''   // local input buffer for the active answerer
 let clearAnswerInput = false
+let uiFocusRecoveryPromptSeconds = 0
 type LeaderboardEntry = { userId: string; name: string; score: number }
+type LeaderboardProfile = { displayName: string; thumbnail: string }
 let uiLeaderboard: LeaderboardEntry[] = []
+const uiLeaderboardProfilesById: Record<string, LeaderboardProfile> = {}
+const pendingLeaderboardProfileFetches = new Set<string>()
+const FOCUS_RECOVERY_PROMPT_DURATION_S = 2
 
 function normalizeUserId(userId: string | null | undefined): string {
   return (userId ?? '').trim().toLowerCase()
+}
+
+async function fetchUserData(userId: string): Promise<any | null> {
+  const url = 'https://peer.decentraland.org/lambdas/profiles'
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ ids: [userId] })
+  })
+
+  if (!response.ok) return null
+
+  const parsed = await response.json()
+  if (!Array.isArray(parsed) || parsed.length < 1) return null
+  return parsed[0]
+}
+
+async function fetchAndCacheLeaderboardProfile(userId: string, fallbackName: string): Promise<void> {
+  if (!userId || uiLeaderboardProfilesById[userId] || pendingLeaderboardProfileFetches.has(userId)) return
+  pendingLeaderboardProfileFetches.add(userId)
+  try {
+    const userData = await fetchUserData(userId)
+    if (!userData) {
+      console.log(`[CLIENT] No profile data found for ${userId}`)
+      return
+    }
+    const avatarData = userData?.avatars?.[0]
+    const thumbnail = avatarData?.avatar?.snapshots?.face256
+    if (typeof thumbnail !== 'string' || thumbnail.length === 0) {
+      console.log(`[CLIENT] No thumbnail URL found for ${userId}`)
+      return
+    }
+
+    const displayName = typeof avatarData?.name === 'string' && avatarData.name.length > 0
+      ? avatarData.name
+      : fallbackName
+
+    uiLeaderboardProfilesById[userId] = { displayName, thumbnail }
+    console.log(`[CLIENT] Cached leaderboard thumbnail for ${userId}: ${thumbnail}`)
+  } catch (err) {
+    console.log(`[CLIENT] Failed profile fetch for ${userId}: ${String(err)}`)
+  } finally {
+    pendingLeaderboardProfileFetches.delete(userId)
+  }
 }
 
 let adminIsRegistered = false
@@ -77,7 +128,8 @@ let onAnswerType: ((text: string) => void) | null = null
 // UI 2 — Answering player (lower-center, with input box)
 // ---------------------------------------------------------------------------
 function BuzzAnsweringUi(): ReactEcs.JSX.Element | null {
-  if (!uiCurrentAnswerer || !uiIsAnswerer) return null
+  const showAnswerPanel = !!uiCurrentAnswerer && uiIsAnswerer
+  const showRecoveryPanel = !showAnswerPanel && uiFocusRecoveryPromptSeconds > 0
 
   // Keep Input uncontrolled while typing; only set value for one-frame clears.
   const inputValue = clearAnswerInput ? ' ' : ''
@@ -91,6 +143,7 @@ function BuzzAnsweringUi(): ReactEcs.JSX.Element | null {
           height: 'auto',
           positionType: 'absolute',
           position: { bottom: 60, left: PANEL_LEFT },
+          display: showAnswerPanel ? 'flex' : 'none',
           flexDirection: 'column',
           alignItems: 'center',
           padding: { top: 16, bottom: 16, left: 24, right: 24 }
@@ -119,8 +172,42 @@ function BuzzAnsweringUi(): ReactEcs.JSX.Element | null {
           }}
         />
       </UiEntity>
+      <UiEntity
+        uiTransform={{
+          width: 320,
+          height: 'auto',
+          positionType: 'absolute',
+          position: { bottom: 60, left: (VIRTUAL_W - 320) / 2 },
+          display: showRecoveryPanel ? 'flex' : 'none',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: { top: 10, bottom: 10, left: 12, right: 12 }
+        }}
+        uiBackground={{ color: Color4.create(0.08, 0.08, 0.08, 0.85) }}
+      >
+        <Label
+          value="Answer window closed. Click to resume control."
+          fontSize={14}
+          color={Color4.White()}
+          textAlign="middle-center"
+          uiTransform={{ margin: { bottom: 8 } }}
+        />
+        <Button
+          value="Resume Control"
+          variant="secondary"
+          fontSize={14}
+          uiTransform={{ width: 180, height: 32 }}
+          onMouseDown={() => {
+            uiFocusRecoveryPromptSeconds = 0
+          }}
+        />
+      </UiEntity>
     </UiEntity>
   )
+}
+
+function showFocusRecoveryPrompt() {
+  uiFocusRecoveryPromptSeconds = FOCUS_RECOVERY_PROMPT_DURATION_S
 }
 
 // ---------------------------------------------------------------------------
@@ -207,15 +294,29 @@ function BuzzRankingUi(): ReactEcs.JSX.Element | null {
               margin: { bottom: index < uiLeaderboard.length - 1 ? 8 : 0 }
             }}
           >
-            <UiEntity
-              uiTransform={{ width: 42, height: 42, margin: { right: 10 } }}
-              uiBackground={{
-                avatarTexture: { userId: entry.userId },
-                textureMode: 'stretch'
-              }}
-            />
+            {(() => {
+              const profile = uiLeaderboardProfilesById[entry.userId]
+              if (profile?.thumbnail) {
+                return (
+                  <UiEntity
+                    uiTransform={{ width: 42, height: 42, margin: { right: 10 } }}
+                    uiBackground={{
+                      texture: { src: profile.thumbnail },
+                      textureMode: 'stretch'
+                    }}
+                  />
+                )
+              }
+
+              return (
+                <UiEntity
+                  uiTransform={{ width: 42, height: 42, margin: { right: 10 } }}
+                  uiBackground={{ color: Color4.create(0.2, 0.2, 0.2, 1) }}
+                />
+              )
+            })()}
             <Label
-              value={`${index + 1}. ${entry.name}`}
+              value={`${index + 1}. ${uiLeaderboardProfilesById[entry.userId]?.displayName ?? entry.name}`}
               fontSize={15}
               color={Color4.White()}
               textAlign="middle-left"
@@ -612,11 +713,15 @@ export class BuzzAnswer {
     })
 
     buzzRoom.onMessage(BuzzMessageType.BUZZ_WINNER, (data) => {
+      const wasAnswerer = uiIsAnswerer
       const { winnerName, topFour } = data
       this.hasWinner = true
       this.topFourNames = JSON.parse(topFour)
       uiCurrentAnswerer = winnerName
       uiIsAnswerer = winnerName === this.localPlayerName
+      if (wasAnswerer && !uiIsAnswerer) {
+        showFocusRecoveryPrompt()
+      }
       uiCountdown = 30
       uiTypedAnswer = ''
       uiInputText = ''
@@ -659,6 +764,9 @@ export class BuzzAnswer {
         ...entry,
         userId: normalizeUserId(entry.userId)
       }))
+      for (const entry of uiLeaderboard) {
+        void fetchAndCacheLeaderboardProfile(entry.userId, entry.name)
+      }
       console.log(
         '[CLIENT] Leaderboard (raw -> normalized IDs):',
         leaderboard.map((entry, index) => ({
@@ -671,11 +779,15 @@ export class BuzzAnswer {
     })
 
     buzzRoom.onMessage(BuzzMessageType.BUZZ_RESET, () => {
+      const wasAnswerer = uiIsAnswerer
       this.hasWinner = false
       this.topFourNames = []
       this.localPlayerName = ''
       uiCurrentAnswerer = ''
       uiIsAnswerer = false
+      if (wasAnswerer) {
+        showFocusRecoveryPrompt()
+      }
       uiTypedAnswer = ''
       uiInputText = ''
       clearAnswerInput = true
@@ -689,6 +801,14 @@ export class BuzzAnswer {
       if (!uiCurrentAnswerer) return
       uiCountdown -= dt
       if (uiCountdown <= 0) uiCountdown = 0
+    })
+
+    engine.addSystem((dt) => {
+      if (uiFocusRecoveryPromptSeconds <= 0) return
+      uiFocusRecoveryPromptSeconds -= dt
+      if (uiFocusRecoveryPromptSeconds < 0) {
+        uiFocusRecoveryPromptSeconds = 0
+      }
     })
   }
 
