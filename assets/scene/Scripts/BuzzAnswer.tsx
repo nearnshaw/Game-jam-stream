@@ -57,13 +57,11 @@ let uiCountdown      = 30
 let uiTypedAnswer    = ''   // answer text synced to all in real time
 let uiInputText      = ''   // local input buffer for the active answerer
 let clearAnswerInput = false
-let uiFocusRecoveryPromptSeconds = 0
 type LeaderboardEntry = { userId: string; name: string; score: number }
 type LeaderboardProfile = { displayName: string; thumbnail: string }
 let uiLeaderboard: LeaderboardEntry[] = []
 const uiLeaderboardProfilesById: Record<string, LeaderboardProfile> = {}
 const pendingLeaderboardProfileFetches = new Set<string>()
-const FOCUS_RECOVERY_PROMPT_DURATION_S = 2
 
 function normalizeUserId(userId: string | null | undefined): string {
   return (userId ?? '').trim().toLowerCase()
@@ -129,7 +127,6 @@ let onAnswerType: ((text: string) => void) | null = null
 // ---------------------------------------------------------------------------
 function BuzzAnsweringUi(): ReactEcs.JSX.Element | null {
   const showAnswerPanel = !!uiCurrentAnswerer && uiIsAnswerer
-  const showRecoveryPanel = !showAnswerPanel && uiFocusRecoveryPromptSeconds > 0
 
   // Keep Input uncontrolled while typing; only set value for one-frame clears.
   const inputValue = clearAnswerInput ? ' ' : ''
@@ -172,42 +169,8 @@ function BuzzAnsweringUi(): ReactEcs.JSX.Element | null {
           }}
         />
       </UiEntity>
-      <UiEntity
-        uiTransform={{
-          width: 320,
-          height: 'auto',
-          positionType: 'absolute',
-          position: { bottom: 60, left: (VIRTUAL_W - 320) / 2 },
-          display: showRecoveryPanel ? 'flex' : 'none',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: { top: 10, bottom: 10, left: 12, right: 12 }
-        }}
-        uiBackground={{ color: Color4.create(0.08, 0.08, 0.08, 0.85) }}
-      >
-        <Label
-          value="Answer window closed. Click to resume control."
-          fontSize={14}
-          color={Color4.White()}
-          textAlign="middle-center"
-          uiTransform={{ margin: { bottom: 8 } }}
-        />
-        <Button
-          value="Resume Control"
-          variant="secondary"
-          fontSize={14}
-          uiTransform={{ width: 180, height: 32 }}
-          onMouseDown={() => {
-            uiFocusRecoveryPromptSeconds = 0
-          }}
-        />
-      </UiEntity>
     </UiEntity>
   )
-}
-
-function showFocusRecoveryPrompt() {
-  uiFocusRecoveryPromptSeconds = FOCUS_RECOVERY_PROMPT_DURATION_S
 }
 
 // ---------------------------------------------------------------------------
@@ -713,15 +676,11 @@ export class BuzzAnswer {
     })
 
     buzzRoom.onMessage(BuzzMessageType.BUZZ_WINNER, (data) => {
-      const wasAnswerer = uiIsAnswerer
       const { winnerName, topFour } = data
       this.hasWinner = true
       this.topFourNames = JSON.parse(topFour)
       uiCurrentAnswerer = winnerName
       uiIsAnswerer = winnerName === this.localPlayerName
-      if (wasAnswerer && !uiIsAnswerer) {
-        showFocusRecoveryPrompt()
-      }
       uiCountdown = 30
       uiTypedAnswer = ''
       uiInputText = ''
@@ -779,15 +738,11 @@ export class BuzzAnswer {
     })
 
     buzzRoom.onMessage(BuzzMessageType.BUZZ_RESET, () => {
-      const wasAnswerer = uiIsAnswerer
       this.hasWinner = false
       this.topFourNames = []
       this.localPlayerName = ''
       uiCurrentAnswerer = ''
       uiIsAnswerer = false
-      if (wasAnswerer) {
-        showFocusRecoveryPrompt()
-      }
       uiTypedAnswer = ''
       uiInputText = ''
       clearAnswerInput = true
@@ -803,13 +758,6 @@ export class BuzzAnswer {
       if (uiCountdown <= 0) uiCountdown = 0
     })
 
-    engine.addSystem((dt) => {
-      if (uiFocusRecoveryPromptSeconds <= 0) return
-      uiFocusRecoveryPromptSeconds -= dt
-      if (uiFocusRecoveryPromptSeconds < 0) {
-        uiFocusRecoveryPromptSeconds = 0
-      }
-    })
   }
 
   // -------------------------------------------------------------------------
