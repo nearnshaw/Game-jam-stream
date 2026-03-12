@@ -169,19 +169,21 @@ export class ResultsUI {
             const showTooltip = this.hoveredVotesOption === result.option
 
             return (
-              <PollResultView
-                result={result}
-                index={index}
-                animationProgress={animationProgress}
-                votesForOption={votesForOption}
-                showTooltip={showTooltip}
-                onMouseEnter={() => {
-                  this.hoveredVotesOption = result.option
-                }}
-                onMouseLeave={() => {
-                  this.hoveredVotesOption = null
-                }}
-              />
+              <UiEntity key={`poll-result-${result.option}-${index}`} uiTransform={{ width: '100%', height: 'auto' }}>
+                <PollResultView
+                  result={result}
+                  index={index}
+                  animationProgress={animationProgress}
+                  votesForOption={votesForOption}
+                  showTooltip={showTooltip}
+                  onMouseEnter={() => {
+                    this.hoveredVotesOption = result.option
+                  }}
+                  onMouseLeave={() => {
+                    this.hoveredVotesOption = null
+                  }}
+                />
+              </UiEntity>
             )
           })}
         </UiEntity>

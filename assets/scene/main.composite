@@ -5335,7 +5335,8 @@
               1081,
               2709697014,
               1042,
-              1
+              1,
+              4149214247
             ]
           }
         },
@@ -5826,7 +5827,78 @@
               "Tag Group 1",
               "Tag Group 2",
               "Tag Group 3",
-              "Tag Group 4"
+              "Tag Group 4",
+              "Confetti"
+            ]
+          }
+        },
+        "546": {
+          "json": {
+            "tags": [
+              "Confetti"
+            ]
+          }
+        },
+        "547": {
+          "json": {
+            "tags": [
+              "Confetti"
+            ]
+          }
+        },
+        "548": {
+          "json": {
+            "tags": [
+              "Confetti"
+            ]
+          }
+        },
+        "549": {
+          "json": {
+            "tags": [
+              "Confetti"
+            ]
+          }
+        },
+        "550": {
+          "json": {
+            "tags": [
+              "Confetti"
+            ]
+          }
+        },
+        "551": {
+          "json": {
+            "tags": [
+              "Confetti"
+            ]
+          }
+        },
+        "554": {
+          "json": {
+            "tags": [
+              "Confetti"
+            ]
+          }
+        },
+        "555": {
+          "json": {
+            "tags": [
+              "Confetti"
+            ]
+          }
+        },
+        "556": {
+          "json": {
+            "tags": [
+              "Confetti"
+            ]
+          }
+        },
+        "557": {
+          "json": {
+            "tags": [
+              "Confetti"
             ]
           }
         }
@@ -6070,6 +6142,7 @@
               },
               {
                 "entity": 549,
+                "open": true,
                 "children": [
                   548
                 ]
@@ -6080,7 +6153,6 @@
               },
               {
                 "entity": 551,
-                "open": true,
                 "children": [
                   550
                 ]
@@ -6095,7 +6167,6 @@
               },
               {
                 "entity": 555,
-                "open": true,
                 "children": [
                   554
                 ]
@@ -6106,6 +6177,7 @@
               },
               {
                 "entity": 557,
+                "open": true,
                 "children": [
                   556
                 ]
@@ -6459,6 +6531,9 @@
           "json": {}
         },
         "547": {
+          "json": {}
+        },
+        "548": {
           "json": {}
         },
         "549": {
@@ -10556,6 +10631,21 @@
                 "type": "set_state",
                 "jsonPayload": "{ \"state\": \"Deactivated\" }",
                 "allowedInBasicView": true
+              },
+              {
+                "name": "Reveal Boy",
+                "type": "call_script_method",
+                "jsonPayload": "{\"scriptPath\":\"assets/scene/Scripts/ColoredConfetti.tsx\",\"methodName\":\"revealBoyConfetti\",\"params\":{}}"
+              },
+              {
+                "name": "Reveal Girl",
+                "type": "call_script_method",
+                "jsonPayload": "{\"scriptPath\":\"assets/scene/Scripts/ColoredConfetti.tsx\",\"methodName\":\"revealGirlConfetti\",\"params\":{}}"
+              },
+              {
+                "name": "Reset Color",
+                "type": "call_script_method",
+                "jsonPayload": "{\"scriptPath\":\"assets/scene/Scripts/ColoredConfetti.tsx\",\"methodName\":\"resetConfetti\",\"params\":{}}"
               }
             ]
           }
@@ -11945,6 +12035,17 @@
                 "path": "assets/custom/photo_mural/photoMural.ts",
                 "priority": 0,
                 "layout": "{\"params\":{\"use_current_scene\":{\"type\":\"boolean\",\"optional\":true,\"value\":true},\"coordinates\":{\"type\":\"string\",\"optional\":false,\"value\":\"\"},\"world_id\":{\"type\":\"string\",\"optional\":true,\"value\":\"\"}},\"actions\":[]}"
+              }
+            ]
+          }
+        },
+        "552": {
+          "json": {
+            "value": [
+              {
+                "path": "assets/scene/Scripts/ColoredConfetti.tsx",
+                "priority": 0,
+                "layout": "{\"params\":{},\"actions\":[{\"methodName\":\"revealGirlConfetti\",\"params\":{}},{\"methodName\":\"revealBoyConfetti\",\"params\":{}},{\"methodName\":\"resetConfetti\",\"params\":{}}]}"
               }
             ]
           }

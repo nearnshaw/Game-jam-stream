@@ -61,6 +61,7 @@ export class ChoosePollUI {
         >
           {buttonData.map(({ id, label, icon }) => (
             <ChoosePollActivityButton
+              key={`choose-poll-${id}`}
               id={id}
               label={label}
               icon={icon}

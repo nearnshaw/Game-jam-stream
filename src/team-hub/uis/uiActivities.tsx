@@ -56,6 +56,7 @@ export class ChooseActivityUI {
         >
           {buttonData.map(({ id, label, icon }) => (
             <ChooseActivityButton
+              key={`activity-${id}`}
               id={id}
               label={label}
               icon={icon}

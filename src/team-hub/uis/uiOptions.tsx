@@ -101,6 +101,7 @@ export class OptionsUI {
         >
           {this.options.map((option, i) => (
             <OptionButton
+              key={`poll-option-${i}-${option}`}
               text={option}
               index={i}
               selected={this.selectedIndex === i}

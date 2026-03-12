@@ -68,7 +68,7 @@ function normalizeUserId(userId: string | null | undefined): string {
 }
 
 async function fetchUserData(userId: string): Promise<any | null> {
-  const url = 'https://peer.decentraland.org/lambdas/profiles'
+  const url = 'https://asset-bundle-registry.decentraland.org/profiles'
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -233,7 +233,8 @@ function BuzzRankingUi(): ReactEcs.JSX.Element | null {
           width: 360,
           height: 'auto',
           positionType: 'absolute',
-          position: { bottom: 20, right: '5%' },
+          // Raise the leaderboard so the first entry is fully visible
+          position: { bottom: 140, right: '5%' },
           flexDirection: 'column',
           padding: { top: 12, bottom: 12, left: 12, right: 12 }
         }}
