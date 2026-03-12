@@ -1,7 +1,7 @@
 import { MeshRenderer, engine, Material, Transform, Tween, EasingFunction, VideoPlayer, pointerEventsSystem, InputAction, MeshCollider, InputModifier } from '@dcl/sdk/ecs'
 import { Color4, Quaternion, Vector3 } from '@dcl/sdk/math'
 import { getTriggerEvents, getActionEvents } from '@dcl/asset-packs/dist/events'
-import { TriggerType } from '@dcl/asset-packs'
+// import { TriggerType } from '@dcl/asset-packs'
 import { PlayerIdentityData } from '@dcl/sdk/ecs'
 import { getPlayer } from '@dcl/sdk/src/players'
 import { triggerEmote } from '~system/RestrictedActions'

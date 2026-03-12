@@ -1,7 +1,7 @@
 {
-  "name": "dcl-project",
+  "name": "the-office",
   "version": "1.0.0",
-  "description": "SDK7 Template scene",
+  "description": "The office",
   "scripts": {
     "start": "sdk-commands start",
     "deploy": "sdk-commands deploy",
@@ -11,7 +11,6 @@
     "server-logs": "sdk-commands sdk-server-logs"
   },
   "devDependencies": {
-    "@dcl/asset-packs": "https://sdk-team-cdn.decentraland.org/creator-hub/branch/admin-ui-virtual-screen-size/@dcl/asset-packs/dcl-asset-packs-2.12.1-commit-cceabc21214dfb71702b88cb0a7c399401c56658.tgz",
     "@dcl/hammurabi-server": "^1.0.0-21071169532.commit-9d5053a",
     "@dcl/js-runtime": "7.21.1-22918726402.commit-ee210ee",
     "@dcl/sdk": "^7.21.1-22918726402.commit-ee210ee"
