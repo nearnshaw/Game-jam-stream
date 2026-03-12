@@ -9,6 +9,7 @@ import { useInteractive } from './hooks/useInteractive'
 import { DCLColors } from './themes/themes'
 
 function OptionButton(props: {
+  key?: string
   index: number
   text: string
   selected: boolean

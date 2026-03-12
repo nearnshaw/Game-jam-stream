@@ -105,6 +105,7 @@ export class ChooseActivityUI {
 }
 
 function ChooseActivityButton(props: {
+  key?: string
   id: ButtonsType
   label: string
   icon: string

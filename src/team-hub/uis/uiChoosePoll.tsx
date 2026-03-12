@@ -108,6 +108,7 @@ export class ChoosePollUI {
 }
 
 function ChoosePollActivityButton(props: {
+  key?: string
   id: ButtonsType
   label: string
   icon: string
