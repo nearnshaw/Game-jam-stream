@@ -27,8 +27,6 @@
   },
   "dependencies": {
     "@dcl-sdk/utils": "latest",
-    "dcl-ui-toolkit": "latest",
-    "install": "^0.13.0",
-    "npm": "^11.11.0"
+    "dcl-ui-toolkit": "latest"
   }
 }
