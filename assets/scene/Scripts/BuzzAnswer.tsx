@@ -21,7 +21,8 @@ enum BuzzMessageType {
   ANSWER_TYPE     = 'ANSWER_TYPE',
   ANSWER_UPDATE   = 'ANSWER_UPDATE',
   INCORRECT_SOUND = 'INCORRECT_SOUND',
-  REQUEST_STATE   = 'REQUEST_STATE'
+  REQUEST_STATE   = 'REQUEST_STATE',
+  SHOW_WRONG      = 'SHOW_WRONG'
 }
 
 const BuzzMessages = {
@@ -37,7 +38,8 @@ const BuzzMessages = {
   [BuzzMessageType.ANSWER_TYPE]:     Schemas.Map({ text: Schemas.String }),
   [BuzzMessageType.ANSWER_UPDATE]:   Schemas.Map({ text: Schemas.String }),
   [BuzzMessageType.INCORRECT_SOUND]: Schemas.Map({}),
-  [BuzzMessageType.REQUEST_STATE]:   Schemas.Map({})
+  [BuzzMessageType.REQUEST_STATE]:   Schemas.Map({}),
+  [BuzzMessageType.SHOW_WRONG]:      Schemas.Map({ playerName: Schemas.String })
 }
 
 const buzzRoom = registerMessages(BuzzMessages)
@@ -410,6 +412,8 @@ export class BuzzAnswer {
   private hasWinner: boolean = false
   private topFourNames: string[] = []
   private localPlayerName: string = ''
+  private wrongDisplayTimer: number = 0
+  private pendingWinnerName: string | null = null
 
   constructor(
     public src: string,
@@ -540,9 +544,11 @@ export class BuzzAnswer {
 
     buzzRoom.onMessage(BuzzMessageType.ADMIN_INCORRECT, () => {
       if (currentAnswererId === null) return
-      console.log(`[SERVER] Incorrect by ${namesById[currentAnswererId] ?? 'Unknown'}`)
+      const wrongPlayerName = namesById[currentAnswererId] ?? 'Unknown'
+      console.log(`[SERVER] Incorrect by ${wrongPlayerName}`)
       penalizeCurrentAnswerer()
       buzzRoom.send(BuzzMessageType.INCORRECT_SOUND, {})
+      buzzRoom.send(BuzzMessageType.SHOW_WRONG, { playerName: wrongPlayerName })
       setCurrentAnswerer(currentIndex + 1)
     })
 
@@ -687,7 +693,11 @@ export class BuzzAnswer {
       uiInputText = ''
       clearAnswerInput = true
       console.log(`[CLIENT] Answering: ${winnerName}, Top 4: ${topFour}`)
-      this.showWinnerText(winnerName)
+      if (this.wrongDisplayTimer > 0) {
+        this.pendingWinnerName = winnerName
+      } else {
+        this.showWinnerText(winnerName)
+      }
     })
 
     // Live answer text from the answering player
@@ -701,6 +711,12 @@ export class BuzzAnswer {
     // Play game-over sound globally for all players on incorrect answer
     buzzRoom.onMessage(BuzzMessageType.INCORRECT_SOUND, () => {
       playGlobalSound('assets/scene/Audio/game-over.mp3')
+    })
+
+    buzzRoom.onMessage(BuzzMessageType.SHOW_WRONG, () => {
+      this.wrongDisplayTimer = 2
+      this.pendingWinnerName = null
+      this.showWrongText()
     })
 
     buzzRoom.onMessage(BuzzMessageType.ANSWER_CORRECT, (_data) => {
@@ -747,7 +763,10 @@ export class BuzzAnswer {
       uiTypedAnswer = ''
       uiInputText = ''
       clearAnswerInput = true
-      this.removeWinnerText()
+      this.pendingWinnerName = null
+      if (this.wrongDisplayTimer <= 0) {
+        this.removeWinnerText()
+      }
     })
 
     // Ask the server for the current state so late-joiners see the right button appearance
@@ -757,6 +776,20 @@ export class BuzzAnswer {
       if (!uiCurrentAnswerer) return
       uiCountdown -= dt
       if (uiCountdown <= 0) uiCountdown = 0
+    })
+
+    engine.addSystem((dt) => {
+      if (this.wrongDisplayTimer <= 0) return
+      this.wrongDisplayTimer -= dt
+      if (this.wrongDisplayTimer <= 0) {
+        this.wrongDisplayTimer = 0
+        if (this.pendingWinnerName !== null) {
+          this.showWinnerText(this.pendingWinnerName)
+          this.pendingWinnerName = null
+        } else {
+          this.removeWinnerText()
+        }
+      }
     })
 
   }
@@ -782,11 +815,38 @@ export class BuzzAnswer {
     const textShape = TextShape.getMutableOrNull(this.winnerTextEntity)
     if (textShape !== null) {
       textShape.text = displayText
+      textShape.textColor = Color4.Yellow()
     } else {
       TextShape.create(this.winnerTextEntity, {
         text: displayText,
         fontSize: 3,
         textColor: Color4.Yellow(),
+        outlineColor: Color4.Black(),
+        outlineWidth: 0.15
+      })
+    }
+  }
+
+  private showWrongText() {
+    if (this.winnerTextEntity === null) {
+      this.winnerTextEntity = engine.addEntity()
+      Transform.create(this.winnerTextEntity, {
+        position: Vector3.create(0, 0.3, 0),
+        scale: Vector3.create(0.5, 0.5, 0.5),
+        parent: this.entity
+      })
+      Billboard.create(this.winnerTextEntity)
+    }
+
+    const textShape = TextShape.getMutableOrNull(this.winnerTextEntity)
+    if (textShape !== null) {
+      textShape.text = 'WRONG'
+      textShape.textColor = Color4.Red()
+    } else {
+      TextShape.create(this.winnerTextEntity, {
+        text: 'WRONG',
+        fontSize: 3,
+        textColor: Color4.Red(),
         outlineColor: Color4.Black(),
         outlineWidth: 0.15
       })
