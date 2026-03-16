@@ -5975,7 +5975,7 @@
         "serializationType": "map"
       },
       "data": {
-        "0": {
+        "539": {
           "json": {
             "gizmo": 0
           }
@@ -6188,6 +6188,7 @@
               },
               {
                 "entity": 559,
+                "open": true,
                 "children": [
                   541,
                   542,
@@ -12033,7 +12034,7 @@
               {
                 "path": "assets/custom/photo_mural/photoMural.ts",
                 "priority": 0,
-                "layout": "{\"params\":{\"use_current_scene\":{\"type\":\"boolean\",\"optional\":true,\"value\":true},\"coordinates\":{\"type\":\"string\",\"optional\":false,\"value\":\"\"},\"world_id\":{\"type\":\"string\",\"optional\":true,\"value\":\"\"}},\"actions\":[]}"
+                "layout": "{\"params\":{\"use_current_scene\":{\"type\":\"boolean\",\"optional\":true,\"value\":false},\"coordinates\":{\"type\":\"string\",\"optional\":false,\"value\":\"\"},\"world_id\":{\"type\":\"string\",\"optional\":true,\"value\":\"nicoe.dcl.eth\"}}}"
               }
             ]
           }

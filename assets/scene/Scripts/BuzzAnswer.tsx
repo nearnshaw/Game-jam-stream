@@ -70,7 +70,9 @@ function normalizeUserId(userId: string | null | undefined): string {
 }
 
 async function fetchUserData(userId: string): Promise<any | null> {
-  const url = 'https://asset-bundle-registry.decentraland.org/profiles'
+  const url = 'https://peer.decentraland.org/lambdas/profiles'
+
+  //'https://asset-bundle-registry.decentraland.org/profiles'
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -532,7 +534,7 @@ export class BuzzAnswer {
       if (currentAnswererId === null) return
       const playerId = currentAnswererId
       const playerName = namesById[playerId] ?? 'Unknown'
-      scores[playerId] = (scores[playerId] ?? 0) + 1
+      scores[playerId] = (scores[playerId] ?? 0) + 2
       console.log(`[SERVER] Correct! ${playerName} scores. Total: ${scores[playerId]}`)
       buzzRoom.send(BuzzMessageType.ANSWER_CORRECT, { playerName: playerName })
       broadcastScores()
@@ -736,10 +738,10 @@ export class BuzzAnswer {
 
     buzzRoom.onMessage(BuzzMessageType.SCORE_UPDATE, (data) => {
       const leaderboard = JSON.parse(data.leaderboard) as LeaderboardEntry[]
-      uiLeaderboard = leaderboard.map((entry) => ({
-        ...entry,
-        userId: normalizeUserId(entry.userId)
-      }))
+      uiLeaderboard = leaderboard
+        .map((entry) => ({ ...entry, userId: normalizeUserId(entry.userId) }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 5)
       for (const entry of uiLeaderboard) {
         void fetchAndCacheLeaderboardProfile(entry.userId, entry.name)
       }
