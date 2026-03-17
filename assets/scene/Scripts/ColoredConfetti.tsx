@@ -76,8 +76,12 @@ export class ColoredConfetti {
    * Triggers pink confetti (girl reveal).
    */
   public async revealGirlConfetti() {
-    const pink = Color4.create(1, 0.3, 0.8, 1) // soft pastel pink
-    await this.coloredConfetti(pink)
+    // const pink = Color4.create(1, 0.3, 0.8, 1) // soft pastel pink
+    // await this.coloredConfetti(pink)
+    const confettiEntities = engine.getEntitiesByTag('Pink')
+    for (const entity of confettiEntities) {
+      getActionEvents(entity).emit('Explode', {})
+    }
   }
 
   /**
@@ -85,20 +89,24 @@ export class ColoredConfetti {
    * Triggers light blue confetti (boy reveal).
    */
   public async revealBoyConfetti() {
-    const lightBlue = Color4.create(0.3, 0.75, 1, 1) // soft pastel blue
-    await this.coloredConfetti(lightBlue)
+    // const lightBlue = Color4.create(0.3, 0.75, 1, 1) // soft pastel blue
+    // await this.coloredConfetti(lightBlue)
+    const confettiEntities = engine.getEntitiesByTag('Blue')
+    for (const entity of confettiEntities) {
+      getActionEvents(entity).emit('Explode', {})
+    }
   }
 
-    /**
-   * @action
-   * Triggers pink confetti (girl reveal).
-   */
-    public async resetConfetti() {
-      const confettiEntities = engine.getEntitiesByTag('Confetti')
-      for (const entity of confettiEntities) {
-        GltfNodeModifiers.deleteFrom(entity)
-      }
+  //   /**
+  //  * @action
+  //  * Triggers pink confetti (girl reveal).
+  //  */
+  //   public async resetConfetti() {
+  //     const confettiEntities = engine.getEntitiesByTag('Confetti')
+  //     for (const entity of confettiEntities) {
+  //       GltfNodeModifiers.deleteFrom(entity)
+  //     }
   
-    }
+  //   }
 
 }

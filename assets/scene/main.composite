@@ -132,48 +132,6 @@
             "parent": 0
           }
         },
-        "515": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 0.07999999821186066,
-              "z": 0
-            },
-            "scale": {
-              "x": 0.15000000596046448,
-              "y": 0.15000000596046448,
-              "z": 0.15000000596046448
-            },
-            "rotation": {
-              "x": 0.7041000127792358,
-              "y": 0,
-              "z": 0,
-              "w": -0.710099995136261
-            },
-            "parent": 516
-          }
-        },
-        "516": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 0.05000000074505806,
-              "z": 0
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": 1,
-              "y": 0,
-              "z": 0,
-              "w": 0
-            },
-            "parent": 520
-          }
-        },
         "518": {
           "json": {
             "position": {
@@ -193,27 +151,6 @@
               "w": 0.707099974155426
             },
             "parent": 514
-          }
-        },
-        "520": {
-          "json": {
-            "position": {
-              "x": -1.75,
-              "y": 1.25,
-              "z": -0.3310000002384186
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": 0.7070000171661377,
-              "y": 0,
-              "z": 0,
-              "w": 0.7070000171661377
-            },
-            "parent": 539
           }
         },
         "521": {
@@ -531,27 +468,6 @@
             "parent": 0
           }
         },
-        "536": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 0.05000000074505806,
-              "z": 0
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": -5.929230630780102e-21,
-              "y": 2.341712956877018e-8,
-              "z": 3.028142786434124e-20,
-              "w": 1
-            },
-            "parent": 576
-          }
-        },
         "537": {
           "json": {
             "position": {
@@ -592,48 +508,6 @@
               "w": 0.7933533191680908
             },
             "parent": 564
-          }
-        },
-        "539": {
-          "json": {
-            "position": {
-              "x": 224.5,
-              "y": 9.5,
-              "z": 224.25
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "parent": 0
-          }
-        },
-        "540": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 0.07999999821186066,
-              "z": 0
-            },
-            "scale": {
-              "x": 0.15000000596046448,
-              "y": 0.15000000596046448,
-              "z": 0.15000000596046448
-            },
-            "rotation": {
-              "x": 0.7041000127792358,
-              "y": 0,
-              "z": 0,
-              "w": -0.710099995136261
-            },
-            "parent": 553
           }
         },
         "541": {
@@ -886,27 +760,6 @@
               "w": 1
             },
             "parent": 535
-          }
-        },
-        "553": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 0.052000001072883606,
-              "z": 0
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            },
-            "rotation": {
-              "x": 1,
-              "y": 0,
-              "z": 0,
-              "w": 0
-            },
-            "parent": 570
           }
         },
         "554": {
@@ -1224,25 +1077,46 @@
             "parent": 0
           }
         },
-        "570": {
+        "571": {
           "json": {
             "position": {
-              "x": 1.75,
-              "y": 1.25,
-              "z": -0.33000001311302185
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
             },
             "scale": {
               "x": 1,
               "y": 1,
               "z": 1
             },
+            "parent": 547
+          }
+        },
+        "572": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
             "rotation": {
-              "x": 0.707099974155426,
+              "x": 0,
               "y": 0,
               "z": 0,
-              "w": 0.707099974155426
+              "w": 1
             },
-            "parent": 539
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 547
           }
         },
         "573": {
@@ -1266,6 +1140,27 @@
             "parent": 537
           }
         },
+        "574": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 549
+          }
+        },
         "575": {
           "json": {
             "position": {
@@ -1287,48 +1182,6 @@
             "parent": 514
           }
         },
-        "576": {
-          "json": {
-            "position": {
-              "x": 7.230000019073486,
-              "y": 8.853230476379395,
-              "z": -18.239999771118164
-            },
-            "scale": {
-              "x": 0.9999999403953552,
-              "y": 1,
-              "z": 0.9999999403953552
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0.7933533191680908,
-              "z": 0,
-              "w": 0.6087614297866821
-            },
-            "parent": 514
-          }
-        },
-        "577": {
-          "json": {
-            "position": {
-              "x": 0,
-              "y": 3.799999952316284,
-              "z": 0
-            },
-            "scale": {
-              "x": 1.5,
-              "y": 1.5,
-              "z": 1.5
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0,
-              "w": 1
-            },
-            "parent": 576
-          }
-        },
         "578": {
           "json": {
             "position": {
@@ -1348,6 +1201,153 @@
               "w": 1
             },
             "parent": 0
+          }
+        },
+        "579": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 549
+          }
+        },
+        "580": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 551
+          }
+        },
+        "581": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 551
+          }
+        },
+        "582": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0.1899999976158142,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 555
+          }
+        },
+        "583": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0.1899999976158142,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 555
+          }
+        },
+        "584": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 557
+          }
+        },
+        "585": {
+          "json": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 557
           }
         },
         "586": {
@@ -1654,12 +1654,6 @@
             "entityId": 8017
           }
         },
-        "515": {
-          "json": {
-            "networkId": 0,
-            "entityId": 8064
-          }
-        },
         "518": {
           "json": {
             "networkId": 0,
@@ -1732,22 +1726,10 @@
             "entityId": 8013
           }
         },
-        "536": {
-          "json": {
-            "networkId": 0,
-            "entityId": 8060
-          }
-        },
         "538": {
           "json": {
             "networkId": 0,
             "entityId": 8043
-          }
-        },
-        "540": {
-          "json": {
-            "networkId": 0,
-            "entityId": 8065
           }
         },
         "541": {
@@ -1870,22 +1852,70 @@
             "entityId": 8067
           }
         },
+        "571": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8069
+          }
+        },
+        "572": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8070
+          }
+        },
         "573": {
           "json": {
             "networkId": 0,
             "entityId": 8053
           }
         },
-        "576": {
+        "574": {
           "json": {
             "networkId": 0,
-            "entityId": 8059
+            "entityId": 8071
           }
         },
-        "577": {
+        "579": {
           "json": {
             "networkId": 0,
-            "entityId": 8061
+            "entityId": 8072
+          }
+        },
+        "580": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8073
+          }
+        },
+        "581": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8074
+          }
+        },
+        "582": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8075
+          }
+        },
+        "583": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8076
+          }
+        },
+        "584": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8077
+          }
+        },
+        "585": {
+          "json": {
+            "networkId": 0,
+            "entityId": 8078
           }
         }
       }
@@ -3423,11 +3453,6 @@
             "states": []
           }
         },
-        "536": {
-          "json": {
-            "states": []
-          }
-        },
         "537": {
           "json": {
             "states": []
@@ -3690,9 +3715,51 @@
             ]
           }
         },
+        "571": {
+          "json": {
+            "states": [
+              {
+                "clip": "Animation",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": true,
+                "shouldReset": false
+              }
+            ]
+          }
+        },
+        "572": {
+          "json": {
+            "states": [
+              {
+                "clip": "Animation",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": true,
+                "shouldReset": false
+              }
+            ]
+          }
+        },
         "573": {
           "json": {
             "states": []
+          }
+        },
+        "574": {
+          "json": {
+            "states": [
+              {
+                "clip": "Animation",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": true,
+                "shouldReset": false
+              }
+            ]
           }
         },
         "575": {
@@ -3700,19 +3767,107 @@
             "states": []
           }
         },
-        "576": {
-          "json": {
-            "states": []
-          }
-        },
-        "577": {
-          "json": {
-            "states": []
-          }
-        },
         "578": {
           "json": {
             "states": []
+          }
+        },
+        "579": {
+          "json": {
+            "states": [
+              {
+                "clip": "Animation",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": true,
+                "shouldReset": false
+              }
+            ]
+          }
+        },
+        "580": {
+          "json": {
+            "states": [
+              {
+                "clip": "Animation",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": true,
+                "shouldReset": false
+              }
+            ]
+          }
+        },
+        "581": {
+          "json": {
+            "states": [
+              {
+                "clip": "Animation",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": true,
+                "shouldReset": false
+              }
+            ]
+          }
+        },
+        "582": {
+          "json": {
+            "states": [
+              {
+                "clip": "Animation",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": true,
+                "shouldReset": false
+              }
+            ]
+          }
+        },
+        "583": {
+          "json": {
+            "states": [
+              {
+                "clip": "Animation",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": true,
+                "shouldReset": false
+              }
+            ]
+          }
+        },
+        "584": {
+          "json": {
+            "states": [
+              {
+                "clip": "Animation",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": true,
+                "shouldReset": false
+              }
+            ]
+          }
+        },
+        "585": {
+          "json": {
+            "states": [
+              {
+                "clip": "Animation",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": true,
+                "shouldReset": false
+              }
+            ]
           }
         },
         "589": {
@@ -3929,25 +4084,11 @@
             "src": "assets/Decentraland Theatre/base_theatre.glb"
           }
         },
-        "516": {
-          "json": {
-            "src": "assets/custom/photo_mural/button_square_red.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
         "518": {
           "json": {
             "src": "assets/asset-packs/video_screen/video_player.glb",
             "visibleMeshesCollisionMask": 1,
             "invisibleMeshesCollisionMask": 0
-          }
-        },
-        "520": {
-          "json": {
-            "src": "assets/custom/photo_mural/button_base_square.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
           }
         },
         "522": {
@@ -3978,25 +4119,11 @@
             "invisibleMeshesCollisionMask": 0
           }
         },
-        "536": {
-          "json": {
-            "src": "assets/asset-packs/clap_meter/clapMeterNeedle.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
         "537": {
           "json": {
             "src": "assets/asset-packs/sign_neon_rect/sign_square.glb",
             "visibleMeshesCollisionMask": 1,
             "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "539": {
-          "json": {
-            "src": "assets/custom/photo_mural/billboard.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
           }
         },
         "541": {
@@ -4069,13 +4196,6 @@
             "invisibleMeshesCollisionMask": 0
           }
         },
-        "553": {
-          "json": {
-            "src": "assets/custom/photo_mural/button_square_red.glb",
-            "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
-          }
-        },
         "554": {
           "json": {
             "src": "assets/asset-packs/confetti/confetti.glb",
@@ -4132,18 +4252,74 @@
             "invisibleMeshesCollisionMask": 0
           }
         },
-        "570": {
+        "571": {
           "json": {
-            "src": "assets/custom/photo_mural/button_base_square.glb",
+            "src": "assets/asset-packs/confetti/confetti.glb",
             "visibleMeshesCollisionMask": 0,
-            "invisibleMeshesCollisionMask": 3
+            "invisibleMeshesCollisionMask": 0
           }
         },
-        "576": {
+        "572": {
           "json": {
-            "src": "assets/asset-packs/clap_meter/clapMeterBoard.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 3
+            "src": "assets/asset-packs/confetti/confetti.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "574": {
+          "json": {
+            "src": "assets/asset-packs/confetti/confetti.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "579": {
+          "json": {
+            "src": "assets/asset-packs/confetti/confetti.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "580": {
+          "json": {
+            "src": "assets/asset-packs/confetti/confetti.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "581": {
+          "json": {
+            "src": "assets/asset-packs/confetti/confetti.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "582": {
+          "json": {
+            "src": "assets/asset-packs/confetti/confetti.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "583": {
+          "json": {
+            "src": "assets/asset-packs/confetti/confetti.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "584": {
+          "json": {
+            "src": "assets/asset-packs/confetti/confetti.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 0
+          }
+        },
+        "585": {
+          "json": {
+            "src": "assets/asset-packs/confetti/confetti.glb",
+            "visibleMeshesCollisionMask": 0,
+            "invisibleMeshesCollisionMask": 0
           }
         },
         "586": {
@@ -4735,24 +4911,9 @@
             "value": "base"
           }
         },
-        "515": {
-          "json": {
-            "value": "Text_3"
-          }
-        },
-        "516": {
-          "json": {
-            "value": "previous_red_2"
-          }
-        },
         "518": {
           "json": {
             "value": "Video Screen"
-          }
-        },
-        "520": {
-          "json": {
-            "value": "previous_button_2"
           }
         },
         "521": {
@@ -4830,11 +4991,6 @@
             "value": "Utils"
           }
         },
-        "536": {
-          "json": {
-            "value": "Needle"
-          }
-        },
         "537": {
           "json": {
             "value": "Banner"
@@ -4843,16 +4999,6 @@
         "538": {
           "json": {
             "value": "VCameraRef5"
-          }
-        },
-        "539": {
-          "json": {
-            "value": "photo_mural"
-          }
-        },
-        "540": {
-          "json": {
-            "value": "Text_4"
           }
         },
         "541": {
@@ -4913,11 +5059,6 @@
         "552": {
           "json": {
             "value": "confettiControl"
-          }
-        },
-        "553": {
-          "json": {
-            "value": "next_red_2"
           }
         },
         "554": {
@@ -4995,9 +5136,14 @@
             "value": "Red Button_2"
           }
         },
-        "570": {
+        "571": {
           "json": {
-            "value": "next_button_2"
+            "value": "confetti_Blue"
+          }
+        },
+        "572": {
+          "json": {
+            "value": "confetti_Pink"
           }
         },
         "573": {
@@ -5005,24 +5151,54 @@
             "value": "BannerText_2"
           }
         },
+        "574": {
+          "json": {
+            "value": "confetti_Blue_2"
+          }
+        },
         "575": {
           "json": {
             "value": "mallorca"
           }
         },
-        "576": {
-          "json": {
-            "value": "clapMeter"
-          }
-        },
-        "577": {
-          "json": {
-            "value": "clapMeterText"
-          }
-        },
         "578": {
           "json": {
             "value": "slideSound"
+          }
+        },
+        "579": {
+          "json": {
+            "value": "confetti_Pink_2"
+          }
+        },
+        "580": {
+          "json": {
+            "value": "confetti_Blue_3"
+          }
+        },
+        "581": {
+          "json": {
+            "value": "confetti_Pink_3"
+          }
+        },
+        "582": {
+          "json": {
+            "value": "confetti_Blue_4"
+          }
+        },
+        "583": {
+          "json": {
+            "value": "confetti_Pink_4"
+          }
+        },
+        "584": {
+          "json": {
+            "value": "confetti_Blue_5"
+          }
+        },
+        "585": {
+          "json": {
+            "value": "confetti_Pink_5"
           }
         },
         "586": {
@@ -5126,14 +5302,6 @@
             ]
           }
         },
-        "515": {
-          "json": {
-            "componentIds": [
-              1030,
-              3981387903
-            ]
-          }
-        },
         "518": {
           "json": {
             "componentIds": [
@@ -5232,27 +5400,10 @@
             ]
           }
         },
-        "536": {
-          "json": {
-            "componentIds": [
-              1,
-              3981387903,
-              1081
-            ]
-          }
-        },
         "538": {
           "json": {
             "componentIds": [
               1
-            ]
-          }
-        },
-        "540": {
-          "json": {
-            "componentIds": [
-              1030,
-              3981387903
             ]
           }
         },
@@ -5431,6 +5582,26 @@
             ]
           }
         },
+        "571": {
+          "json": {
+            "componentIds": [
+              1042,
+              1081,
+              1020,
+              1099
+            ]
+          }
+        },
+        "572": {
+          "json": {
+            "componentIds": [
+              1042,
+              1081,
+              1020,
+              1099
+            ]
+          }
+        },
         "573": {
           "json": {
             "componentIds": [
@@ -5439,23 +5610,83 @@
             ]
           }
         },
-        "576": {
+        "574": {
           "json": {
             "componentIds": [
-              3981387903,
-              2193198513,
-              1,
               1042,
-              1081
+              1081,
+              1020,
+              1099
             ]
           }
         },
-        "577": {
+        "579": {
           "json": {
             "componentIds": [
-              1030,
-              3981387903,
-              2709697014
+              1042,
+              1081,
+              1020,
+              1099
+            ]
+          }
+        },
+        "580": {
+          "json": {
+            "componentIds": [
+              1042,
+              1081,
+              1020,
+              1099
+            ]
+          }
+        },
+        "581": {
+          "json": {
+            "componentIds": [
+              1042,
+              1081,
+              1020,
+              1099
+            ]
+          }
+        },
+        "582": {
+          "json": {
+            "componentIds": [
+              1042,
+              1081,
+              1020,
+              1099
+            ]
+          }
+        },
+        "583": {
+          "json": {
+            "componentIds": [
+              1042,
+              1081,
+              1020,
+              1099
+            ]
+          }
+        },
+        "584": {
+          "json": {
+            "componentIds": [
+              1042,
+              1081,
+              1020,
+              1099
+            ]
+          }
+        },
+        "585": {
+          "json": {
+            "componentIds": [
+              1042,
+              1081,
+              1020,
+              1099
             ]
           }
         }
@@ -5470,15 +5701,6 @@
         "protocolBuffer": "PBTextShape"
       },
       "data": {
-        "515": {
-          "json": {
-            "text": "<",
-            "font": 2,
-            "fontSize": 4,
-            "fontAutoSize": true,
-            "textAlign": 4
-          }
-        },
         "521": {
           "json": {
             "text": "Meetups",
@@ -5505,15 +5727,6 @@
             }
           }
         },
-        "540": {
-          "json": {
-            "text": ">",
-            "font": 2,
-            "fontSize": 4,
-            "fontAutoSize": true,
-            "textAlign": 4
-          }
-        },
         "573": {
           "json": {
             "text": "2026",
@@ -5536,32 +5749,6 @@
               "r": 0.5411764979362488,
               "g": 0.7607843279838562,
               "b": 1,
-              "a": 1
-            }
-          }
-        },
-        "577": {
-          "json": {
-            "text": "",
-            "font": 2,
-            "fontSize": 5,
-            "fontAutoSize": false,
-            "textAlign": 4,
-            "paddingTop": 0,
-            "paddingRight": 0,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "lineSpacing": 0,
-            "outlineWidth": 0,
-            "outlineColor": {
-              "r": 1,
-              "g": 1,
-              "b": 1
-            },
-            "textColor": {
-              "r": 0.7568627595901489,
-              "g": 0.10196078568696976,
-              "b": 0.10196078568696976,
               "a": 1
             }
           }
@@ -5650,11 +5837,6 @@
         "534": {
           "json": {
             "visible": false
-          }
-        },
-        "536": {
-          "json": {
-            "visible": true
           }
         },
         "538": {
@@ -5767,12 +5949,57 @@
             "visible": false
           }
         },
-        "576": {
+        "571": {
           "json": {
-            "visible": true
+            "visible": false
+          }
+        },
+        "572": {
+          "json": {
+            "visible": false
+          }
+        },
+        "574": {
+          "json": {
+            "visible": false
           }
         },
         "578": {
+          "json": {
+            "visible": false
+          }
+        },
+        "579": {
+          "json": {
+            "visible": false
+          }
+        },
+        "580": {
+          "json": {
+            "visible": false
+          }
+        },
+        "581": {
+          "json": {
+            "visible": false
+          }
+        },
+        "582": {
+          "json": {
+            "visible": false
+          }
+        },
+        "583": {
+          "json": {
+            "visible": false
+          }
+        },
+        "584": {
+          "json": {
+            "visible": false
+          }
+        },
+        "585": {
           "json": {
             "visible": false
           }
@@ -5828,7 +6055,9 @@
               "Tag Group 2",
               "Tag Group 3",
               "Tag Group 4",
-              "Confetti"
+              "Confetti",
+              "Blue",
+              "Pink"
             ]
           }
         },
@@ -5901,6 +6130,86 @@
               "Confetti"
             ]
           }
+        },
+        "571": {
+          "json": {
+            "tags": [
+              "Confetti",
+              "Blue"
+            ]
+          }
+        },
+        "572": {
+          "json": {
+            "tags": [
+              "Confetti",
+              "Pink"
+            ]
+          }
+        },
+        "574": {
+          "json": {
+            "tags": [
+              "Confetti",
+              "Blue"
+            ]
+          }
+        },
+        "579": {
+          "json": {
+            "tags": [
+              "Confetti",
+              "Pink"
+            ]
+          }
+        },
+        "580": {
+          "json": {
+            "tags": [
+              "Confetti",
+              "Blue"
+            ]
+          }
+        },
+        "581": {
+          "json": {
+            "tags": [
+              "Confetti",
+              "Pink"
+            ]
+          }
+        },
+        "582": {
+          "json": {
+            "tags": [
+              "Confetti",
+              "Blue"
+            ]
+          }
+        },
+        "583": {
+          "json": {
+            "tags": [
+              "Confetti",
+              "Pink"
+            ]
+          }
+        },
+        "584": {
+          "json": {
+            "tags": [
+              "Confetti",
+              "Blue"
+            ]
+          }
+        },
+        "585": {
+          "json": {
+            "tags": [
+              "Confetti",
+              "Pink"
+            ]
+          }
         }
       }
     },
@@ -5959,6 +6268,616 @@
               }
             ]
           }
+        },
+        "571": {
+          "json": {
+            "modifiers": [
+              {
+                "path": "",
+                "castShadows": true,
+                "material": {
+                  "material": {
+                    "$case": "unlit",
+                    "unlit": {
+                      "texture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      },
+                      "alphaTest": 0.5,
+                      "castShadows": true,
+                      "diffuseColor": {
+                        "r": 0.4000000059604645,
+                        "g": 0.8784313797950745,
+                        "b": 1,
+                        "a": 1
+                      },
+                      "alphaTexture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "572": {
+          "json": {
+            "modifiers": [
+              {
+                "path": "",
+                "castShadows": true,
+                "material": {
+                  "material": {
+                    "$case": "unlit",
+                    "unlit": {
+                      "texture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      },
+                      "alphaTest": 0.5,
+                      "castShadows": true,
+                      "diffuseColor": {
+                        "r": 1,
+                        "g": 0.32156863808631897,
+                        "b": 0.6823529601097107,
+                        "a": 1
+                      },
+                      "alphaTexture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "574": {
+          "json": {
+            "modifiers": [
+              {
+                "path": "",
+                "castShadows": true,
+                "material": {
+                  "material": {
+                    "$case": "unlit",
+                    "unlit": {
+                      "texture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      },
+                      "alphaTest": 0.5,
+                      "castShadows": true,
+                      "diffuseColor": {
+                        "r": 0.4000000059604645,
+                        "g": 0.8784313797950745,
+                        "b": 1,
+                        "a": 1
+                      },
+                      "alphaTexture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "579": {
+          "json": {
+            "modifiers": [
+              {
+                "path": "",
+                "castShadows": true,
+                "material": {
+                  "material": {
+                    "$case": "unlit",
+                    "unlit": {
+                      "texture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      },
+                      "alphaTest": 0.5,
+                      "castShadows": true,
+                      "diffuseColor": {
+                        "r": 1,
+                        "g": 0.32156863808631897,
+                        "b": 0.6823529601097107,
+                        "a": 1
+                      },
+                      "alphaTexture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "580": {
+          "json": {
+            "modifiers": [
+              {
+                "path": "",
+                "castShadows": true,
+                "material": {
+                  "material": {
+                    "$case": "unlit",
+                    "unlit": {
+                      "texture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      },
+                      "alphaTest": 0.5,
+                      "castShadows": true,
+                      "diffuseColor": {
+                        "r": 0.4000000059604645,
+                        "g": 0.8784313797950745,
+                        "b": 1,
+                        "a": 1
+                      },
+                      "alphaTexture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "581": {
+          "json": {
+            "modifiers": [
+              {
+                "path": "",
+                "castShadows": true,
+                "material": {
+                  "material": {
+                    "$case": "unlit",
+                    "unlit": {
+                      "texture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      },
+                      "alphaTest": 0.5,
+                      "castShadows": true,
+                      "diffuseColor": {
+                        "r": 1,
+                        "g": 0.32156863808631897,
+                        "b": 0.6823529601097107,
+                        "a": 1
+                      },
+                      "alphaTexture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "582": {
+          "json": {
+            "modifiers": [
+              {
+                "path": "",
+                "castShadows": true,
+                "material": {
+                  "material": {
+                    "$case": "unlit",
+                    "unlit": {
+                      "texture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      },
+                      "alphaTest": 0.5,
+                      "castShadows": true,
+                      "diffuseColor": {
+                        "r": 0.4000000059604645,
+                        "g": 0.8784313797950745,
+                        "b": 1,
+                        "a": 1
+                      },
+                      "alphaTexture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "583": {
+          "json": {
+            "modifiers": [
+              {
+                "path": "",
+                "castShadows": true,
+                "material": {
+                  "material": {
+                    "$case": "unlit",
+                    "unlit": {
+                      "texture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      },
+                      "alphaTest": 0.5,
+                      "castShadows": true,
+                      "diffuseColor": {
+                        "r": 1,
+                        "g": 0.32156863808631897,
+                        "b": 0.6823529601097107,
+                        "a": 1
+                      },
+                      "alphaTexture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "584": {
+          "json": {
+            "modifiers": [
+              {
+                "path": "",
+                "castShadows": true,
+                "material": {
+                  "material": {
+                    "$case": "unlit",
+                    "unlit": {
+                      "texture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      },
+                      "alphaTest": 0.5,
+                      "castShadows": true,
+                      "diffuseColor": {
+                        "r": 0.4000000059604645,
+                        "g": 0.8784313797950745,
+                        "b": 1,
+                        "a": 1
+                      },
+                      "alphaTexture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "585": {
+          "json": {
+            "modifiers": [
+              {
+                "path": "",
+                "castShadows": true,
+                "material": {
+                  "material": {
+                    "$case": "unlit",
+                    "unlit": {
+                      "texture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      },
+                      "alphaTest": 0.5,
+                      "castShadows": true,
+                      "diffuseColor": {
+                        "r": 1,
+                        "g": 0.32156863808631897,
+                        "b": 0.6823529601097107,
+                        "a": 1
+                      },
+                      "alphaTexture": {
+                        "tex": {
+                          "$case": "texture",
+                          "texture": {
+                            "src": "",
+                            "wrapMode": 0,
+                            "filterMode": 0,
+                            "offset": {
+                              "x": 0,
+                              "y": 0
+                            },
+                            "tiling": {
+                              "x": 1,
+                              "y": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
         }
       }
     },
@@ -5975,9 +6894,9 @@
         "serializationType": "map"
       },
       "data": {
-        "539": {
+        "514": {
           "json": {
-            "gizmo": 0
+            "gizmo": 1
           }
         }
       }
@@ -6032,7 +6951,6 @@
                   535,
                   533,
                   578,
-                  539,
                   568,
                   513
                 ]
@@ -6048,7 +6966,6 @@
                   575,
                   518,
                   586,
-                  576,
                   588
                 ]
               },
@@ -6137,14 +7054,18 @@
                 "entity": 547,
                 "open": true,
                 "children": [
-                  546
+                  546,
+                  571,
+                  572
                 ]
               },
               {
                 "entity": 549,
                 "open": true,
                 "children": [
-                  548
+                  548,
+                  574,
+                  579
                 ]
               },
               {
@@ -6153,8 +7074,11 @@
               },
               {
                 "entity": 551,
+                "open": true,
                 "children": [
-                  550
+                  550,
+                  580,
+                  581
                 ]
               },
               {
@@ -6167,8 +7091,11 @@
               },
               {
                 "entity": 555,
+                "open": true,
                 "children": [
-                  554
+                  554,
+                  582,
+                  583
                 ]
               },
               {
@@ -6179,7 +7106,9 @@
                 "entity": 557,
                 "open": true,
                 "children": [
-                  556
+                  556,
+                  584,
+                  585
                 ]
               },
               {
@@ -6288,22 +7217,6 @@
                 "children": []
               },
               {
-                "entity": 536,
-                "children": []
-              },
-              {
-                "entity": 576,
-                "open": true,
-                "children": [
-                  577,
-                  536
-                ]
-              },
-              {
-                "entity": 577,
-                "children": []
-              },
-              {
                 "entity": 586,
                 "children": []
               },
@@ -6374,50 +7287,51 @@
                 "children": []
               },
               {
-                "entity": 515,
-                "children": []
-              },
-              {
-                "entity": 516,
-                "children": [
-                  515
-                ]
-              },
-              {
-                "entity": 520,
-                "children": [
-                  516
-                ]
-              },
-              {
-                "entity": 539,
-                "children": [
-                  570,
-                  520
-                ]
-              },
-              {
-                "entity": 540,
-                "children": []
-              },
-              {
-                "entity": 553,
-                "children": [
-                  540
-                ]
-              },
-              {
-                "entity": 570,
-                "children": [
-                  553
-                ]
-              },
-              {
                 "entity": 568,
                 "children": []
               },
               {
                 "entity": 513,
+                "children": []
+              },
+              {
+                "entity": 571,
+                "children": []
+              },
+              {
+                "entity": 572,
+                "children": []
+              },
+              {
+                "entity": 574,
+                "children": []
+              },
+              {
+                "entity": 579,
+                "children": []
+              },
+              {
+                "entity": 580,
+                "children": []
+              },
+              {
+                "entity": 581,
+                "children": []
+              },
+              {
+                "entity": 582,
+                "children": []
+              },
+              {
+                "entity": 583,
+                "children": []
+              },
+              {
+                "entity": 584,
+                "children": []
+              },
+              {
+                "entity": 585,
                 "children": []
               }
             ]
@@ -6500,16 +7414,10 @@
         "535": {
           "json": {}
         },
-        "536": {
-          "json": {}
-        },
         "537": {
           "json": {}
         },
         "538": {
-          "json": {}
-        },
-        "539": {
           "json": {}
         },
         "541": {
@@ -6604,16 +7512,43 @@
         "569": {
           "json": {}
         },
+        "571": {
+          "json": {}
+        },
+        "572": {
+          "json": {}
+        },
         "573": {
+          "json": {}
+        },
+        "574": {
           "json": {}
         },
         "575": {
           "json": {}
         },
-        "576": {
+        "578": {
           "json": {}
         },
-        "578": {
+        "579": {
+          "json": {}
+        },
+        "580": {
+          "json": {}
+        },
+        "581": {
+          "json": {}
+        },
+        "582": {
+          "json": {}
+        },
+        "583": {
+          "json": {}
+        },
+        "584": {
+          "json": {}
+        },
+        "585": {
           "json": {}
         },
         "586": {
@@ -6690,6 +7625,26 @@
       }
     },
     {
+      "name": "inspector::Lock",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "boolean",
+            "serializationType": "boolean"
+          }
+        },
+        "serializationType": "map"
+      },
+      "data": {
+        "581": {
+          "json": {
+            "value": true
+          }
+        }
+      }
+    },
+    {
       "name": "inspector::CustomAsset",
       "jsonSchema": {
         "type": "object",
@@ -6715,11 +7670,6 @@
         "534": {
           "json": {
             "assetId": "4e4ffd4e-4f0d-45f1-9d1e-d26661f6b15e"
-          }
-        },
-        "539": {
-          "json": {
-            "assetId": "4e8ed7d0-f65b-4840-9369-5cf54ca273f3"
           }
         },
         "588": {
@@ -7170,92 +8120,6 @@
             "version": 1
           }
         },
-        "515": {
-          "json": {
-            "isBasicViewEnabled": true,
-            "componentName": "",
-            "fields": [],
-            "assetId": "4e8ed7d0-f65b-4840-9369-5cf54ca273f3",
-            "label": "Text Settings",
-            "sections": [
-              {
-                "id": "text-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "TextArea",
-                    "label": "Text",
-                    "type": "text",
-                    "path": "text"
-                  }
-                ]
-              },
-              {
-                "id": "font-size-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "TextField",
-                    "label": "Font Size",
-                    "type": "number",
-                    "path": "fontSize"
-                  },
-                  {
-                    "component": "core::TextShape",
-                    "widget": "CheckboxField",
-                    "label": "Auto-Size",
-                    "type": "boolean",
-                    "path": "fontAutoSize"
-                  }
-                ],
-                "columns": 2
-              },
-              {
-                "id": "color-align-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "ColorField",
-                    "label": "Color",
-                    "type": "Color4",
-                    "path": "textColor",
-                    "props": {
-                      "basic": true
-                    },
-                    "transform": {
-                      "in": {
-                        "steps": [
-                          {
-                            "op": "toHex"
-                          }
-                        ]
-                      },
-                      "out": {
-                        "steps": [
-                          {
-                            "op": "toColor4"
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "component": "core::TextShape",
-                    "widget": "Dropdown",
-                    "label": "Text align",
-                    "type": "text",
-                    "path": "textAlign",
-                    "dataSource": {
-                      "kind": "textAlign"
-                    }
-                  }
-                ],
-                "columns": 2
-              }
-            ],
-            "version": 2
-          }
-        },
         "518": {
           "json": {
             "isBasicViewEnabled": true,
@@ -7284,92 +8148,6 @@
               }
             ],
             "assetId": "0c419cb9-bc21-4c51-977f-41a505a097f0"
-          }
-        },
-        "540": {
-          "json": {
-            "isBasicViewEnabled": true,
-            "componentName": "",
-            "fields": [],
-            "assetId": "4e8ed7d0-f65b-4840-9369-5cf54ca273f3",
-            "label": "Text Settings",
-            "sections": [
-              {
-                "id": "text-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "TextArea",
-                    "label": "Text",
-                    "type": "text",
-                    "path": "text"
-                  }
-                ]
-              },
-              {
-                "id": "font-size-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "TextField",
-                    "label": "Font Size",
-                    "type": "number",
-                    "path": "fontSize"
-                  },
-                  {
-                    "component": "core::TextShape",
-                    "widget": "CheckboxField",
-                    "label": "Auto-Size",
-                    "type": "boolean",
-                    "path": "fontAutoSize"
-                  }
-                ],
-                "columns": 2
-              },
-              {
-                "id": "color-align-settings",
-                "items": [
-                  {
-                    "component": "core::TextShape",
-                    "widget": "ColorField",
-                    "label": "Color",
-                    "type": "Color4",
-                    "path": "textColor",
-                    "props": {
-                      "basic": true
-                    },
-                    "transform": {
-                      "in": {
-                        "steps": [
-                          {
-                            "op": "toHex"
-                          }
-                        ]
-                      },
-                      "out": {
-                        "steps": [
-                          {
-                            "op": "toColor4"
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "component": "core::TextShape",
-                    "widget": "Dropdown",
-                    "label": "Text align",
-                    "type": "text",
-                    "path": "textAlign",
-                    "dataSource": {
-                      "kind": "textAlign"
-                    }
-                  }
-                ],
-                "columns": 2
-              }
-            ],
-            "version": 2
           }
         },
         "541": {
@@ -7506,6 +8284,30 @@
             "version": 1
           }
         },
+        "571": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Confetti",
+            "fields": [],
+            "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
+        "572": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Confetti",
+            "fields": [],
+            "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
+        "574": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Confetti",
+            "fields": [],
+            "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
         "578": {
           "json": {
             "isBasicViewEnabled": false,
@@ -7519,6 +8321,62 @@
               }
             ],
             "assetId": "5c8b4646-6ec0-41a0-8e9b-415a58728a9e"
+          }
+        },
+        "579": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Confetti",
+            "fields": [],
+            "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
+        "580": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Confetti",
+            "fields": [],
+            "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
+        "581": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Confetti",
+            "fields": [],
+            "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
+        "582": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Confetti",
+            "fields": [],
+            "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
+        "583": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Confetti",
+            "fields": [],
+            "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
+        "584": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Confetti",
+            "fields": [],
+            "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
+          }
+        },
+        "585": {
+          "json": {
+            "isBasicViewEnabled": true,
+            "componentName": "Confetti",
+            "fields": [],
+            "assetId": "39a19351-c101-4401-8a82-bbd809bc1299"
           }
         },
         "586": {
@@ -10256,23 +11114,6 @@
             ]
           }
         },
-        "536": {
-          "json": {
-            "id": 71,
-            "value": [
-              {
-                "name": "Show",
-                "type": "set_visibility",
-                "jsonPayload": "{\"visible\":true,\"collider\":0}"
-              },
-              {
-                "name": "Hide",
-                "type": "set_visibility",
-                "jsonPayload": "{\"visible\":false,\"collider\":0}"
-              }
-            ]
-          }
-        },
         "541": {
           "json": {
             "id": 38,
@@ -10627,12 +11468,6 @@
                 "allowedInBasicView": true
               },
               {
-                "name": "Deactivate",
-                "type": "set_state",
-                "jsonPayload": "{ \"state\": \"Deactivated\" }",
-                "allowedInBasicView": true
-              },
-              {
                 "name": "Reveal Boy",
                 "type": "call_script_method",
                 "jsonPayload": "{\"scriptPath\":\"assets/scene/Scripts/ColoredConfetti.tsx\",\"methodName\":\"revealBoyConfetti\",\"params\":{}}"
@@ -10641,11 +11476,6 @@
                 "name": "Reveal Girl",
                 "type": "call_script_method",
                 "jsonPayload": "{\"scriptPath\":\"assets/scene/Scripts/ColoredConfetti.tsx\",\"methodName\":\"revealGirlConfetti\",\"params\":{}}"
-              },
-              {
-                "name": "Reset Color",
-                "type": "call_script_method",
-                "jsonPayload": "{\"scriptPath\":\"assets/scene/Scripts/ColoredConfetti.tsx\",\"methodName\":\"resetConfetti\",\"params\":{}}"
               }
             ]
           }
@@ -10895,14 +11725,442 @@
             ]
           }
         },
-        "576": {
+        "571": {
           "json": {
-            "id": 70,
+            "id": 78,
             "value": [
               {
+                "name": "Play animation",
+                "type": "play_animation",
+                "jsonPayload": "{\"animation\":\"Animation\"}"
+              },
+              {
                 "name": "Reset",
-                "type": "stop_tween",
+                "type": "stop_animation",
                 "jsonPayload": "{}"
+              },
+              {
+                "name": "Play sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/asset-packs/confetti/fireworkexplode.mp3\"}"
+              },
+              {
+                "name": "Show",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":true,\"collider\":0}"
+              },
+              {
+                "name": "Hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Explode",
+                "type": "batch",
+                "jsonPayload": "{\"actions\":[\"Play animation\",\"Play sound\",\"Show\",\"Delay Hide\"]}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Delay Hide",
+                "type": "start_delay",
+                "jsonPayload": "{\"actions\":[\"Hide\"],\"timeout\":10}"
+              }
+            ]
+          }
+        },
+        "572": {
+          "json": {
+            "id": 79,
+            "value": [
+              {
+                "name": "Play animation",
+                "type": "play_animation",
+                "jsonPayload": "{\"animation\":\"Animation\"}"
+              },
+              {
+                "name": "Reset",
+                "type": "stop_animation",
+                "jsonPayload": "{}"
+              },
+              {
+                "name": "Play sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/asset-packs/confetti/fireworkexplode.mp3\"}"
+              },
+              {
+                "name": "Show",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":true,\"collider\":0}"
+              },
+              {
+                "name": "Hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Explode",
+                "type": "batch",
+                "jsonPayload": "{\"actions\":[\"Play animation\",\"Play sound\",\"Show\",\"Delay Hide\"]}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Delay Hide",
+                "type": "start_delay",
+                "jsonPayload": "{\"actions\":[\"Hide\"],\"timeout\":10}"
+              }
+            ]
+          }
+        },
+        "574": {
+          "json": {
+            "id": 80,
+            "value": [
+              {
+                "name": "Play animation",
+                "type": "play_animation",
+                "jsonPayload": "{\"animation\":\"Animation\"}"
+              },
+              {
+                "name": "Reset",
+                "type": "stop_animation",
+                "jsonPayload": "{}"
+              },
+              {
+                "name": "Play sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/asset-packs/confetti/fireworkexplode.mp3\"}"
+              },
+              {
+                "name": "Show",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":true,\"collider\":0}"
+              },
+              {
+                "name": "Hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Explode",
+                "type": "batch",
+                "jsonPayload": "{\"actions\":[\"Play animation\",\"Play sound\",\"Show\",\"Delay Hide\"]}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Delay Hide",
+                "type": "start_delay",
+                "jsonPayload": "{\"actions\":[\"Hide\"],\"timeout\":10}"
+              }
+            ]
+          }
+        },
+        "579": {
+          "json": {
+            "id": 81,
+            "value": [
+              {
+                "name": "Play animation",
+                "type": "play_animation",
+                "jsonPayload": "{\"animation\":\"Animation\"}"
+              },
+              {
+                "name": "Reset",
+                "type": "stop_animation",
+                "jsonPayload": "{}"
+              },
+              {
+                "name": "Play sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/asset-packs/confetti/fireworkexplode.mp3\"}"
+              },
+              {
+                "name": "Show",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":true,\"collider\":0}"
+              },
+              {
+                "name": "Hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Explode",
+                "type": "batch",
+                "jsonPayload": "{\"actions\":[\"Play animation\",\"Play sound\",\"Show\",\"Delay Hide\"]}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Delay Hide",
+                "type": "start_delay",
+                "jsonPayload": "{\"actions\":[\"Hide\"],\"timeout\":10}"
+              }
+            ]
+          }
+        },
+        "580": {
+          "json": {
+            "id": 82,
+            "value": [
+              {
+                "name": "Play animation",
+                "type": "play_animation",
+                "jsonPayload": "{\"animation\":\"Animation\"}"
+              },
+              {
+                "name": "Reset",
+                "type": "stop_animation",
+                "jsonPayload": "{}"
+              },
+              {
+                "name": "Play sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/asset-packs/confetti/fireworkexplode.mp3\"}"
+              },
+              {
+                "name": "Show",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":true,\"collider\":0}"
+              },
+              {
+                "name": "Hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Explode",
+                "type": "batch",
+                "jsonPayload": "{\"actions\":[\"Play animation\",\"Play sound\",\"Show\",\"Delay Hide\"]}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Delay Hide",
+                "type": "start_delay",
+                "jsonPayload": "{\"actions\":[\"Hide\"],\"timeout\":10}"
+              }
+            ]
+          }
+        },
+        "581": {
+          "json": {
+            "id": 83,
+            "value": [
+              {
+                "name": "Play animation",
+                "type": "play_animation",
+                "jsonPayload": "{\"animation\":\"Animation\"}"
+              },
+              {
+                "name": "Reset",
+                "type": "stop_animation",
+                "jsonPayload": "{}"
+              },
+              {
+                "name": "Play sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/asset-packs/confetti/fireworkexplode.mp3\"}"
+              },
+              {
+                "name": "Show",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":true,\"collider\":0}"
+              },
+              {
+                "name": "Hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Explode",
+                "type": "batch",
+                "jsonPayload": "{\"actions\":[\"Play animation\",\"Play sound\",\"Show\",\"Delay Hide\"]}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Delay Hide",
+                "type": "start_delay",
+                "jsonPayload": "{\"actions\":[\"Hide\"],\"timeout\":10}"
+              }
+            ]
+          }
+        },
+        "582": {
+          "json": {
+            "id": 84,
+            "value": [
+              {
+                "name": "Play animation",
+                "type": "play_animation",
+                "jsonPayload": "{\"animation\":\"Animation\"}"
+              },
+              {
+                "name": "Reset",
+                "type": "stop_animation",
+                "jsonPayload": "{}"
+              },
+              {
+                "name": "Play sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/asset-packs/confetti/fireworkexplode.mp3\"}"
+              },
+              {
+                "name": "Show",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":true,\"collider\":0}"
+              },
+              {
+                "name": "Hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Explode",
+                "type": "batch",
+                "jsonPayload": "{\"actions\":[\"Play animation\",\"Play sound\",\"Show\",\"Delay Hide\"]}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Delay Hide",
+                "type": "start_delay",
+                "jsonPayload": "{\"actions\":[\"Hide\"],\"timeout\":10}"
+              }
+            ]
+          }
+        },
+        "583": {
+          "json": {
+            "id": 85,
+            "value": [
+              {
+                "name": "Play animation",
+                "type": "play_animation",
+                "jsonPayload": "{\"animation\":\"Animation\"}"
+              },
+              {
+                "name": "Reset",
+                "type": "stop_animation",
+                "jsonPayload": "{}"
+              },
+              {
+                "name": "Play sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/asset-packs/confetti/fireworkexplode.mp3\"}"
+              },
+              {
+                "name": "Show",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":true,\"collider\":0}"
+              },
+              {
+                "name": "Hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Explode",
+                "type": "batch",
+                "jsonPayload": "{\"actions\":[\"Play animation\",\"Play sound\",\"Show\",\"Delay Hide\"]}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Delay Hide",
+                "type": "start_delay",
+                "jsonPayload": "{\"actions\":[\"Hide\"],\"timeout\":10}"
+              }
+            ]
+          }
+        },
+        "584": {
+          "json": {
+            "id": 86,
+            "value": [
+              {
+                "name": "Play animation",
+                "type": "play_animation",
+                "jsonPayload": "{\"animation\":\"Animation\"}"
+              },
+              {
+                "name": "Reset",
+                "type": "stop_animation",
+                "jsonPayload": "{}"
+              },
+              {
+                "name": "Play sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/asset-packs/confetti/fireworkexplode.mp3\"}"
+              },
+              {
+                "name": "Show",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":true,\"collider\":0}"
+              },
+              {
+                "name": "Hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Explode",
+                "type": "batch",
+                "jsonPayload": "{\"actions\":[\"Play animation\",\"Play sound\",\"Show\",\"Delay Hide\"]}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Delay Hide",
+                "type": "start_delay",
+                "jsonPayload": "{\"actions\":[\"Hide\"],\"timeout\":10}"
+              }
+            ]
+          }
+        },
+        "585": {
+          "json": {
+            "id": 87,
+            "value": [
+              {
+                "name": "Play animation",
+                "type": "play_animation",
+                "jsonPayload": "{\"animation\":\"Animation\"}"
+              },
+              {
+                "name": "Reset",
+                "type": "stop_animation",
+                "jsonPayload": "{}"
+              },
+              {
+                "name": "Play sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/asset-packs/confetti/fireworkexplode.mp3\"}"
+              },
+              {
+                "name": "Show",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":true,\"collider\":0}"
+              },
+              {
+                "name": "Hide",
+                "type": "set_visibility",
+                "jsonPayload": "{\"visible\":false,\"collider\":0}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Explode",
+                "type": "batch",
+                "jsonPayload": "{\"actions\":[\"Play animation\",\"Play sound\",\"Show\",\"Delay Hide\"]}",
+                "allowedInBasicView": true
+              },
+              {
+                "name": "Delay Hide",
+                "type": "start_delay",
+                "jsonPayload": "{\"actions\":[\"Hide\"],\"timeout\":10}"
               }
             ]
           }
@@ -10946,13 +12204,7 @@
         "0": {
           "json": {
             "id": 0,
-            "value": 77
-          }
-        },
-        "536": {
-          "json": {
-            "id": 72,
-            "value": 0
+            "value": 87
           }
         }
       }
@@ -12028,17 +13280,6 @@
             ]
           }
         },
-        "539": {
-          "json": {
-            "value": [
-              {
-                "path": "assets/custom/photo_mural/photoMural.ts",
-                "priority": 0,
-                "layout": "{\"params\":{\"use_current_scene\":{\"type\":\"boolean\",\"optional\":true,\"value\":false},\"coordinates\":{\"type\":\"string\",\"optional\":false,\"value\":\"\"},\"world_id\":{\"type\":\"string\",\"optional\":true,\"value\":\"nicoe.dcl.eth\"}}}"
-              }
-            ]
-          }
-        },
         "552": {
           "json": {
             "value": [
@@ -12057,17 +13298,6 @@
                 "path": "assets/scene/Scripts/BuzzAnswer.tsx",
                 "priority": 0,
                 "layout": "{\"params\":{\"ActivateOnSuccess\":{\"type\":\"action\",\"optional\":true,\"value\":{\"entity\":0,\"action\":\"\"}}},\"actions\":[]}"
-              }
-            ]
-          }
-        },
-        "576": {
-          "json": {
-            "value": [
-              {
-                "path": "assets/custom/clap_meter/ClapMeter.ts",
-                "priority": 0,
-                "layout": "{\"params\":{\"emoteDetected\":{\"type\":\"string\",\"optional\":true,\"value\":\"urn:decentraland:off-chain:base-emotes:clap\"},\"max_increment\":{\"type\":\"number\",\"optional\":true,\"value\":2},\"min_increment\":{\"type\":\"number\",\"optional\":true,\"value\":1},\"diminishing_threshold\":{\"type\":\"number\",\"optional\":true,\"value\":25}},\"actions\":[]}"
               }
             ]
           }
