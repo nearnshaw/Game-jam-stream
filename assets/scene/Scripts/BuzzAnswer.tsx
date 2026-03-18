@@ -22,7 +22,8 @@ enum BuzzMessageType {
   ANSWER_UPDATE   = 'ANSWER_UPDATE',
   INCORRECT_SOUND = 'INCORRECT_SOUND',
   REQUEST_STATE   = 'REQUEST_STATE',
-  SHOW_WRONG      = 'SHOW_WRONG'
+  SHOW_WRONG      = 'SHOW_WRONG',
+  RESET_SCORES    = 'RESET_SCORES'
 }
 
 const BuzzMessages = {
@@ -39,7 +40,8 @@ const BuzzMessages = {
   [BuzzMessageType.ANSWER_UPDATE]:   Schemas.Map({ text: Schemas.String }),
   [BuzzMessageType.INCORRECT_SOUND]: Schemas.Map({}),
   [BuzzMessageType.REQUEST_STATE]:   Schemas.Map({}),
-  [BuzzMessageType.SHOW_WRONG]:      Schemas.Map({ playerName: Schemas.String })
+  [BuzzMessageType.SHOW_WRONG]:      Schemas.Map({ playerName: Schemas.String }),
+  [BuzzMessageType.RESET_SCORES]:    Schemas.Map({})
 }
 
 const buzzRoom = registerMessages(BuzzMessages)
@@ -118,10 +120,12 @@ async function fetchAndCacheLeaderboardProfile(userId: string, fallbackName: str
 }
 
 let adminIsRegistered = false
-let adminOnEnable:    (() => void) | null = null
-let adminOnCorrect:   (() => void) | null = null
-let adminOnIncorrect: (() => void) | null = null
-let adminOnReset:     (() => void) | null = null
+let adminOnEnable:      (() => void) | null = null
+let adminOnCorrect:     (() => void) | null = null
+let adminOnIncorrect:   (() => void) | null = null
+let adminOnReset:       (() => void) | null = null
+let adminOnResetScores: (() => void) | null = null
+let adminResetScoresConfirming = false
 
 // Callback set by the answering client to send typed text to the server
 let onAnswerType: ((text: string) => void) | null = null
@@ -346,10 +350,47 @@ function BuzzAdminUi(): ReactEcs.JSX.Element | null {
           value={toggleLabel}
           variant="primary"
           fontSize={15}
-          uiTransform={{ width: 220, height: 38, margin: { bottom: hasAnswerer ? 14 : 0 } }}
+          uiTransform={{ width: 220, height: 38, margin: { bottom: 8 } }}
           uiBackground={{ color: toggleColor }}
           onMouseDown={() => { adminOnEnable?.() }}
         />
+        {adminResetScoresConfirming ? (
+          <UiEntity
+            uiTransform={{ flexDirection: 'row', width: 220, justifyContent: 'center', margin: { bottom: hasAnswerer ? 14 : 0 } }}
+          >
+            <Label
+              value="Reset scores?"
+              fontSize={13}
+              color={Color4.White()}
+              textAlign="middle-center"
+              uiTransform={{ margin: { right: 8 } }}
+            />
+            <Button
+              value="Yes"
+              variant="primary"
+              fontSize={13}
+              uiTransform={{ width: 50, height: 32, margin: { right: 6 } }}
+              uiBackground={{ color: Color4.create(0.15, 0.65, 0.25, 1) }}
+              onMouseDown={() => { adminResetScoresConfirming = false; adminOnResetScores?.() }}
+            />
+            <Button
+              value="No"
+              variant="secondary"
+              fontSize={13}
+              uiTransform={{ width: 50, height: 32 }}
+              onMouseDown={() => { adminResetScoresConfirming = false }}
+            />
+          </UiEntity>
+        ) : (
+          <Button
+            value="Reset Score"
+            variant="secondary"
+            fontSize={13}
+            uiTransform={{ width: 220, height: 32, margin: { bottom: hasAnswerer ? 14 : 0 } }}
+            uiBackground={{ color: Color4.create(0.3, 0.2, 0.05, 1) }}
+            onMouseDown={() => { adminResetScoresConfirming = true }}
+          />
+        )}
 
         {hasAnswerer && (
           <UiEntity
@@ -534,6 +575,14 @@ export class BuzzAnswer {
       resetState()
     })
 
+    buzzRoom.onMessage(BuzzMessageType.RESET_SCORES, () => {
+      for (const playerId of Object.keys(scores)) {
+        scores[playerId] = 0
+      }
+      console.log('[SERVER] Scores reset')
+      broadcastScores()
+    })
+
     // A late-joining client requests the current state so it sees the right button appearance
     buzzRoom.onMessage(BuzzMessageType.REQUEST_STATE, () => {
       buzzRoom.send(BuzzMessageType.BUTTON_STATE, { enabled })
@@ -597,7 +646,8 @@ export class BuzzAnswer {
         adminOnEnable    = () => buzzRoom.send(BuzzMessageType.SET_ENABLED, { enabled: !buttonEnabled })
         adminOnCorrect   = () => buzzRoom.send(BuzzMessageType.ADMIN_CORRECT, {})
         adminOnIncorrect = () => buzzRoom.send(BuzzMessageType.ADMIN_INCORRECT, {})
-        adminOnReset     = () => buzzRoom.send(BuzzMessageType.BUZZ_RESET, {})
+        adminOnReset       = () => buzzRoom.send(BuzzMessageType.BUZZ_RESET, {})
+        adminOnResetScores = () => buzzRoom.send(BuzzMessageType.RESET_SCORES, {})
         ReactEcsRenderer.addUiRenderer(this.entity + 2 as Entity, BuzzAdminUi, { virtualWidth: VIRTUAL_W, virtualHeight: VIRTUAL_H })
       }
     }).catch((err) => {
