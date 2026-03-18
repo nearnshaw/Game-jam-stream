@@ -27,7 +27,7 @@ enum BuzzMessageType {
 
 const BuzzMessages = {
   [BuzzMessageType.BUZZ_PRESS]:      Schemas.Map({ playerId: Schemas.String, playerName: Schemas.String }),
-  [BuzzMessageType.BUZZ_WINNER]:     Schemas.Map({ winnerName: Schemas.String, topFour: Schemas.String }),
+  [BuzzMessageType.BUZZ_WINNER]:     Schemas.Map({ winnerName: Schemas.String }),
   [BuzzMessageType.BUZZ_RESET]:      Schemas.Map({}),
   [BuzzMessageType.SET_ENABLED]:     Schemas.Map({ enabled: Schemas.Boolean }),
   [BuzzMessageType.BUTTON_STATE]:    Schemas.Map({ enabled: Schemas.Boolean }),
@@ -253,7 +253,6 @@ function BuzzRankingUi(): ReactEcs.JSX.Element | null {
         />
         {uiLeaderboard.map((entry, index) => (
           <UiEntity
-            key={`rank-${entry.userId}-${index}`}
             uiTransform={{
               width: '100%',
               height: 54,
@@ -412,7 +411,6 @@ function BuzzAdminUi(): ReactEcs.JSX.Element | null {
 export class BuzzAnswer {
   private winnerTextEntity: Entity | null = null
   private hasWinner: boolean = false
-  private topFourNames: string[] = []
   private localPlayerName: string = ''
   private wrongDisplayTimer: number = 0
   private pendingWinnerName: string | null = null
@@ -438,8 +436,6 @@ export class BuzzAnswer {
   private setupServer() {
     let enabled = false
     let currentAnswererId: string | null = null
-    let currentIndex = 0
-    let pressOrder: string[] = []
     let resetTimer = 0
     let timerActive = false
     const scores: Record<string, number> = {}
@@ -467,30 +463,19 @@ export class BuzzAnswer {
       broadcastScores()
     }
 
-    const setCurrentAnswerer = (index: number) => {
-      if (index >= pressOrder.length) {
-        resetState()
-        return
-      }
-      currentIndex = index
-      currentAnswererId = pressOrder[index]
+    const setCurrentAnswerer = (playerId: string) => {
+      currentAnswererId = playerId
       timerActive = true
       resetTimer = 0
-      // Clear the typed answer when a new player starts answering
       buzzRoom.send(BuzzMessageType.ANSWER_UPDATE, { text: '' })
-      const winnerName = namesById[currentAnswererId] ?? 'Unknown'
-      console.log(`[SERVER] Now answering: ${winnerName} (index ${index})`)
-      buzzRoom.send(BuzzMessageType.BUZZ_WINNER, {
-        winnerName,
-        topFour: JSON.stringify(pressOrder.slice(0, 4).map((id) => namesById[id] ?? 'Unknown'))
-      })
+      const winnerName = namesById[playerId] ?? 'Unknown'
+      console.log(`[SERVER] Now answering: ${winnerName}`)
+      buzzRoom.send(BuzzMessageType.BUZZ_WINNER, { winnerName })
     }
 
     const resetState = () => {
       console.log('[SERVER] Buzz reset')
       currentAnswererId = null
-      currentIndex = 0
-      pressOrder = []
       timerActive = false
       resetTimer = 0
       buzzRoom.send(BuzzMessageType.ANSWER_UPDATE, { text: '' })
@@ -509,20 +494,11 @@ export class BuzzAnswer {
       const rawPlayerId = data.playerId
       const playerId = normalizeUserId(rawPlayerId)
       const playerName = data.playerName
-      if (!playerId || !playerName || pressOrder.includes(playerId)) return
+      if (!playerId || !playerName || currentAnswererId !== null) return
 
       namesById[playerId] = playerName
-      pressOrder.push(playerId)
-      console.log(`[SERVER] Buzz press from: ${playerName} (#${pressOrder.length}) rawId=${rawPlayerId} normalizedId=${playerId}`)
-
-      if (currentAnswererId === null) {
-        setCurrentAnswerer(0)
-      } else {
-        buzzRoom.send(BuzzMessageType.BUZZ_WINNER, {
-          winnerName: namesById[currentAnswererId] ?? 'Unknown',
-          topFour: JSON.stringify(pressOrder.slice(0, 4).map((id) => namesById[id] ?? 'Unknown'))
-        })
-      }
+      console.log(`[SERVER] Buzz press from: ${playerName} rawId=${rawPlayerId} normalizedId=${playerId}`)
+      setCurrentAnswerer(playerId)
     })
 
     // Forward typed text to all clients as-is
@@ -551,7 +527,7 @@ export class BuzzAnswer {
       penalizeCurrentAnswerer()
       buzzRoom.send(BuzzMessageType.INCORRECT_SOUND, {})
       buzzRoom.send(BuzzMessageType.SHOW_WRONG, { playerName: wrongPlayerName })
-      setCurrentAnswerer(currentIndex + 1)
+      resetState()
     })
 
     buzzRoom.onMessage(BuzzMessageType.BUZZ_RESET, () => {
@@ -562,10 +538,7 @@ export class BuzzAnswer {
     buzzRoom.onMessage(BuzzMessageType.REQUEST_STATE, () => {
       buzzRoom.send(BuzzMessageType.BUTTON_STATE, { enabled })
       if (currentAnswererId !== null) {
-        buzzRoom.send(BuzzMessageType.BUZZ_WINNER, {
-          winnerName: namesById[currentAnswererId] ?? 'Unknown',
-          topFour: JSON.stringify(pressOrder.slice(0, 4).map((id) => namesById[id] ?? 'Unknown'))
-        })
+        buzzRoom.send(BuzzMessageType.BUZZ_WINNER, { winnerName: namesById[currentAnswererId] ?? 'Unknown' })
       }
       broadcastScores()
     })
@@ -576,7 +549,7 @@ export class BuzzAnswer {
       if (resetTimer >= 30) {
         console.log(`[SERVER] Time's up for ${currentAnswererId ? namesById[currentAnswererId] ?? 'Unknown' : 'Unknown'}`)
         penalizeCurrentAnswerer()
-        setCurrentAnswerer(currentIndex + 1)
+        resetState()
       }
     })
   }
@@ -685,16 +658,15 @@ export class BuzzAnswer {
     })
 
     buzzRoom.onMessage(BuzzMessageType.BUZZ_WINNER, (data) => {
-      const { winnerName, topFour } = data
+      const { winnerName } = data
       this.hasWinner = true
-      this.topFourNames = JSON.parse(topFour)
       uiCurrentAnswerer = winnerName
       uiIsAnswerer = winnerName === this.localPlayerName
       uiCountdown = 30
       uiTypedAnswer = ''
       uiInputText = ''
       clearAnswerInput = true
-      console.log(`[CLIENT] Answering: ${winnerName}, Top 4: ${topFour}`)
+      console.log(`[CLIENT] Answering: ${winnerName}`)
       if (this.wrongDisplayTimer > 0) {
         this.pendingWinnerName = winnerName
       } else {
@@ -758,7 +730,6 @@ export class BuzzAnswer {
 
     buzzRoom.onMessage(BuzzMessageType.BUZZ_RESET, () => {
       this.hasWinner = false
-      this.topFourNames = []
       this.localPlayerName = ''
       uiCurrentAnswerer = ''
       uiIsAnswerer = false
@@ -810,9 +781,7 @@ export class BuzzAnswer {
       Billboard.create(this.winnerTextEntity)
     }
 
-    const displayText = this.topFourNames.length > 1
-      ? `${winnerName}\n\n${this.topFourNames.map((n, i) => `${i + 1}. ${n}`).join('\n')}`
-      : winnerName
+    const displayText = winnerName
 
     const textShape = TextShape.getMutableOrNull(this.winnerTextEntity)
     if (textShape !== null) {

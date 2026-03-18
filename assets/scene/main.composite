@@ -94,19 +94,19 @@
           "json": {
             "position": {
               "x": 226.2156982421875,
-              "y": 10.041910171508789,
+              "y": 10.791910171508789,
               "z": 193.2755584716797
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
             },
             "parent": 0
           }
@@ -1084,16 +1084,16 @@
               "y": 0,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 547
           }
@@ -1105,16 +1105,16 @@
               "y": 0,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 547
           }
@@ -1147,16 +1147,16 @@
               "y": 0,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 549
           }
@@ -1210,16 +1210,16 @@
               "y": 0,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 549
           }
@@ -1231,16 +1231,16 @@
               "y": 0,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 551
           }
@@ -1252,16 +1252,16 @@
               "y": 0,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 551
           }
@@ -1273,16 +1273,16 @@
               "y": 0.1899999976158142,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 555
           }
@@ -1294,16 +1294,16 @@
               "y": 0.1899999976158142,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 555
           }
@@ -1315,16 +1315,16 @@
               "y": 0,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 557
           }
@@ -1336,16 +1336,16 @@
               "y": 0,
               "z": 0
             },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0,
               "w": 1
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
             },
             "parent": 557
           }
@@ -1374,20 +1374,20 @@
         "588": {
           "json": {
             "position": {
-              "x": 9.479999542236328,
-              "y": 8.449999809265137,
-              "z": -7.989999771118164
-            },
-            "scale": {
-              "x": 2,
-              "y": 1,
-              "z": 2
+              "x": 9.479995727539062,
+              "y": 5.449999809265137,
+              "z": -7.9900054931640625
             },
             "rotation": {
               "x": 0,
               "y": 0.7032999992370605,
               "z": 0,
               "w": -0.7109000086784363
+            },
+            "scale": {
+              "x": 2,
+              "y": 1,
+              "z": 2
             },
             "parent": 514
           }
@@ -4227,21 +4227,21 @@
         "561": {
           "json": {
             "src": "assets/scene/LightsCat.gltf",
-            "visibleMeshesCollisionMask": 1,
+            "visibleMeshesCollisionMask": 0,
             "invisibleMeshesCollisionMask": 0
           }
         },
         "562": {
           "json": {
             "src": "assets/scene/Lights.gltf",
-            "visibleMeshesCollisionMask": 1,
+            "visibleMeshesCollisionMask": 0,
             "invisibleMeshesCollisionMask": 0
           }
         },
         "563": {
           "json": {
             "src": "assets/scene/Lights_Down.gltf",
-            "visibleMeshesCollisionMask": 1,
+            "visibleMeshesCollisionMask": 0,
             "invisibleMeshesCollisionMask": 0
           }
         },
@@ -6894,7 +6894,7 @@
         "serializationType": "map"
       },
       "data": {
-        "514": {
+        "588": {
           "json": {
             "gizmo": 1
           }
@@ -7104,7 +7104,6 @@
               },
               {
                 "entity": 557,
-                "open": true,
                 "children": [
                   556,
                   584,
@@ -7117,7 +7116,6 @@
               },
               {
                 "entity": 559,
-                "open": true,
                 "children": [
                   541,
                   542,
@@ -7156,7 +7154,6 @@
               },
               {
                 "entity": 537,
-                "open": true,
                 "children": [
                   521,
                   573
@@ -7176,7 +7173,6 @@
               },
               {
                 "entity": 564,
-                "open": true,
                 "children": [
                   527,
                   526,
@@ -7226,7 +7222,6 @@
               },
               {
                 "entity": 588,
-                "open": true,
                 "children": [
                   593,
                   525,
